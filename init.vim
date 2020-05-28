@@ -36,4 +36,8 @@ nnoremap <leader>zv :vsplit ~/.config/nvim/init.vim<cr>
 nnoremap <leader>sv :source ~/config/nvim/init.vim<cr>
 " use leader + e to open coc-explorer split
 nnoremap <leader>e :CocCommand explorer<cr>
-
+" fzf remmaping for <c-p>
+nnoremap <c-p> :Files<cr>
+" mapping to use Ag to find all ocurrences of a word in a file, needs
+" silversearcher-ag to be installed
+nnoremap <c-f> :Ag<space>
