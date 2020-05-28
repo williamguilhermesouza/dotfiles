@@ -9,6 +9,7 @@ Plug 'junegunn/fzf.vim' " config of the fzf
 Plug 'mattn/emmet-vim' " emmet for snippets creation
 Plug 'tpope/vim-eunuch' " enable some linux commands inside nvim
 Plug 'tpope/vim-surround' " activate brackets surround highlight
-Plug 'w0rp/ale' " syntax checking on the go
+Plug 'w0rp/ale' " syntax checking and highlight on the go
 Plug 'tpope/vim-fugitive' " git wrapper for git commands
+Plug 'roxma/nvim-completion-manager' " navigate between the completion with arrows
 call plug#end()
