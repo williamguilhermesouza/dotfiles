@@ -1,33 +1,34 @@
+" Import of vim Plug plugins list file
 source ~/.config/nvim/plugins.vim
+" Import coc.nvim config
+source ~/.config/nvim/coc.vim
+
 
 syntax on
 set encoding=UTF-8
-set cursorline
-set number
+" enable hidding of edited but not saved files
 set hidden
+" enable line numbers
+set number
+" enable relative numbering of lines
+" set relativenumber
+" autocomplete of commands inside vim
+set inccommand=split
+"enable mouse support
 set mouse=a
+" line highlight
+set cursorline
 set smarttab
 set smartindent
+" dracula theme colorscheme setting
 colorscheme dracula
+" set the leader key to space
+let mapleader="\<space>"
+" use leader + ; to put ; at the end of the line
+nnoremap <leader>; A;<esc>
+" use leader + ev to open init file in vsplit
+nnoremap <leader>ev :vsplit ~/.config/nvim/init.vim<cr>
+" use leader + sv to save init file 
+nnoremap <leader>sv :source ~/config/nvim/init.vim<cr>
 
-" NERDTree config
-map <C-a> :NERDTreeToggle<CR>
-let NERDTreeShowHidden=1
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-let NERDTreeMinimalUI=1
 
-" NERDTree highlight active buffer file
-function! IsNERDTreeOpen()        
-	return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
-function! SyncTree()
-	if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-		NERDTreeFind
-	wincmd p
-	endif
-endfunction
-autocmd BufEnter * call SyncTree()
-
-" Import coc.nvim config
-source ~/.config/nvim/coc.vim
