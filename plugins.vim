@@ -11,5 +11,6 @@ Plug 'tpope/vim-eunuch' " enable some linux commands inside nvim
 Plug 'tpope/vim-surround' " activate brackets surround highlight
 Plug 'w0rp/ale' " syntax checking and highlight on the go
 Plug 'tpope/vim-fugitive' " git wrapper for git commands
-Plug 'roxma/nvim-completion-manager' " navigate between the completion with arrows
+Plug 'ncm2/ncm2' " navigate between completion with arrows
+Plug 'roxma/nvim-yarp' " above plugin depend
 call plug#end()
