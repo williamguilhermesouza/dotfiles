@@ -20,7 +20,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/i
 curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
 chmod u+x nvim.appimage
 ./nvim.appimage
-
+[ ! -d "~/.config/nvim" ] && mkdir ~/.config/nvim
 git clone "https://github.com/williamguilhermesouza/dotfiles.git"
 cd dotfiles
 ./installfonts.sh
