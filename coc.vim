@@ -1,3 +1,10 @@
+" Plugins for coc
+let g:coc_global_extensions = [
+	\'coc-explorer',
+	\'coc-git',
+	\'coc-json',
+	\'coc-python'
+	\]
 " TextEdit might fail if hidden is not set.
 set hidden
 
