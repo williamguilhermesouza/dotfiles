@@ -8,4 +8,4 @@
 # As an alternative, you can first download the install script and run it afterwards:
 #   wget  https://raw.githubusercontent.com/williamguilhermesouza/dotfiles/master/firstinstall.sh)
 # install.sh
-echo "teste"
+ls
