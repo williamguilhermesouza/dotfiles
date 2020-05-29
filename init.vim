@@ -41,3 +41,9 @@ nnoremap <c-p> :Files<cr>
 " mapping to use Ag to find all ocurrences of a word in a file, needs
 " silversearcher-ag to be installed
 nnoremap <c-f> :Ag<space>
+" terminal configs
+command! -nargs=* T belowright split | resize 5 | terminal <args>
+command! -nargs=* VT belowright vsplit | terminal <args>
+tnoremap <Esc> <C-\><C-n> 
+" terminal config mapping to leader + t
+nnoremap <leader>t :T<cr>
