@@ -9,4 +9,4 @@ ln -sfi $PWD/coc.vim ~/.config/nvim/coc.vim
 ln -sfi $PWD/plugins.vim ~/.config/nvim/plugins.vim
 ## TERMINAL CONFIGURATION ## 
 # create .zshrc symlink
-# ln -sfi $PWD/.zshrc ~/.zshrc
+ln -sfi $PWD/.zshrc ~/.zshrc
