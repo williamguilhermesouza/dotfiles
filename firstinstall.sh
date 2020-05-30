@@ -16,8 +16,8 @@ sudo apt update && sudo apt install --no-install-recommends yarn
 sudo npm install npm@latest -g
 sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 sudo git clone https://github.com/dracula/zsh.git
-sudo ln -s $PWD/zsh/dracula.zsh-theme ~/.oh-my-zsh/themes/dracula.zsh-theme
 sudo git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
+sudo ln -s zsh/dracula.zsh-theme ~/.oh-my-zsh/themes
 ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "~/.oh-my-zsh/themes/spaceship.zsh-theme"
 sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 [ ! -d "~/.config/nvim" ] && mkdir -p ~/.config/nvim
