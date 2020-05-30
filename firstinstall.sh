@@ -12,7 +12,7 @@ curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt update
-sudo apt install fonts-firacode zsh dconf-cli silversearcher-ag nodejs neovim -y
+sudo apt install gconftool-2 fonts-firacode zsh dconf-cli silversearcher-ag nodejs neovim -y
 sudo apt update && sudo apt install --no-install-recommends yarn
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 git clone https://github.com/dracula/gnome-terminal
@@ -26,6 +26,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/i
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 git clone "https://github.com/williamguilhermesouza/dotfiles.git"
 cd dotfiles
+cp -r $PWD/.oh-my-zsh ~/.oh-my-zsh
 ./installfonts.sh
 ./symlinkcreation.sh
 
