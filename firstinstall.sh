@@ -22,8 +22,6 @@ sudo apt install --no-install-recommends yarn
 sudo npm install npm@latest -g
 # installing zsh
 sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-exit # exiting of zsh
-zsh
 # cloning dracula zsh repository
 sudo git clone https://github.com/dracula/zsh.git
 # linking dracula theme
