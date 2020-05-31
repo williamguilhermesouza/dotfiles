@@ -25,7 +25,8 @@ sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zs
 # cloning dracula zsh repository
 sudo git clone https://github.com/dracula/zsh.git
 # linking dracula theme
-sudo ln -s zsh/dracula.zsh-theme ~/.oh-my-zsh/themes
+sudo mv ./zsh/dracula.zsh-theme ~/.oh-my-zsh/themes/dracula.zsh-theme
+sudo mv ./zsh/lib ~/.oh-my-zsh/themes/lib
 # installing spaceship theme
 sudo git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
 ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "~/.oh-my-zsh/themes/spaceship.zsh-theme"
