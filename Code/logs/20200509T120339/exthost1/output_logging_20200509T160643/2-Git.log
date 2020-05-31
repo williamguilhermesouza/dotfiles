@@ -1,0 +1,259 @@
+Looking for git in: git
+Using git 2.17.1 from git
+> git rev-parse --show-toplevel
+> git rev-parse --git-dir
+Open repository: /home/william/Documentos/enderecosAlunosAPI
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse feature/graphql
+> git rev-parse --symbolic-full-name feature/graphql@{u}
+> git rev-list --left-right feature/graphql...refs/remotes/origin/feature/graphql
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git check-ignore -v -z --stdin
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse feature/graphql
+> git rev-parse --symbolic-full-name feature/graphql@{u}
+> git rev-list --left-right feature/graphql...refs/remotes/origin/feature/graphql
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :src/graphql/aluno.resolver.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/aluno.resolver.ts
+> git cat-file -s cf11940f9a4db18d8647f0f93e266598304dba13
+> git show :src/graphql/graphql.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/graphql.module.ts
+> git cat-file -s 09b5496fd71ab3dd6a9070e132441998bbdeaf94
+> git show :src/app.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/app.module.ts
+> git cat-file -s 422c37739be05bcb52f0f39d04164020a2384080
+> git show :src/graphql/graphql.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/graphql.module.ts
+> git cat-file -s 09b5496fd71ab3dd6a9070e132441998bbdeaf94
+> git show :src/graphql/schema.gql
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/schema.gql
+> git cat-file -s c41d1d5aa223d9aa4b8afc390b78aa3624897429
+> git show :src/graphql/aluno.resolver.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/aluno.resolver.ts
+> git cat-file -s cf11940f9a4db18d8647f0f93e266598304dba13
+> git show :src/graphql/graphql.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/graphql.module.ts
+> git cat-file -s 09b5496fd71ab3dd6a9070e132441998bbdeaf94
+> git show :src/graphql/aluno.resolver.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/aluno.resolver.ts
+> git cat-file -s cf11940f9a4db18d8647f0f93e266598304dba13
+> git show :src/graphql/graphql.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/graphql.module.ts
+> git cat-file -s 09b5496fd71ab3dd6a9070e132441998bbdeaf94
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse feature/graphql
+> git rev-parse --symbolic-full-name feature/graphql@{u}
+> git rev-list --left-right feature/graphql...refs/remotes/origin/feature/graphql
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :src/app.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/app.module.ts
+> git cat-file -s 422c37739be05bcb52f0f39d04164020a2384080
+> git show :src/graphql/graphql.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/graphql.module.ts
+> git cat-file -s 09b5496fd71ab3dd6a9070e132441998bbdeaf94
+> git show :src/app.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/app.module.ts
+> git cat-file -s 422c37739be05bcb52f0f39d04164020a2384080
+> git check-ignore -v -z --stdin
+> git show :src/alunos/aluno.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/alunos/aluno.module.ts
+> git cat-file -s 483f14811a69cee636875aeb54692a524e64dd58
+> git show :src/graphql/graphql.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/graphql.module.ts
+> git cat-file -s 09b5496fd71ab3dd6a9070e132441998bbdeaf94
+> git show :src/app.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/app.module.ts
+> git cat-file -s 422c37739be05bcb52f0f39d04164020a2384080
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse feature/graphql
+> git rev-parse --symbolic-full-name feature/graphql@{u}
+> git rev-list --left-right feature/graphql...refs/remotes/origin/feature/graphql
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse feature/graphql
+> git rev-parse --symbolic-full-name feature/graphql@{u}
+> git rev-list --left-right feature/graphql...refs/remotes/origin/feature/graphql
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :src/graphql/graphql.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/graphql.module.ts
+> git cat-file -s 09b5496fd71ab3dd6a9070e132441998bbdeaf94
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse feature/graphql
+> git rev-parse --symbolic-full-name feature/graphql@{u}
+> git rev-list --left-right feature/graphql...refs/remotes/origin/feature/graphql
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse feature/graphql
+> git rev-parse --symbolic-full-name feature/graphql@{u}
+> git rev-list --left-right feature/graphql...refs/remotes/origin/feature/graphql
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse feature/graphql
+> git rev-parse --symbolic-full-name feature/graphql@{u}
+> git rev-list --left-right feature/graphql...refs/remotes/origin/feature/graphql
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :src/app.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/app.module.ts
+> git cat-file -s 422c37739be05bcb52f0f39d04164020a2384080
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse feature/graphql
+> git rev-parse --symbolic-full-name feature/graphql@{u}
+> git rev-list --left-right feature/graphql...refs/remotes/origin/feature/graphql
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :src/graphql/graphql.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/graphql.module.ts
+> git cat-file -s 09b5496fd71ab3dd6a9070e132441998bbdeaf94
+> git show :src/graphql/aluno.resolver.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/aluno.resolver.ts
+> git cat-file -s cf11940f9a4db18d8647f0f93e266598304dba13
+> git show :src/graphql/graphql.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/graphql.module.ts
+> git cat-file -s 09b5496fd71ab3dd6a9070e132441998bbdeaf94
+> git show :src/graphql/aluno.resolver.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/aluno.resolver.ts
+> git cat-file -s cf11940f9a4db18d8647f0f93e266598304dba13
+> git show :src/graphql/graphql.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/graphql.module.ts
+> git cat-file -s 09b5496fd71ab3dd6a9070e132441998bbdeaf94
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse feature/graphql
+> git rev-parse --symbolic-full-name feature/graphql@{u}
+> git rev-list --left-right feature/graphql...refs/remotes/origin/feature/graphql
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :src/app.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/app.module.ts
+> git cat-file -s 422c37739be05bcb52f0f39d04164020a2384080
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse feature/graphql
+> git rev-parse --symbolic-full-name feature/graphql@{u}
+> git rev-list --left-right feature/graphql...refs/remotes/origin/feature/graphql
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :src/graphql/graphql.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/graphql.module.ts
+> git cat-file -s 09b5496fd71ab3dd6a9070e132441998bbdeaf94
+> git show :src/graphql/aluno.resolver.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/aluno.resolver.ts
+> git cat-file -s cf11940f9a4db18d8647f0f93e266598304dba13
+> git show :src/graphql/graphql.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/graphql.module.ts
+> git cat-file -s 09b5496fd71ab3dd6a9070e132441998bbdeaf94
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse feature/graphql
+> git rev-parse --symbolic-full-name feature/graphql@{u}
+> git rev-list --left-right feature/graphql...refs/remotes/origin/feature/graphql
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse feature/graphql
+> git rev-parse --symbolic-full-name feature/graphql@{u}
+> git rev-list --left-right feature/graphql...refs/remotes/origin/feature/graphql
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :src/graphql/schema.gql
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/schema.gql
+> git cat-file -s c41d1d5aa223d9aa4b8afc390b78aa3624897429
+> git show :src/graphql/graphql.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/graphql.module.ts
+> git cat-file -s 09b5496fd71ab3dd6a9070e132441998bbdeaf94
+> git show :src/app.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/app.module.ts
+> git cat-file -s 422c37739be05bcb52f0f39d04164020a2384080
+> git show :src/graphql/graphql.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/graphql.module.ts
+> git cat-file -s 09b5496fd71ab3dd6a9070e132441998bbdeaf94
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse feature/graphql
+> git rev-parse --symbolic-full-name feature/graphql@{u}
+> git rev-list --left-right feature/graphql...refs/remotes/origin/feature/graphql
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :src/app.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/app.module.ts
+> git cat-file -s 422c37739be05bcb52f0f39d04164020a2384080
+> git show :src/graphql/graphql.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/graphql.module.ts
+> git cat-file -s 09b5496fd71ab3dd6a9070e132441998bbdeaf94
+> git show :src/app.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/app.module.ts
+> git cat-file -s 422c37739be05bcb52f0f39d04164020a2384080
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse feature/graphql
+> git rev-parse --symbolic-full-name feature/graphql@{u}
+> git rev-list --left-right feature/graphql...refs/remotes/origin/feature/graphql
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse feature/graphql
+> git rev-parse --symbolic-full-name feature/graphql@{u}
+> git rev-list --left-right feature/graphql...refs/remotes/origin/feature/graphql
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :src/graphql/graphql.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/graphql.module.ts
+> git cat-file -s 09b5496fd71ab3dd6a9070e132441998bbdeaf94
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse feature/graphql
+> git rev-parse --symbolic-full-name feature/graphql@{u}
+> git rev-list --left-right feature/graphql...refs/remotes/origin/feature/graphql
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/graphql.module.ts
+> git cat-file -s 2cccb3139c608fbcfabac74da914a1132273fc3b
+> git show :src/graphql/graphql.module.ts
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse feature/graphql
+> git rev-parse --symbolic-full-name feature/graphql@{u}
+> git rev-list --left-right feature/graphql...refs/remotes/origin/feature/graphql
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/graphql.module.ts
+> git config --get commit.template
+> git cat-file -s 2cccb3139c608fbcfabac74da914a1132273fc3b
+> git show :src/graphql/graphql.module.ts

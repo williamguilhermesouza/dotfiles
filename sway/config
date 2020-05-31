@@ -1,0 +1,390 @@
+
+#############################
+########## XWAYLAND #########
+#############################
+#xwayland disable
+
+#############################
+######### MAIN KEYS #########
+#############################
+set $mod Mod4
+
+set $left	h
+set $down	j
+set $up		k
+set $right	l
+
+#############################
+########### COLORS ##########
+#############################
+set $black		#282828
+set $red		#cc241d
+set $green		#98971a
+set $yellow		#d79921
+set $blue		#458588
+set $magenta		#b16286
+set $cyan		#689d6a
+set $white		#ebdbb2
+
+set $acc_black		#1d2021
+set $acc_red		#fb4934
+set $acc_green		#b8bb26
+set $acc_yellow		#fabd2f
+set $acc_magenta	#d3869b
+set $acc_cyan		#8ec07c
+set $acc_blue		#83a598
+set $acc_white		#fbf1c7
+
+set $background_color $black
+set $foreground_color $white
+
+set $hightlight_color		$blue
+set $hightlight_color_dim	$acc_blue
+
+set $warning_color		$yellow
+set $error_color		$red
+set $modeswitch_color	$green
+#
+###############################
+############ FONTS ############
+###############################
+# You should have Medium, Bold and Regular ...
+# ... variants of the choosen font installed.
+# Preferably NERD fonts. You can drop the .ttf/.otf ...
+# ... files on ~/.local/share/fonts/.
+
+# Non-mono font will be used by sway bar ...
+# ... and launcher, to make icons bigger.
+
+set $font	FiraCode Nerd Font
+set $font_mono	FiraCode Nerd Font Mono
+set $fontsize	10
+
+# $line_padding above 1 will probably make your ...
+# ... vim-airline powerline separator look ...
+# ... broken (if you use a non-blank separator).
+set $line_padding	2
+
+set $titlebar_fontstyle Bold
+set $bar_fontstyle	Bold
+
+###############################
+######### LOCK SCREEN #########
+###############################
+set $lockscreen_circle_width	80
+set $lockscreen_ring_width	15
+
+set $lockscreen_lock_after	300
+set $lockscreen_turnoff_after	10
+set $lockscreen_sum_after	310
+
+###############################
+########### LAUNCHER ##########
+###############################
+set $launcher_width 15
+set $launcher_height 30
+
+# This key will be binded to "$mod + $launcher_key" to open launcher
+set $launcher_key d
+
+###############################
+############# BAR #############
+###############################
+set $bar_background		$background_color
+set $bar_position		top
+set $bar_separator		'   '
+
+###############################
+######### DECORATIONS #########
+###############################
+set $wallpaper				~/.config/sway/assets/bg.png
+set $gaps				10
+set $border_width			2
+set $terminal_inner_padding 		0
+
+# Smart border "on" will make borders disappear ...
+# ... when theres only one window on workspace, ...
+# ... "off" will make borders always visible.
+smart_borders	on
+
+# Smart gaps "on" will make your gaps disappear ...
+# ... when theres only one window on workspace, ...
+# ... "off" will make gaps always visible.
+smart_gaps		on
+
+###############################
+########## WORKSPACES #########
+###############################
+set $remove_numbers_from_workspaces yes
+
+set $misc_ws_label ''
+
+set $ws1	'1: Firefox'
+set $ws2	'2: Neovim'
+set $ws3	'3: Neovim'
+set $ws4	'4:$misc_ws_label'
+set $ws5	'5:$misc_ws_label'
+set $ws6	'6:$misc_ws_label'
+set $ws7	'7:$misc_ws_label'
+set $ws8	'8:$misc_ws_label'
+set $ws9	'9:$misc_ws_label'
+set $ws10	'10:$misc_ws_label'
+#################################
+######## HARDWARE INPUTS ########
+#################################
+# To get events, run "sudo libinput debug-events"
+# To get input identifiers, run "swaymsg -t get_inputs"
+
+input 9610:4102:SINO_WEALTH_USB_KEYBOARD {
+	xkb_layout 'br'
+	xkb_variant 'abnt2'
+}
+
+input 1:1:AT_Translated_Set_2_keyboard {
+	xkb_layout		'br'
+	xkb_variant		'abnt2'
+}
+
+input 2:7:SynPS/2_Synaptics_TouchPad {
+	events			disabled_on_external_mouse
+	tap			enabled
+	natural_scroll		enabled
+}
+
+####################################
+########## SYSTEM FILES ############
+####################################
+set $file_launcher_entries						~/.config/sway/launcherentries
+set $file_lockscreen_script						~/.config/sway/scripts/lockscreen.sh
+set $file_launcher_script						~/.config/sway/scripts/launcher.sh
+set $file_alacritty_terminal_config					.config/alacritty/terminal.yml
+set $file_alacritty_launcher_config					.config/alacritty/launcher.yml
+set $file_i3blocks_config						~/.config/sway/i3blocks/config
+set $file_alacritty_config_generator_script				~/.config/sway/scripts/alacrittygenerator.sh
+
+###################################
+### SYSTEM ACTIONS  & VARIABLES ###
+###################################
+set $bar_status_command i3blocks -c $file_i3blocks_config
+set $launcher_title applicationlauncher
+set $lockscreen sh $file_lockscreen_script "$font Bold" $fontsize "$background_color" "$foreground_color" "$hightlight_color" "$error_color" "$warning_color" $lockscreen_circle_width $lockscreen_ring_width
+set $terminal alacritty --config-file=$file_alacritty_terminal_config
+set $launcher alacritty --config-file=$file_alacritty_launcher_config --title=$launcher_title -e sh $file_launcher_script $file_launcher_entries $file_alacritty_terminal_config "$background_color" "$foreground_color" "$hightlight_color"
+set $alacritty_config_generator sh $file_alacritty_config_generator_script "$font" "$font_mono" $fontsize $line_padding $terminal_inner_padding "$file_alacritty_terminal_config" "$file_alacritty_launcher_config" "$foreground_color" "$background_color" "$black" "$red" "$green" "$yellow" "$blue" "$magenta" "$cyan" "$white" "$acc_black" "$acc_red" "$acc_green" "$acc_yellow" "$acc_blue" "$acc_magenta" "$acc_cyan" "$acc_white" 
+
+#############################
+########### MODES ###########
+#############################
+set $default_mode 'default'
+
+# Multimedia mode
+set $audio_mode 'audio'
+mode $audio_mode {
+	bindsym $up		exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+	bindsym $down	exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+	bindsym Up		exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+	bindsym Down	exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+	bindsym m		exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+	bindsym v		exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+	
+	bindsym Escape	mode $default_mode
+	bindsym Return	mode $default_mode
+}
+bindsym $mod+Shift+a mode $audio_mode
+
+# Brightness mode
+set $brightness_mode 'brightness'
+mode $brightness_mode {
+	bindsym $up		exec brightnessctl set +5%
+	bindsym $down	exec brightnessctl set 5%-
+
+	bindsym Up		exec brightnessctl set +5%
+	bindsym Down	exec brightnessctl set 5%-
+
+	bindsym Escape mode $default_mode
+	bindsym Return mode $default_mode
+}
+bindsym $mod+Shift+b mode $brightness_mode
+
+# Resize mode
+set $resize_mode 'resize'
+mode $resize_mode {
+    bindsym $up		resize grow		height	10px
+    bindsym $down	resize shrink	height	10px
+
+	bindsym Up		resize grow		height	10px
+    bindsym Down	resize shrink	height	10px
+
+    bindsym $left	resize shrink	width	10px
+    bindsym $right	resize grow		width	10px
+
+	bindsym Left	resize shrink	width	10px
+	bindsym Right	resize grow		width	10px
+	
+	bindsym Return mode $default_mode
+    bindsym Escape mode $default_mode
+}
+bindsym $mod+Shift+r mode $resize_mode 
+
+# Printscreen mode
+set $printscreen_mode 'printscreen'
+mode $printscreen_mode {
+	bindsym s exec grim -t png -g "$(slurp -d)" - | wl-copy -t image/png && swaymsg 'mode $default_mode'
+	bindsym f exec grim -t png - | wl-copy -t image/png && swaymsg 'mode $default_mode'
+	bindsym w exec swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | grim -t png -g - - | wl-copy -t image/png && swaymsg 'mode $default_mode'
+	bindsym o exec swaymsg -t get_tree | jq -r '.. | (.nodes? // empty)[] | select(.focused) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | grim -t png -g - - | wl-copy -t image/png && swaymsg 'mode $default_mode'
+
+	bindsym Return mode $default_mode
+    bindsym Escape mode $default_mode
+}
+bindsym $mod+Shift+p mode $printscreen_mode 
+
+#################################
+########## ASSIGNMENTS ##########
+#################################
+# DO NOT REMOVE
+for_window [title="$launcher_title"] floating enable, resize set width $launcher_width ppt height $launcher_height ppt
+# Use "swaymsg -t get_tree" to get window information
+assign [app_id="firefox"]		$ws1
+
+#################################
+############ AUTOSTART ##########
+#################################
+# DO NOT REMOVE $config_generator
+exec_always $alacritty_config_generator
+
+exec MOZ_ENABLE_WAYLAND=1 firefox
+
+################################
+############ KEYBINDS ##########
+################################
+# Launcher
+bindsym $mod+$launcher_key exec $launcher
+
+# Terminal
+bindsym $mod+Return exec $terminal
+
+# Lock screen
+bindsym $mod+Shift+x exec $lockscreen
+
+# Close window
+bindsym $mod+Shift+q kill
+
+# Change focus
+bindsym $mod+$left		focus left
+bindsym $mod+$down		focus down
+bindsym $mod+$up		focus up
+bindsym $mod+$right		focus right
+
+bindsym $mod+Left		focus left
+bindsym $mod+Down		focus down
+bindsym $mod+Up			focus up
+bindsym $mod+Right		focus right
+
+# Move window
+bindsym $mod+Shift+$left	move left
+bindsym $mod+Shift+$down	move down
+bindsym $mod+Shift+$up		move up
+bindsym $mod+Shift+$right	move right
+
+bindsym $mod+Shift+Left		move left
+bindsym $mod+Shift+Down		move down
+bindsym $mod+Shift+Up		move up
+bindsym $mod+Shift+Right	move right
+
+
+# Change workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# Send window to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# Layout
+floating_modifier $mod normal
+bindsym $mod+b splith
+bindsym $mod+v splitv
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+f fullscreen
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+
+# Scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+#################################
+######## IDLE/SCREENLOCK ########
+#################################
+exec swayidle -w \
+timeout $lockscreen_lock_after '$lockscreen' \
+timeout $lockscreen_turnoff_after 'if pgrep swaylock; then swaymsg "output * dpms off"; fi' \
+timeout $lockscreen_sum_after 'swaymsg "output * dpms off"' \
+resume 'swaymsg "output * dpms on"' \
+before-sleep '$lockscreen'
+
+#######################################
+############ WINDOWS CONFIG ###########
+#######################################
+font				$font $titlebar_fontstyle $fontsize 
+titlebar_border_thickness	0
+default_border pixel		$border_width
+
+
+
+gaps inner $gaps
+
+output * bg $wallpaper fill
+
+client.focused			$hightlight_color		$hightlight_color			$background_color		$hightlight_color	$hightlight_color
+client.focused_inactive	$hightlight_color_dim	$hightlight_color_dim		$background_color		$hightlight_color	$hightlight_color_dim
+client.unfocused		$background_color		$background_color			$foreground_color		$background_color	$background_color
+client.placeholder		$background_color		$background_color			$foreground_color		$background_color	$background_color
+client.urgent			$error_color			$error_color				$background_color		$error_color		$error_color
+
+client.background		$hightlight_color_dim
+
+#######################################
+############# BAR CONFIG ##############
+#######################################
+bar {
+    position					$bar_position
+	status_command				$bar_status_command
+	strip_workspace_numbers		$remove_numbers_from_workspaces
+	font						$font $bar_fontstyle $fontsize
+	separator_symbol			$bar_separator
+	tray_output					primary
+
+    colors {
+        statusline $foreground_color
+		background $bar_background
+
+        focused_workspace	$hightlight_color	$hightlight_color	$foreground_color
+        active_workspace	$bar_background		$bar_background		$foreground_color
+        inactive_workspace	$bar_background		$bar_background		$foreground_color
+        urgent_workspace	$error_color		$error_color		$foreground_color
+        binding_mode		$modeswitch_color	$modeswitch_color	$foreground_color
+	}
+}

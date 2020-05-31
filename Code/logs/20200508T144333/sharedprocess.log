@@ -1,0 +1,16 @@
+[2020-05-08 14:43:40.935] [sharedprocess] [info] main {"machineId":"d1952d5cd5d7d9b7b36d2fd02ea9612fb82fbbe0e412e3de9189268afe544e9d","windowId":2}
+[2020-05-08 14:44:20.991] [sharedprocess] [info] Starting to clean up unused language packs.
+[2020-05-09 08:48:32.316] [sharedprocess] [info] Installing extension: kumar-harsh.graphql-for-vscode
+[2020-05-09 08:48:34.041] [sharedprocess] [info] Downloaded extension: kumar-harsh.graphql-for-vscode /tmp/450b099a-5447-495f-8c76-e01612ededaf
+[2020-05-09 08:48:37.110] [sharedprocess] [info] Extracted extension to /home/william/.vscode/extensions/.kumar-harsh.graphql-for-vscode-1.15.3: kumar-harsh.graphql-for-vscode
+[2020-05-09 08:48:37.111] [sharedprocess] [info] Renamed to /home/william/.vscode/extensions/kumar-harsh.graphql-for-vscode-1.15.3
+[2020-05-09 08:48:37.113] [sharedprocess] [info] Installation completed. kumar-harsh.graphql-for-vscode
+[2020-05-09 08:48:37.189] [sharedprocess] [info] Extensions installed successfully: kumar-harsh.graphql-for-vscode
+[2020-05-09 08:49:07.940] [sharedprocess] [info] Uninstalling extension: kumar-harsh.graphql-for-vscode
+[2020-05-09 08:49:08.009] [sharedprocess] [info] Successfully uninstalled extension: kumar-harsh.graphql-for-vscode
+[2020-05-09 08:52:24.995] [sharedprocess] [info] Installing extension: prisma.vscode-graphql
+[2020-05-09 08:52:26.672] [sharedprocess] [info] Downloaded extension: prisma.vscode-graphql /tmp/ea3a293a-8cda-4aa4-9abe-cfe5c0b61cd6
+[2020-05-09 08:52:41.545] [sharedprocess] [info] Extracted extension to /home/william/.vscode/extensions/.prisma.vscode-graphql-0.2.14: prisma.vscode-graphql
+[2020-05-09 08:52:41.547] [sharedprocess] [info] Renamed to /home/william/.vscode/extensions/prisma.vscode-graphql-0.2.14
+[2020-05-09 08:52:41.553] [sharedprocess] [info] Installation completed. prisma.vscode-graphql
+[2020-05-09 08:52:42.449] [sharedprocess] [info] Extensions installed successfully: prisma.vscode-graphql

@@ -1,0 +1,73 @@
+Looking for git in: git
+Using git 2.17.1 from git
+> git rev-parse --show-toplevel
+> git rev-parse --git-dir
+Open repository: /home/william/Documentos/enderecosAlunosAPI
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+Failed to watch ref '/home/william/Documentos/enderecosAlunosAPI/.git/refs/remotes/origin/master', is most likely packed.
+Error: ENOENT: no such file or directory, watch '/home/william/Documentos/enderecosAlunosAPI/.git/refs/remotes/origin/master'
+	at FSWatcher.start (internal/fs/watchers.js:165:26)
+	at Object.watch (fs.js:1270:11)
+	at Object.t.watch (/snap/code/31/usr/share/code/resources/app/extensions/git/dist/main.js:1:598268)
+	at T.updateTransientWatchers (/snap/code/31/usr/share/code/resources/app/extensions/git/dist/main.js:1:83870)
+	at e.fire (/snap/code/31/usr/share/code/resources/app/out/vs/workbench/services/extensions/node/extensionHostProcess.js:48:517)
+	at e.updateModelState (/snap/code/31/usr/share/code/resources/app/extensions/git/dist/main.js:1:102740)
+> git config --get commit.template
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show :src/app.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/app.module.ts
+> git cat-file -s 422c37739be05bcb52f0f39d04164020a2384080
+> git check-ignore -v -z --stdin
+> git show :dbscripts/sqlfordatabase.txt
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/dbscripts/sqlfordatabase.txt
+> git cat-file -s 295eda84acb9124c6d8d5914cbf564bc6b0318ed
+> git show :dbscripts/dbDump.sql
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/dbscripts/dbDump.sql
+> git cat-file -s 3b2959066710c592e63977e3c01a8f23a34a6309
+> git show :dbscripts/sqlfordatabase.txt
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/dbscripts/sqlfordatabase.txt
+> git cat-file -s 295eda84acb9124c6d8d5914cbf564bc6b0318ed
+> git show :dbscripts/dbDump.sql
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/dbscripts/dbDump.sql
+> git cat-file -s 3b2959066710c592e63977e3c01a8f23a34a6309
+> git show :src/app.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/app.module.ts
+> git cat-file -s 422c37739be05bcb52f0f39d04164020a2384080
+> git show :dbscripts/sqlfordatabase.txt
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/dbscripts/sqlfordatabase.txt
+> git cat-file -s 295eda84acb9124c6d8d5914cbf564bc6b0318ed
+> git show :dbscripts/dbDump.sql
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/dbscripts/dbDump.sql
+> git cat-file -s 3b2959066710c592e63977e3c01a8f23a34a6309
+> git show :src/app.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/app.module.ts
+> git cat-file -s 422c37739be05bcb52f0f39d04164020a2384080
+> git show :src/main.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/main.ts
+> git cat-file -s b2e0fc5428cf760313dd4b41ba22982fdff46c51
+> git show :dbscripts/dbDump.sql
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/dbscripts/dbDump.sql
+> git cat-file -s 3b2959066710c592e63977e3c01a8f23a34a6309
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+Failed to watch ref '/home/william/Documentos/enderecosAlunosAPI/.git/refs/remotes/origin/master', is most likely packed.
+Error: ENOENT: no such file or directory, watch '/home/william/Documentos/enderecosAlunosAPI/.git/refs/remotes/origin/master'
+	at FSWatcher.start (internal/fs/watchers.js:165:26)
+	at Object.watch (fs.js:1270:11)
+	at Object.t.watch (/snap/code/31/usr/share/code/resources/app/extensions/git/dist/main.js:1:598268)
+	at T.updateTransientWatchers (/snap/code/31/usr/share/code/resources/app/extensions/git/dist/main.js:1:83870)
+	at e.fire (/snap/code/31/usr/share/code/resources/app/out/vs/workbench/services/extensions/node/extensionHostProcess.js:48:517)
+	at e.updateModelState (/snap/code/31/usr/share/code/resources/app/extensions/git/dist/main.js:1:102740)
+> git config --get commit.template

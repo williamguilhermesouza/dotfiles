@@ -1,0 +1,21 @@
+Looking for git in: git
+Using git 2.17.1 from git
+> git rev-parse --show-toplevel
+> git rev-parse --git-dir
+Open repository: /home/william/Documentos/enderecosAlunosAPI
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse feature/graphql
+> git rev-parse --symbolic-full-name feature/graphql@{u}
+> git rev-list --left-right feature/graphql...refs/remotes/origin/feature/graphql
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git show :src/graphql/graphql.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/graphql/graphql.module.ts
+> git cat-file -s 2cccb3139c608fbcfabac74da914a1132273fc3b
+> git check-ignore -v -z --stdin
+> git show :src/app.module.ts
+> git ls-files --stage -- /home/william/Documentos/enderecosAlunosAPI/src/app.module.ts
+> git cat-file -s 821ed316e19d970a9ba94df79f2e8318165fd92f
+> git check-ignore -v -z --stdin

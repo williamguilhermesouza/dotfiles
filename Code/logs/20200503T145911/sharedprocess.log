@@ -1,0 +1,10 @@
+[2020-05-03 14:59:16.481] [sharedprocess] [info] main {"machineId":"d1952d5cd5d7d9b7b36d2fd02ea9612fb82fbbe0e412e3de9189268afe544e9d","windowId":2}
+[2020-05-03 14:59:16.814] [sharedprocess] [info] Deleted from disk rocketseat.rocketseatreactjs /home/william/.vscode/extensions/rocketseat.rocketseatreactjs-2.2.0
+[2020-05-03 14:59:16.815] [sharedprocess] [info] Deleted from disk rocketseat.rocketseatreactnative /home/william/.vscode/extensions/rocketseat.rocketseatreactnative-2.2.0
+[2020-05-03 14:59:23.912] [sharedprocess] [info] Installing extension: dbaeumer.vscode-eslint
+[2020-05-03 14:59:25.789] [sharedprocess] [info] Downloaded extension: dbaeumer.vscode-eslint /tmp/7f0a7035-c4d7-427e-8884-e80eeaade4b6
+[2020-05-03 14:59:25.853] [sharedprocess] [info] Extracted extension to /home/william/.vscode/extensions/.dbaeumer.vscode-eslint-2.1.5: dbaeumer.vscode-eslint
+[2020-05-03 14:59:25.854] [sharedprocess] [info] Renamed to /home/william/.vscode/extensions/dbaeumer.vscode-eslint-2.1.5
+[2020-05-03 14:59:25.855] [sharedprocess] [info] Installation completed. dbaeumer.vscode-eslint
+[2020-05-03 14:59:25.913] [sharedprocess] [info] Extensions installed successfully: dbaeumer.vscode-eslint
+[2020-05-03 14:59:56.536] [sharedprocess] [info] Starting to clean up unused language packs.

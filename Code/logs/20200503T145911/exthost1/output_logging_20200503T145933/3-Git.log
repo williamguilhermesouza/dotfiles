@@ -1,0 +1,28 @@
+Looking for git in: git
+Using git 2.17.1 from git
+> git rev-parse --show-toplevel
+> git rev-parse --git-dir
+Open repository: /home/william/Documentos/SpaSaude
+> git status -z -u
+> git symbolic-ref --short HEAD
+> git rev-parse master
+> git rev-parse --symbolic-full-name master@{u}
+> git rev-list --left-right master...refs/remotes/origin/master
+> git for-each-ref --format %(refname) %(objectname) --sort -committerdate
+> git remote --verbose
+> git config --get commit.template
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
+> git show :mobile/.expo/settings.json
+> git ls-files --stage -- /home/william/Documentos/SpaSaude/mobile/.expo/settings.json
+> git show :mobile/.expo/packager-info.json
+> git ls-files --stage -- /home/william/Documentos/SpaSaude/mobile/.expo/packager-info.json
+> git check-ignore -v -z --stdin
+> git show :mobile/app.json
+> git ls-files --stage -- /home/william/Documentos/SpaSaude/mobile/app.json
+> git cat-file -s 4d4994c3803536e5fe979ce35f9917a1bcc6794f
+> git show :mobile/babel.config.js
+> git ls-files --stage -- /home/william/Documentos/SpaSaude/mobile/babel.config.js
+> git cat-file -s 2900afe9d85a54cf9552ec0b4107665c5c10e078
+> git check-ignore -v -z --stdin
+> git check-ignore -v -z --stdin
