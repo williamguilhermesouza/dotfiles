@@ -20,7 +20,7 @@ sudo apt install gconf-service fonts-firacode zsh dconf-cli silversearcher-ag no
 sudo apt install --no-install-recommends yarn
 # updating npm
 sudo npm install npm@latest -g
-# installing zsh
+# installing oh-my-zsh
 sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 # cloning dracula zsh repository
 sudo git clone https://github.com/dracula/zsh.git
