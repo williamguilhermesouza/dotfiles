@@ -40,3 +40,10 @@ sudo dnf install snapd -y
 # install insomnia using snapd
 sudo snap install insomnia
 
+# installing make
+sudo dnf install make -y
+
+# clonning tiling for pop
+git clone https://github.com/pop-os/shell.git
+cd shell
+sh rebuild.sh
