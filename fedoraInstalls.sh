@@ -11,6 +11,7 @@ sudo dnf install breeze cursor-theme geary -y
 
 # installing node
 curl -sL https://rpm.nodesource.com/setup_12.x | sudo bash -
+sudo dnf install nodejs -y
 
 # installing yarn 
 sudo npm install -g yarn
@@ -37,5 +38,5 @@ sudo flatpak install flathub com.valvesoftware.Steam -y
 sudo dnf install snapd -y
 
 # install insomnia using snapd
-sudo snap install insomnia -y
+sudo snap install insomnia
 
