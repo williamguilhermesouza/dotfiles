@@ -16,8 +16,8 @@ cd ..
 sudo dnf install fira-code-fonts -y
 
 # install spaceship theme
-sudo git clone https://github.com/denysdovhan/spaceship-prompt.git "/home/william/.oh-my-zsh/custom/themes/spaceship-prompt"
-sudo ln -s "/home/william/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme" "/home/william/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+sudo git clone https://github.com/denysdovhan/spaceship-prompt.git "$HOME/.oh-my-zsh/custom/themes/spaceship-prompt"
+sudo ln -s "$HOME/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme" "$HOME/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
 
 # changing the theme in .zshrc to spaceship
 sed -i "s/ZSH_THEME=.*/ZSH_THEME=\"spaceship\"/g" ~/.zshrc
