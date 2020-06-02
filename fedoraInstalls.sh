@@ -18,6 +18,12 @@ sudo npm install -g yarn
 # installing typescript 
 sudo npm install -g typescript
 
+# RPM repositories for postgres
+sudo dnf install https://download.postgresql.org/pub/repos/yum/reporpms/F-32-x86_64/pgdg-fedora-repo-latest.noarch.rpm
+
+# client packages and server
+sudo dnf install postgresql12 postgresql12-server -y
+
 # install spotify
 sudo flatpak install flathub com.spotify.Client
 
