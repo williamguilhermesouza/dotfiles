@@ -25,9 +25,13 @@ sudo dnf install https://download.postgresql.org/pub/repos/yum/reporpms/F-32-x86
 sudo dnf install postgresql12 postgresql12-server -y
 
 # install spotify
-sudo flatpak install flathub com.spotify.Client
+sudo flatpak install flathub com.spotify.Client -y
 
 # install steam
-sudo flatpak install flathub com.valvesoftware.Steam
+sudo flatpak install flathub com.valvesoftware.Steam -y
 
+# install snapd
+sudo dnf install snapd -y
 
+# install insomnia using snapd
+udo snap install insomnia -y
