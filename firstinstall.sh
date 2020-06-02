@@ -28,8 +28,8 @@ sudo git clone https://github.com/dracula/zsh.git
 sudo mv ./zsh/dracula.zsh-theme ~/.oh-my-zsh/themes/dracula.zsh-theme
 sudo mv ./zsh/lib ~/.oh-my-zsh/themes/lib
 # installing spaceship theme
-sudo git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
-ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "~/.oh-my-zsh/themes/spaceship.zsh-theme"
+sudo git clone https://github.com/denysdovhan/spaceship-prompt.git "$HOME/.oh-my-zsh/custom/themes/spaceship-prompt"
+ln -s "$HOME/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme" "$HOME/.oh-my-zsh/themes/spaceship.zsh-theme"
 # changing the theme in .zshrc to spaceship
 sed -i "s/ZSH_THEME=.*/ZSH_THEME=\"spaceship\"/g" ~/.zshrc
 # cloning the repo 
