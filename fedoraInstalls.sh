@@ -24,9 +24,6 @@ sudo dnf install https://download.postgresql.org/pub/repos/yum/reporpms/F-32-x86
 # client packages and server
 sudo dnf install postgresql12 postgresql12-server -y
 
-# repositories for pgadmin4
-sudo dnf -y install https://download.postgresql.org/pub/repos/yum/reporpms/F-32/pgdg-fedora-repo-latest.noarch.rpm
-
 # install pgadmin4
 sudo dnf -y install pgadmin4 -y
 
