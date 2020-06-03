@@ -25,8 +25,8 @@ sudo dnf install https://download.postgresql.org/pub/repos/yum/reporpms/F-32-x86
 # client packages and server
 sudo dnf install postgresql12 postgresql12-server -y
 /usr/pgsql-12/bin/postgresql-12-setup initdb
-systemctl enable postgresql-12
-systemctl start postgresql-12
+sudo systemctl enable postgresql-12
+sudo systemctl start postgresql-12
 
 # install pgadmin4
 sudo dnf -y install pgadmin4 -y
@@ -66,4 +66,6 @@ psql
 
 # altering postgresuser pass to 123
 ALTER USER postgres WITH PASSWORD '123';
-
+sudo echo 'host all all all md5' >> /var/lib/pgsql/12/data/pg_hba.conf
+sed -i "s/#listen_addresses='127.0.0.1'/listen_addresses='*'/g" /var/lib/pgsql/12/data/postgresql.conf
+sudo systemctl restart postgresql-12
