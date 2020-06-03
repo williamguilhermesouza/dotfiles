@@ -24,6 +24,9 @@ sudo dnf install https://download.postgresql.org/pub/repos/yum/reporpms/F-32-x86
 
 # client packages and server
 sudo dnf install postgresql12 postgresql12-server -y
+/usr/pgsql-12/bin/postgresql-12-setup initdb
+systemctl enable postgresql-12
+systemctl start postgresql-12
 
 # install pgadmin4
 sudo dnf -y install pgadmin4 -y
@@ -47,3 +50,20 @@ sudo dnf install make -y
 git clone https://github.com/pop-os/shell.git
 cd shell
 sh rebuild.sh
+
+# installing expo cli for react-native
+sudo npm installl expo-cli --global
+
+# installing nestJS cli 
+sudo npm i -g @nestjs/cli
+
+
+# configuring postgresql
+sudo su - postgres
+
+# entering psql console
+psql
+
+# altering postgresuser pass to 123
+ALTER USER postgres WITH PASSWORD '123';
+
