@@ -66,10 +66,17 @@ psql
 # altering postgresuser pass to 123
 ALTER USER postgres WITH PASSWORD '123';
 exit
+exit
 # configuring pg_hba and postgresql.conf
 sudo echo 'host all all all md5' >> /var/lib/pgsql/12/data/pg_hba.conf
 sed -i "s/#listen_addresses='127.0.0.1'/listen_addresses='*'/g" /var/lib/pgsql/12/data/postgresql.conf
 sudo systemctl restart postgresql-12
 #configuring pgadmin4
-sudo systemctl start httpd && sudo systemctl enable httpd
-sudo cp /etc/httpd/conf.d/pgadmin4.conf.sample /etc/httpd/conf.d/pgadmin4.conf
+#sudo systemctl start httpd && sudo systemctl enable httpd
+#sudo cp /etc/httpd/conf.d/pgadmin4.conf.sample /etc/httpd/conf.d/pgadmin4.conf
+#sudo mkdir -p /var/lib/pgadmin4/ /var/log/pgadmin4/
+#cd ..
+#cat ./fedorapgadminconfig_distro.txt >> /usr/lib/python3.8/site-packages/pgadmin4-web/config_distro.py
+#sudo python3 /usr/lib/python3.8/site-packages/pgadmin4-web/setup.py
+#sudo chown -R apache:apache /var/lib/pgadmin4 /var/log/pgadmin4
+#sudo systemctl restart httpd
