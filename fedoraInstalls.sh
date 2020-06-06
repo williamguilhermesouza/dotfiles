@@ -57,20 +57,28 @@ sudo npm installl expo-cli --global
 # installing nestJS cli 
 sudo npm i -g @nestjs/cli
 
+# install kitty terminal
+sudo dnf install kitty -y
+
+# to configure kitty with fira code
+echo 'font_family   FiraCode' >> $HOME/.config/kitty/kitty.conf
 
 # configuring postgresql
-sudo su - postgres
+#sudo su - postgres
 
 # entering psql console
-psql
+#psql
+
 # altering postgresuser pass to 123
-ALTER USER postgres WITH PASSWORD '123';
-exit
-exit
+#ALTER USER postgres WITH PASSWORD '123';
+#exit
+#exit
+
 # configuring pg_hba and postgresql.conf
-sudo echo 'host all all all md5' >> /var/lib/pgsql/12/data/pg_hba.conf
-sed -i "s/#listen_addresses='127.0.0.1'/listen_addresses='*'/g" /var/lib/pgsql/12/data/postgresql.conf
-sudo systemctl restart postgresql-12
+#sudo echo 'host all all all md5' >> /var/lib/pgsql/12/data/pg_hba.conf
+#sed -i "s/#listen_addresses='127.0.0.1'/listen_addresses='*'/g" /var/lib/pgsql/12/data/postgresql.conf
+#sudo systemctl restart postgresql-12
+
 #configuring pgadmin4
 #sudo systemctl start httpd && sudo systemctl enable httpd
 #sudo cp /etc/httpd/conf.d/pgadmin4.conf.sample /etc/httpd/conf.d/pgadmin4.conf
