@@ -16,4 +16,5 @@ Plug 'leafgarland/typescript-vim' " typescript syntax highlighter
 Plug 'jparise/vim-graphql' " gql files highlighterlug 
 Plug 'tpope/vim-eunuch' " enable some linux commands inside nvim
 Plug 'mattn/emmet-vim' " emmet for snippets creation
+Plug 'peitalin/vim-jsx-typescript' " syntax for tsx
 call plug#end()
