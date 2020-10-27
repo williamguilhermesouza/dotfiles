@@ -9,24 +9,15 @@
 #   wget  https://raw.githubusercontent.com/williamguilhermesouza/dotfiles/master/firstinstall.sh)
 # install.sh
 # keys for node 
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-# keys for yarn
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-# adding yarn to apt list
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 # installing dependencies
 sudo apt install gconf-service fonts-firacode zsh dconf-cli silversearcher-ag nodejs neovim -y
-# installing yarn without node
-sudo apt install --no-install-recommends yarn
+# installing yarn 
+sudo npm i -g yarn
 # updating npm
 sudo npm install npm@latest -g
 # installing oh-my-zsh
 sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-# cloning dracula zsh repository
-sudo git clone https://github.com/dracula/zsh.git
-# linking dracula theme
-sudo mv ./zsh/dracula.zsh-theme ~/.oh-my-zsh/themes/dracula.zsh-theme
-sudo mv ./zsh/lib ~/.oh-my-zsh/themes/lib
 # installing spaceship theme
 sudo git clone https://github.com/denysdovhan/spaceship-prompt.git "$HOME/.oh-my-zsh/custom/themes/spaceship-prompt"
 ln -s "$HOME/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme" "$HOME/.oh-my-zsh/themes/spaceship.zsh-theme"
