@@ -1,8 +1,0 @@
-{
-    "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Dracula",
-    "terminal.integrated.shell.osx": "/bin/zsh",
-    "editor.fontFamily": "Fira Code",
-    "editor.fontLigatures": true,
-    "[python]": {},
-}
