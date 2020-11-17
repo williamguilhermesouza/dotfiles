@@ -10,6 +10,8 @@
 # installing neovim
 sudo apt install neovim -y
 # checking if .config/nvim exists, if not create if
-[ ! -d "~/.config/nvim" ] && mkdir -p ~/.config/nvim
+#[ ! -d "~/.config/nvim" ] && mkdir -p ~/.config/nvim
 # installing plug for nvim plugin management
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+sh -c 'curl -fLo "${HOME}"/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+# copy nvim files
+cp -r .config/nvim $HOME/.config/
