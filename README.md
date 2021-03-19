@@ -7,4 +7,4 @@ To use:
 
 Choose an script and execute it with:
 
-> ./<scriptname>
+> ./scriptname
