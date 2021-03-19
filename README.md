@@ -1,7 +1,7 @@
 # dotfiles
 My personal dotfiles with plugins and configuration. Download the code with 
 
-> git clone 
+> git clone https://github.com/williamguilhermesouza/dotfiles.git
 
 To use:
 
