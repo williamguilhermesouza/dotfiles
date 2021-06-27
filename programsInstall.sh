@@ -26,3 +26,14 @@ sudo apt-get update && sudo apt-get install spotify-client -y
 wget https://github.com/balena-io/etcher/releases/download/v1.5.120/balena-etcher-electron-1.5.120-linux-x64.zip?d_id=81577739-3519-4108-bcd3-d51224667665R
 unzip unzip balena-etcher-electron-1.5.120-linux-x64.zip\?d_id=81577739-3519-4108-bcd3-d51224667665R
 rm balena-etcher-electron-1.5.120-linux-x64.zip\?d_id=81577739-3519-4108-bcd3-d51224667665R 
+
+# installing retropie
+sudo apt update && sudo apt upgrade -y
+
+sudo apt install -y git dialog unzip xmlstarlet
+
+git clone --depth=1 https://github.com/RetroPie/RetroPie-Setup.git
+
+cd RetroPie-Setup
+
+sudo ./retropie_setup.sh
