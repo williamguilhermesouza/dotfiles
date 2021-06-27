@@ -22,5 +22,7 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 
 sudo apt-get update && sudo apt-get install spotify-client -y
 
-
-
+# balena etcher
+wget https://github.com/balena-io/etcher/releases/download/v1.5.120/balena-etcher-electron-1.5.120-linux-x64.zip?d_id=81577739-3519-4108-bcd3-d51224667665R
+unzip unzip balena-etcher-electron-1.5.120-linux-x64.zip\?d_id=81577739-3519-4108-bcd3-d51224667665R
+rm balena-etcher-electron-1.5.120-linux-x64.zip\?d_id=81577739-3519-4108-bcd3-d51224667665R 
