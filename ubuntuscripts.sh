@@ -10,9 +10,6 @@
 # node
 sh -c "$(wget -qO- https://raw.githubusercontent.com/williamguilhermesouza/dotfiles/master/nodeinstall.sh)"
 
-# go 
-sh -c "$(wget -qO- https://raw.githubusercontent.com/williamguilhermesouza/dotfiles/master/goinstall.sh)"
-
 # neovim
 sh -c "$(wget -qO- https://raw.githubusercontent.com/williamguilhermesouza/dotfiles/master/neoviminstall.sh)"
 
@@ -21,3 +18,9 @@ sh -c "$(wget -qO- https://raw.githubusercontent.com/williamguilhermesouza/dotfi
 
 # github
 sh -c "$(wget -qO- https://raw.githubusercontent.com/williamguilhermesouza/dotfiles/master/githubconfigs.sh)"
+
+# non essentials
+sh -c "$(wget -qO- https://raw.githubusercontent.com/williamguilhermesouza/dotfiles/master/programsInstall.sh)"
+
+# theming
+sh -c "$(wget -qO- https://raw.githubusercontent.com/williamguilhermesouza/dotfiles/master/theming.sh)"
