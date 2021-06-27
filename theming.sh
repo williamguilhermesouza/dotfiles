@@ -21,4 +21,9 @@ wget https://dllb.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI
 
 tar -xf 165371-Breeze.tar.gz
 
-
+# installing dracula on gnome terminal
+git clone https://github.com/dracula/gnome-terminal
+cd gnome-terminal
+./install.sh
+cd ..
+rm -Rf gnome-terminal
