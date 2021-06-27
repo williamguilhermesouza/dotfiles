@@ -1,5 +1,7 @@
 #! /bin/bash
 
+sudo apt install gnome-tweaks
+
 cd ~
 mkdir .themes
 mkdir .icons
