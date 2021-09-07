@@ -10,11 +10,11 @@
 # node
 sh -c "$(wget -qO- https://raw.githubusercontent.com/williamguilhermesouza/dotfiles/master/nodeinstall.sh)"
 
-# neovim
-sh -c "$(wget -qO- https://raw.githubusercontent.com/williamguilhermesouza/dotfiles/master/neoviminstall.sh)"
-
 # terminal
 sh -c "$(wget -qO- https://raw.githubusercontent.com/williamguilhermesouza/dotfiles/master/terminal.sh)"
+
+# neovim
+sh -c "$(wget -qO- https://raw.githubusercontent.com/williamguilhermesouza/dotfiles/master/neoviminstall.sh)"
 
 # github
 sh -c "$(wget -qO- https://raw.githubusercontent.com/williamguilhermesouza/dotfiles/master/githubconfigs.sh)"
