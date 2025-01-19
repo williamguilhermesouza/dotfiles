@@ -39,13 +39,25 @@ nnoremap <leader>zv :vsplit ~/.config/nvim/init.vim<cr>
 nnoremap <leader>sv :source ~/config/nvim/init.vim<cr>
 " use leader + e to open coc-explorer split
 nnoremap <leader>e :CocCommand explorer<cr>
+" use control + alt + l to open coc-explorer split
+nnoremap <c-a-l> :CocCommand explorer<cr>
 " use leader + v to open second file
 nnoremap <leader>v :vsplit<cr>
 " fzf remmaping for <c-p>
 nnoremap <c-p> :Files<cr>
+" fzf remmaping for <c-t>
+nnoremap <c-t> :Files<cr>
 " mapping to use Ag to find all ocurrences of a word in a file, needs
 " silversearcher-ag to be installed
 nnoremap <c-f> :Ag<space>
+" use alt + up mapping to move line up
+nnoremap <a-Up> :m -2<cr>
+" use alt + down mapping to move line down
+nnoremap <a-Down> :m +1<cr>
+" use control + d mapping to duplicate line
+nnoremap <c-d> :t.<cr>
+" use control + q mapping to close window
+nnoremap <c-q> :q<cr>
 " terminal configs
 command! -nargs=* T belowright split | resize 5 | terminal <args>
 command! -nargs=* VT belowright vsplit | terminal <args>
