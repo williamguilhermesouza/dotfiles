@@ -12,7 +12,9 @@ set hidden
 " enable line numbers
 set number
 " enable relative numbering of lines
-" set relativenumber
+set relativenumber
+" ignore close
+set ic
 " autocomplete of commands inside vim
 set inccommand=split
 "enable mouse support
