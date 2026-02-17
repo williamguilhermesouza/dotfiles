@@ -22,6 +22,13 @@ return {
       indent = { enable = true },
     },
     config = function(_, opts)
+      local ok_parsers, ts_parsers = pcall(require, "nvim-treesitter.parsers")
+      if ok_parsers and ts_parsers.ft_to_lang == nil and vim.treesitter and vim.treesitter.language then
+        if vim.treesitter.language.get_lang then
+          ts_parsers.ft_to_lang = vim.treesitter.language.get_lang
+        end
+      end
+
       local ok_new, ts = pcall(require, "nvim-treesitter")
       if ok_new and ts.setup then
         ts.setup(opts)
