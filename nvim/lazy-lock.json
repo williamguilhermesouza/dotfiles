@@ -1,0 +1,19 @@
+{
+  "ale": { "branch": "master", "commit": "cb8c4662aaa5c4ce91357932dab71992763ae8be" },
+  "coc.nvim": { "branch": "release", "commit": "acaac49d5d3fe358ce0d67c91d78b1ada683d148" },
+  "dracula": { "branch": "master", "commit": "d4b0823100c702af127cba8dd5595a8f599041ec" },
+  "emmet-vim": { "branch": "master", "commit": "e98397144982d1e75b20d94d55a82de3ec8f648d" },
+  "fzf": { "branch": "master", "commit": "b56d614ba2f901c64eed454f181badec0b1cedff" },
+  "fzf.vim": { "branch": "master", "commit": "34a564c81f36047f50e593c1656f4580ff75ccca" },
+  "lazy.nvim": { "branch": "main", "commit": "85c7ff3711b730b4030d03144f6db6375044ae82" },
+  "lightline.vim": { "branch": "master", "commit": "e358557e1a9f9fc860416c8eb2e34c0404078155" },
+  "typescript-vim": { "branch": "master", "commit": "4740441db1e070ef8366c888c658000dd032e4cb" },
+  "vim-devicons": { "branch": "master", "commit": "71f239af28b7214eebb60d4ea5bd040291fb7e33" },
+  "vim-eunuch": { "branch": "master", "commit": "e86bb794a1c10a2edac130feb0ea590a00d03f1e" },
+  "vim-fugitive": { "branch": "master", "commit": "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4" },
+  "vim-graphql": { "branch": "master", "commit": "0eef7d76750aa80507a3df60dabb4c66b6fbc70c" },
+  "vim-javascript": { "branch": "master", "commit": "b26c9edb3563e02f5c0b20580f7cf9743e95b157" },
+  "vim-jsx-typescript": { "branch": "master", "commit": "22df470d92651426f2377e3166488672f7b4b4ef" },
+  "vim-multiple-cursors": { "branch": "master", "commit": "6456718e1d30b42c04b920c5413ca44f68f08759" },
+  "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" }
+}
