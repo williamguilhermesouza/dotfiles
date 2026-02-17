@@ -8,7 +8,7 @@ vim.keymap.set("n", "<leader>sc", function()
   dofile(nvim_config .. "/init.lua")
 end, { noremap = true, silent = true })
 
-vim.keymap.set("n", "<leader>e", ":CocCommand explorer<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>e", ":Ex<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-p>", ":GFiles<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>pf", ":Files<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-f>", ":Ag ", { noremap = true })
