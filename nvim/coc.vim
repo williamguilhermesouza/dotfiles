@@ -1,3 +1,8 @@
+" Skip this file when coc.nvim is not installed/loaded yet.
+if !exists(':CocInfo')
+  finish
+endif
+
 " Plugins for coc
 let g:coc_global_extensions = [
 	\'coc-explorer',

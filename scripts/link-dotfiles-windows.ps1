@@ -33,15 +33,18 @@ function New-SafeSymlink {
 }
 
 $nvimSource = Join-Path $repoRoot "nvim"
+$vimSource = Join-Path $repoRoot "vim"
 $ideaVimSource = Join-Path $repoRoot "ideavim\.ideavimrc"
 $vsVimSource = Join-Path $repoRoot "vsvim\.vsvimrc"
 
 $nvimTarget = Join-Path $env:LOCALAPPDATA "nvim"
+$vimTarget = Join-Path $HOME ".vim"
 $ideaVimTarget = Join-Path $HOME ".ideavimrc"
 $vsVimTargetDot = Join-Path $HOME ".vsvimrc"
 $vsVimTargetUnderscore = Join-Path $HOME "_vsvimrc"
 
 New-SafeSymlink -Source $nvimSource -Target $nvimTarget -IsDirectory $true
+New-SafeSymlink -Source $vimSource -Target $vimTarget -IsDirectory $true
 New-SafeSymlink -Source $ideaVimSource -Target $ideaVimTarget -IsDirectory $false
 New-SafeSymlink -Source $vsVimSource -Target $vsVimTargetDot -IsDirectory $false
 New-SafeSymlink -Source $vsVimSource -Target $vsVimTargetUnderscore -IsDirectory $false

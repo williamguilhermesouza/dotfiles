@@ -26,6 +26,7 @@ link_safe() {
 }
 
 link_safe "${REPO_ROOT}/nvim" "${HOME}/.config/nvim"
+link_safe "${REPO_ROOT}/vim" "${HOME}/.vim"
 link_safe "${REPO_ROOT}/ideavim/.ideavimrc" "${HOME}/.ideavimrc"
 link_safe "${REPO_ROOT}/vsvim/.vsvimrc" "${HOME}/.vsvimrc"
 
