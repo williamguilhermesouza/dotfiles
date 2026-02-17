@@ -1,0 +1,2 @@
+" Shared base config
+source ~/.vim/init.vim
