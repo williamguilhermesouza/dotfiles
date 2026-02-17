@@ -24,8 +24,31 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 " Paste without yanking replaced text
-vnoremap <leader>p "_dP
+xnoremap <leader>p "_dP
 
 " Clipboard helpers
 vnoremap <leader>y "+y
 nnoremap <leader>Y gg"+yG
+
+" control d and u centering
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+" search terms in the middle
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" quickfix list nav
+nnoremap <C-k> :cnext<CR>zz
+nnoremap <C-j> :cprev<CR>zz
+nnoremap <leader>k :lnext<CR>zz
+nnoremap <leader>j :lprev<CR>zz
+
+" starts a replace under cursor
+nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
+
+" make current file executable
+nnoremap <silent> <leader>x :!chmod +x %<CR>
+
+" source current file
+:source %

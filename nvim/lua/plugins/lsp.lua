@@ -39,6 +39,9 @@ return {
       local cmp_lsp = require("cmp_nvim_lsp")
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend("force", capabilities, cmp_lsp.default_capabilities())
+      vim.lsp.config("*", {
+        capabilities = capabilities,
+      })
 
       require("fidget").setup({})
       require("mason").setup()
@@ -93,6 +96,9 @@ return {
           vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
           vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, opts)
           vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
+          vim.keymap.set("n", "<leader>f", function()
+            require("conform").format({ async = true, lsp_fallback = true })
+          end, opts)
           vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
         end,
       })
