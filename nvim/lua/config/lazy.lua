@@ -1,4 +1,4 @@
-local lazy_root = vim.fn.expand("~/.local/share/nvim/lazy")
+local lazy_root = vim.fn.expand("~/.nvim/lazy")
 local lazypath = lazy_root .. "/lazy.nvim"
 local uv = vim.uv or vim.loop
 if not uv.fs_stat(lazypath) then
