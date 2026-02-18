@@ -53,7 +53,7 @@ return {
         "tailwindcss",
         "pyright",
         "jsonls",
-        "csharp_ls",
+        "omnisharp",
       }
       if ok_mason_lsp then
         mason_lspconfig.setup({
@@ -143,7 +143,7 @@ return {
       setup_server("vtsls", { capabilities = capabilities })
       setup_server("pyright", { capabilities = capabilities })
       setup_server("jsonls", { capabilities = capabilities })
-      setup_server("csharp_ls", { capabilities = capabilities })
+      setup_server("omnisharp", { capabilities = capabilities })
 
       local cmp_select = { behavior = cmp.SelectBehavior.Select }
       cmp.setup({
