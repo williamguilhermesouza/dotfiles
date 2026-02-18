@@ -51,4 +51,4 @@ nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 nnoremap <silent> <leader>x :!chmod +x %<CR>
 
 " source current file
-:source %
+nnoremap <leader><enter> :source %<CR>
