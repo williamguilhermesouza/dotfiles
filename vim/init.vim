@@ -17,6 +17,7 @@ let mapleader=" "
 
 " Window and quit
 nnoremap <leader>v :vsplit<CR>
+nnoremap <leader>h :split<CR>
 nnoremap <leader>q :q<CR>
 
 " Move selected lines
