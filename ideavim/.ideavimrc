@@ -34,19 +34,13 @@ nnoremap <leader>h :action SplitHorizontally<CR>
 nnoremap <Leader>q :action CloseContent<CR>
 nnoremap <Leader>qa :action CloseAllEditors<CR>
 
-" reselects afer indenting
+" reselects after indenting
 vnoremap < <gv
 vnoremap > >gv
 
 " method navigation
 nnoremap [[ :action MethodUp<CR>
 nnoremap ]] :action MethodDown<CR>
-
-" fold unfold code
-"nnoremap zc :action CollapseRegion<CR>
-"nnoremap zo :action ExpandRegion<CR>
-"nnoremap <leader>zc :action CollapseAllRegions<CR>
-"nnoremap <leader>zo :action ExpandAllRegions<CR>
 
 " comment code
 nnoremap <c-k>c :action CommentByLineComment<CR>
@@ -62,7 +56,7 @@ nnoremap = :action ReformatCode<CR>
 nnoremap <leader>oi :action OptimizeImports<CR>
 
 " show recent opened files
-" nnoremap <c-r> :action RecentFiles<CR>
+nnoremap <leader>gr :action RecentFiles<CR>
 
 " show recent cursor positions
 nnoremap <leader>l :action RecentLocations<CR>
@@ -71,39 +65,45 @@ nnoremap <leader>l :action RecentLocations<CR>
 nnoremap <leader>h  :action LocalHistory.ShowHistory<CR>
 
 " error navigation
-nnoremap ge :action GotoNextError<CR>
-nnoremap gE :action GotoPreviousError<CR>
+nnoremap <leader>ge :action GotoNextError<CR>
+nnoremap <leader>gE :action GotoPreviousError<CR>
+
+" code search and navigation, review
+nnoremap <c-s>f :action FindInPath<CR>
+nnoremap <c-p> :action GotoFile<CR>
+
+nnoremap <leader>u :action FindUsages<CR>
+nnoremap <leader>os :action FileStructurePopup<CR>
+
+" nnoremap <leader>gs :action GotoSymbol<CR>
+" nnoremap <leader>gc :action GotoClass<CR>
+nnoremap <leader>gi :action GotoImplementation<CR>
+nnoremap <leader>gd :action GotToDeclaration<CR>
+nnoremap <leader>gp :action GotToSuperMethod<CR>
+nnoremap <leader>gt :action GotoTest<CR>
+" nnoremap <leader>ga :action GotoAction<CR> " open window to issue commands
+" nnoremap <leader>b :action ShowNavBar<CR>
+" nnoremap <leader>s :action GotoRelated<CR>
+" nnoremap <leader>h :action CallHierarchy<CR>
+" nnoremap <leader>gb :action Back<CR> " ctrl o does it
+" nnoremap <leader>gf :action Forward<CR> " ctrl i does it
+
+" mimicking harpoon (as close as possible) through bookmarks
+nnoremap <c-e> :action ShowBookmarks<CR>
+nnoremap <leader>a :action ToggleBookmarkWithMnemonic<CR>
+
+" ctrl c to esc
+map <C-c> <Esc>
+
+" fold unfold code
+"nnoremap zc :action CollapseRegion<CR>
+"nnoremap zo :action ExpandRegion<CR>
+"nnoremap <leader>zc :action CollapseAllRegions<CR>
+"nnoremap <leader>zo :action ExpandAllRegions<CR>
 
 " tab navigation
 "nnoremap <TAB> :action PreviousTab<CR>
 "nnoremap <s-TAB> :action NextTab<CR>
-
-" code search and navigation, review
-nnoremap <c-/> :action FindInPath<CR>
-nnoremap <c-a> :action GotoAction<CR>
-nnoremap <c-f> :action GotoFile<CR>
-
-nnoremap <leader>u :action FindUsages<CR>
-nnoremap <leader>s :action GotoRelated<CR>
-nnoremap <leader>h :action CallHierarchy<CR>
-nnoremap <leader>b :action ShowNavBar<CR>
-nnoremap <c-s> :action FileStructurePopup<CR>
-
-nnoremap <c-o> :action GotoSymbol<CR>
-nnoremap gc :action GotoClass<CR>
-nnoremap gi :action GotoImplementation<CR>
-nnoremap gd :action GotToDeclaration<CR>
-nnoremap gp :action GotToSuperMethod<CR>
-nnoremap gt :action GotoTest<CR>
-nnoremap gb :action Back<CR>
-nnoremap gf :action Forward<CR>
-
-" mimicking harpoon through bookmarks
-nnoremap <c-e> :action ShowBookmarks<CR>
-
-
-" ctrl c to esc
-map <C-c> <Esc>
 
 " handling shortcuts in vim instead of rider
 sethandler <C-c> a:vim " esc remap
@@ -112,4 +112,8 @@ sethandler <C-t> a:vim " terminal
 sethandler <C-r> a:vim " redo
 sethandler <C-k> a:vim " comments
 sethandler <C-o> a:vim " navigate back
+sethandler <C-i> a:vim " navigate forward
+sethandler <C-d> a:vim " scroll down
+sethandler <C-u> a:vim " scroll up
+
 
