@@ -50,7 +50,7 @@ vnoremap <c-k>c :action CommentByLineComment<CR>
 nnoremap <leader>r :action Refactorings.QuickListPopupAction<CR>
 
 " format code
-nnoremap = :action ReformatCode<CR>
+nnoremap <leader>f :action ReformatCode<CR>
 
 " format imports
 nnoremap <leader>oi :action OptimizeImports<CR>
@@ -77,10 +77,10 @@ nnoremap <leader>os :action FileStructurePopup<CR>
 
 " nnoremap <leader>gs :action GotoSymbol<CR>
 " nnoremap <leader>gc :action GotoClass<CR>
-nnoremap <leader>gi :action GotoImplementation<CR>
-nnoremap <leader>gd :action GotToDeclaration<CR>
-nnoremap <leader>gp :action GotToSuperMethod<CR>
-nnoremap <leader>gt :action GotoTest<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gs :action GotoSuperMethod<CR>
+" nnoremap gt :action GotoTest<CR>
 " nnoremap <leader>ga :action GotoAction<CR> " open window to issue commands
 " nnoremap <leader>b :action ShowNavBar<CR>
 " nnoremap <leader>s :action GotoRelated<CR>
@@ -91,9 +91,21 @@ nnoremap <leader>gt :action GotoTest<CR>
 " mimicking harpoon (as close as possible) through bookmarks
 nnoremap <c-e> :action ShowBookmarks<CR>
 nnoremap <leader>a :action ToggleBookmarkWithMnemonic<CR>
+nnoremap <c-h> :action GotoBookmark1<CR>
+nnoremap <c-j> :action GotoBookmark2<CR>
+nnoremap <c-k> :action GotoBookmark3<CR>
+nnoremap <c-l> :action GotoBookmark4<CR>
 
 " ctrl c to esc
 map <C-c> <Esc>
+
+" === git commands ===
+" Git log for current file
+nnoremap <leader>gl :action Vcs.ShowTabbedFileHistory<CR>
+" Blame (like :Gblame)
+nnoremap <leader>gb :action Annotate<CR>
+" Rollback file
+" nnoremap <leader>grr :action Revert<CR>
 
 " fold unfold code
 "nnoremap zc :action CollapseRegion<CR>
@@ -115,5 +127,6 @@ sethandler <C-o> a:vim " navigate back
 sethandler <C-i> a:vim " navigate forward
 sethandler <C-d> a:vim " scroll down
 sethandler <C-u> a:vim " scroll up
+sethandler <C-p> a:vim " goto file
 
 
