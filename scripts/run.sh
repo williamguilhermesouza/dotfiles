@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+# the primeagen run script, other scripts should be added to the runs directory and made executable
+#source in
+# https://github.com/ThePrimeagen/dev/blob/master/run
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+if [ -z "$DEV_ENV" ]; then
+    echo "env var DEV_ENV needs to be present"
+    exit 1
+fi
+
+# if i just did DEV_ENV=$(pwd) ./run then this is needed for the rest of the
+# scripts
+export DEV_ENV="$DEV_ENV"
+
+grep=""
+dry_run="0"
+
+while [[ $# -gt 0 ]]; do
+    echo "ARG: \"$1\""
+    if [[ "$1" == "--dry" ]]; then
+        dry_run="1"
+    else
+        grep="$1"
+    fi
+    shift
+done
+
+log() {
+    if [[ $dry_run == "1" ]]; then
+        echo "[DRY_RUN]: $1"
+    else
+        echo "$1"
+    fi
+}
+
+log "RUN: env: $env -- grep: $grep"
+
+runs_dir=`find $script_dir/runs -mindepth 1 -maxdepth 1 -executable`
+
+for s in $runs_dir; do
+    if basename $s | grep -vq "$grep"; then
+        log "grep \"$grep\" filtered out $s"
+        continue
+    fi
+
+    log "running script: $s"
+
+    if [[ $dry_run == "0" ]]; then
+        $s
+    fi
+done
+
+#remove_files() {
+#    pushd $1
+#    (
+#        configs=`find . -mindepth 1 -maxdepth 1 -type d`
+#        if [[ $dry_run == "1" ]]; then
+#            echo "[DRY_RUN]: removing: $configs"
+#        else
+#            echo "removing: $configs"
+#        fi
+#
+#        for c in $configs; do
+#            directory=${2%/}/${c}
+#            if [[ $dry_run == "1" ]]; then
+#                echo "[DRY_RUN]:    removing: $directory"
+#            else
+#                echo "    removing: $directory"
+#                rm -rf $directory
+#            fi
+#        done
+#
+#        if [[ $dry_run == "1" ]]; then
+#            echo "copying env: $2"
+#        else
+#            echo "copying env: $2"
+#            cp -r ./* $2
+#        fi
+#    )
+#    popd
+#}
+
+#run_env() {
+#    pushd $script_dir
+#    echo "removing ~config"
+#    remove_files env/.config $XDG_CONFIG_HOME
+#
+#    echo "removing ~local"
+#    remove_files env/.local $HOME/.local
+#
+#    echo "copying zsh"
+#    if [[ $dry_run == "0" ]]; then
+#        cp $script_dir/env/.zshrc ~/.zshrc
+#        cp $script_dir/env/.zsh_profile ~/.zsh_profile
+#    fi
+#
+#    popd
+#}
