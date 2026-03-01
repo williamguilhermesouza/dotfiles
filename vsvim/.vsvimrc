@@ -1,2 +1,128 @@
 " Shared base config
 source ~/.vim/init.vim
+
+" ============================================================
+" VsVim Configuration for Visual Studio Community
+" ============================================================
+
+" Use system clipboard
+set clipboard=unnamed
+
+" ------------------------------------------------------------
+" General
+" ------------------------------------------------------------
+
+" Open this config
+nnoremap <leader>oc :e ~\.vsvimrc<CR>
+
+" Reload config
+nnoremap <leader>sc :source ~\.vsvimrc<CR>
+
+" Ctrl+C as Esc
+map <C-c> <Esc>
+
+" Reselect visual block after indent
+vnoremap < <gv
+vnoremap > >gv
+
+
+" ------------------------------------------------------------
+" Terminal
+" ------------------------------------------------------------
+
+nnoremap <leader>t :vsc View.Terminal<CR>
+
+
+" ------------------------------------------------------------
+" Window / Tab Management
+" ------------------------------------------------------------
+
+" Split tab groups
+nnoremap <leader>v :vsc Window.NewVerticalTabGroup<CR>
+nnoremap <leader>h :vsc Window.NewHorizontalTabGroup<CR>
+
+" Close editors
+nnoremap <leader>q  :vsc File.Close<CR>
+nnoremap <leader>qa :vsc File.CloseAllDocuments<CR>
+
+
+" ------------------------------------------------------------
+" Navigation
+" ------------------------------------------------------------
+
+" Navigate between methods
+"nnoremap [[ :vsc Edit.PreviousMethod<CR>" review
+"nnoremap ]] :vsc Edit.NextMethod<CR>" review
+
+" Go to definition / implementation
+nnoremap gd :vsc Edit.GoToDefinition<CR>
+nnoremap gi :vsc Edit.GoToImplementation<CR>
+nnoremap gs :vsc Edit.GoToBase<CR>
+
+" Find usages
+nnoremap <leader>u :vsc Edit.FindAllReferences<CR>
+
+" Go to file
+nnoremap <C-p> :vsc Edit.GoToFile<CR>
+
+" Navigate back / forward
+nnoremap <C-o> :vsc View.NavigateBackward<CR>
+nnoremap <C-i> :vsc View.NavigateForward<CR>
+
+
+" ------------------------------------------------------------
+" Code Actions
+" ------------------------------------------------------------
+
+" Comment selection
+"nnoremap <C-k>c :vsc Edit.CommentSelection<CR>
+"vnoremap <C-k>c :vsc Edit.CommentSelection<CR>
+
+" Quick actions / lightbulb
+"nnoremap <leader>r :vsc Edit.QuickActions<CR>" review
+
+" Format document
+nnoremap <leader>f :vsc Edit.FormatDocument<CR>
+
+" Remove and sort usings (C#)
+nnoremap <leader>oi :vsc Edit.RemoveAndSort<CR>
+
+
+" ------------------------------------------------------------
+" Search
+" ------------------------------------------------------------
+
+" Find in solution
+"nnoremap <C-s>f :vsc Edit.FindinFiles<CR> " ctrl shift f already find all
+
+" File structure (navigate to)
+nnoremap <leader>os :vsc Edit.NavigateTo<CR>
+
+
+" ------------------------------------------------------------
+" Recent / History
+" ------------------------------------------------------------
+
+" Recent files
+"nnoremap <leader>gr :vsc File.OpenRecentFile<CR>" review
+
+" Git file history
+"nnoremap <leader>gl :vsc View.GitHistory<CR> " review
+
+" Git blame
+nnoremap <leader>gb :vsc Team.Git.Annotate<CR>
+
+
+" ------------------------------------------------------------
+" Bookmarks (Harpoon-like approximation)
+" ------------------------------------------------------------
+
+" Toggle bookmark
+"nnoremap <leader>a :vsc Edit.ToggleBookmark<CR> " should be set on vs
+
+" Bookmark window
+"nnoremap <C-e> :vsc View.BookmarkWindow<CR> " should be set on vs
+
+" Next / Previous bookmark
+"nnoremap <C-h> :vsc Edit.GoToNextBookmark<CR> " should be set on vs
+"nnoremap <C-l> :vsc Edit.GoToPreviousBookmark<CR> " should be set on vs
