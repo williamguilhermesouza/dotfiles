@@ -6,6 +6,8 @@ else
   vim.notify("Shared config not found: " .. shared_vim, vim.log.levels.WARN)
 end
 
+vim.opt.smartindent = true
+
 require("config.options")
 require("config.lazy")
 require("config.keymaps")
