@@ -1,0 +1,53 @@
+#!/usr/bin/env pwsh
+
+# Resolve script directory (equivalent to bash BASH_SOURCE logic)
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+
+if (-not $env:DEV_ENV) {
+    Write-Host "env var DEV_ENV needs to be present"
+    exit 1
+}
+
+# Ensure DEV_ENV is exported to child processes
+$env:DEV_ENV = $env:DEV_ENV
+
+$grep = ""
+$dryRun = $false
+
+# Parse arguments
+foreach ($arg in $args) {
+    Write-Host "ARG: `"$arg`""
+    if ($arg -eq "--dry") {
+        $dryRun = $true
+    } else {
+        $grep = $arg
+    }
+}
+
+function Log($msg) {
+    if ($dryRun) {
+        Write-Host "[DRY_RUN]: $msg"
+    } else {
+        Write-Host $msg
+    }
+}
+
+Log "RUN: env: $env:DEV_ENV -- grep: $grep"
+
+$runsDir = Join-Path $scriptDir "runs_windows"
+
+# Get executable scripts (ps1 files)
+$scripts = Get-ChildItem -Path $runsDir -File
+
+foreach ($s in $scripts) {
+    if ($grep -and ($s.Name -notmatch $grep)) {
+        Log "grep `"$grep`" filtered out $($s.FullName)"
+        continue
+    }
+
+    Log "running script: $($s.FullName)"
+
+    if (-not $dryRun) {
+        & $s.FullName
+    }
+}
