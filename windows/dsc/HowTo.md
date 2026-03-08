@@ -1,0 +1,1 @@
+winget configure -f configurations/<file>.yaml

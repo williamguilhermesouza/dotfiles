@@ -36,8 +36,9 @@ Log "RUN: env: $env:DEV_ENV -- grep: $grep"
 
 $runsDir = Join-Path $scriptDir "runs_windows"
 
-# Get executable scripts (ps1 files)
-$scripts = Get-ChildItem -Path $runsDir -File
+# Get executable scripts (ps1 files). Run link script last.
+$scripts = Get-ChildItem -Path $runsDir -File |
+    Sort-Object @{ Expression = { if ($_.Name -eq "link-dotfiles.ps1") { 1 } else { 0 } } }, Name
 
 foreach ($s in $scripts) {
     if ($grep -and ($s.Name -notmatch $grep)) {

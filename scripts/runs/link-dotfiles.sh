@@ -2,11 +2,16 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
 link_safe() {
   local source="$1"
   local target="$2"
+
+  if [[ ! -e "${source}" && ! -L "${source}" ]]; then
+    echo "Skipping missing source: ${source}"
+    return
+  fi
 
   mkdir -p "$(dirname "${target}")"
 
@@ -25,9 +30,10 @@ link_safe() {
   echo "Linked: ${target} -> ${source}"
 }
 
-link_safe "${REPO_ROOT}/nvim" "${HOME}/.config/nvim"
-link_safe "${REPO_ROOT}/vim" "${HOME}/.vim"
-link_safe "${REPO_ROOT}/ideavim/.ideavimrc" "${HOME}/.ideavimrc"
-link_safe "${REPO_ROOT}/vsvim/.vsvimrc" "${HOME}/.vsvimrc"
+link_safe "${REPO_ROOT}/config/nvim" "${HOME}/.config/nvim"
+link_safe "${REPO_ROOT}/config/vim" "${HOME}/.vim"
+link_safe "${REPO_ROOT}/config/ideavim/.ideavimrc" "${HOME}/.ideavimrc"
+link_safe "${REPO_ROOT}/config/vsvim/.vsvimrc" "${HOME}/.vsvimrc"
+link_safe "${REPO_ROOT}/config/yazi" "${HOME}/.config/yazi"
 
 echo "Done."
