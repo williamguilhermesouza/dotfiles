@@ -12,12 +12,48 @@
             "keys": "ctrl+c"
         },
         {
+            "id": null,
+            "keys": "alt+right"
+        },
+        {
             "id": "Terminal.PasteFromClipboard",
             "keys": "ctrl+v"
         },
         {
             "id": "Terminal.DuplicatePaneAuto",
             "keys": "alt+shift+d"
+        },
+        {
+            "id": "Terminal.MoveFocusLeft",
+            "keys": "ctrl+left"
+        },
+        {
+            "id": "Terminal.MoveFocusRight",
+            "keys": "ctrl+right"
+        },
+        {
+            "id": null,
+            "keys": "alt+left"
+        },
+        {
+            "id": "Terminal.MoveFocusUp",
+            "keys": "ctrl+up"
+        },
+        {
+            "id": null,
+            "keys": "alt+up"
+        },
+        {
+            "id": "Terminal.MoveFocusDown",
+            "keys": "ctrl+down"
+        },
+        {
+            "id": null,
+            "keys": "alt+down"
+        },
+        {
+            "id": "Terminal.ResizePaneDown",
+            "keys": "alt+shift+down"
         }
     ],
     "launchMode": "maximized",
