@@ -8,52 +8,92 @@
     "keybindings": 
     [
         {
+            "id": "Terminal.ResizePaneUp",
+            "keys": "ctrl+shift+k"
+        },
+        {
             "id": "Terminal.CopyToClipboard",
             "keys": "ctrl+c"
         },
         {
             "id": null,
-            "keys": "alt+right"
+            "keys": "alt+shift+up"
+        },
+        {
+            "id": "Terminal.MoveFocusLeft",
+            "keys": "ctrl+h"
         },
         {
             "id": "Terminal.PasteFromClipboard",
             "keys": "ctrl+v"
         },
         {
-            "id": "Terminal.DuplicatePaneAuto",
-            "keys": "alt+shift+d"
+            "id": "Terminal.ResizePaneLeft",
+            "keys": "ctrl+shift+h"
         },
         {
-            "id": "Terminal.MoveFocusLeft",
-            "keys": "ctrl+left"
+            "id": "Terminal.MoveFocusDown",
+            "keys": "ctrl+j"
+        },
+        {
+            "id": "Terminal.MoveFocusUp",
+            "keys": "ctrl+k"
         },
         {
             "id": "Terminal.MoveFocusRight",
-            "keys": "ctrl+right"
+            "keys": "ctrl+l"
+        },
+        {
+            "id": "Terminal.ResizePaneDown",
+            "keys": "ctrl+shift+j"
+        },
+        {
+            "id": "Terminal.ResizePaneRight",
+            "keys": "ctrl+shift+l"
+        },
+        {
+            "id": "Terminal.SplitPaneDown",
+            "keys": "ctrl+shift+minus"
+        },
+        {
+            "id": null,
+            "keys": "alt+shift+left"
+        },
+        {
+            "id": "Terminal.SplitPaneRight",
+            "keys": "ctrl+shift+plus"
         },
         {
             "id": null,
             "keys": "alt+left"
         },
         {
-            "id": "Terminal.MoveFocusUp",
-            "keys": "ctrl+up"
+            "id": null,
+            "keys": "alt+down"
         },
         {
             "id": null,
             "keys": "alt+up"
         },
         {
-            "id": "Terminal.MoveFocusDown",
-            "keys": "ctrl+down"
+            "id": null,
+            "keys": "alt+right"
         },
         {
             "id": null,
-            "keys": "alt+down"
+            "keys": "alt+shift+down"
         },
         {
-            "id": "Terminal.ResizePaneDown",
-            "keys": "alt+shift+down"
+            "id": null,
+            "keys": "alt+shift+right"
+        },
+        {
+            "id": null,
+            "keys": "alt+shift+minus"
+        },
+        {
+            "id": null,
+            "keys": "alt+shift+plus"
         }
     ],
     "launchMode": "maximized",

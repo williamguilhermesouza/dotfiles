@@ -1,0 +1,8 @@
+{
+  "$schema": "https://zebar.app/schemas/zpack-schema.v2.json",
+  "name": "Default",
+  "description": "Minimal Zebar pack for GlazeWM integration.",
+  "author": "williamguilhermesouza",
+  "version": "1.0.0",
+  "tags": ["dotfiles", "zebar"]
+}
