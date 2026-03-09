@@ -159,7 +159,6 @@ window_rules:
     match:
       - window_title: { regex: 'Quake|Windows Terminal - Quake' } # Modify regex based on actual title
       # You can add window_class or window_process for more precision
-      - window_process: { equals: 'WindowsTerminal' } # This line is optional but helpful
 
 binding_modes:
   # When enabled, the focused window can be resized via arrow keys or HJKL.
