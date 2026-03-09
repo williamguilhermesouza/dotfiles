@@ -2,12 +2,40 @@
 ![Repo-size](https://img.shields.io/github/repo-size/williamguilhermesouza/dotfiles)
 ![Last-commit](https://img.shields.io/github/last-commit/williamguilhermesouza/dotfiles)
 
-My personal dotfiles with plugins and configuration. Download the code with 
+My personal dotfiles with plugins and configuration.
 
-> git clone https://github.com/williamguilhermesouza/dotfiles.git
+## Clone
 
-To use:
+```bash
+git clone https://github.com/williamguilhermesouza/dotfiles.git
+cd dotfiles
+```
 
-Choose an script and execute it with:
+## Windows
 
-> ./scriptname
+### 1) Set up environment variables and PATH
+Run the dev env bootstrap once in PowerShell to make `DEV_ENV`, `XDG_HOME`, `XDG_CONFIG_HOME` permanent and add `windows/scripts` to your user `PATH`:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\windows\dev_env.ps1
+```
+
+Open a new PowerShell session after this step.
+
+### 2) Apply environment (set)
+Use the run script from anywhere:
+
+```powershell
+run setenv
+```
+
+This runs `winget configure` with `windows/dsc/configuration.dev.dsc.yaml`.
+
+### 3) Reset environment (unset)
+To undo the applied environment safely:
+
+```powershell
+run unsetenv
+```
+
+This runs `winget configure` with `windows/dsc/configuration.reset.dsc.yaml`.

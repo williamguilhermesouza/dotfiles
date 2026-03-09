@@ -46,7 +46,8 @@ $scripts = Get-ChildItem -Path $runsDir -File |
     Sort-Object @{ Expression = { if ($_.Name -eq "link-dotfiles.ps1") { 1 } else { 0 } } }, Name
 
 foreach ($s in $scripts) {
-    if ($grep -and ($s.Name -notmatch $grep)) {
+    $scriptName = [System.IO.Path]::GetFileNameWithoutExtension($s.Name)
+    if ($grep -and $scriptName -ne $grep -and $s.Name -ne $grep) {
         Log "grep `"$grep`" filtered out $($s.FullName)"
         continue
     }
