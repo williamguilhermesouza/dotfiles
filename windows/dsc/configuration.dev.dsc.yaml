@@ -1,0 +1,52 @@
+properties:
+  configurationVersion: 0.2.0
+
+  assertions:
+    - resource: Microsoft.Windows.Developer/OsVersion
+      directives:
+        description: Verify this configuration runs on Windows 10/11.
+        allowPrerelease: true
+      settings:
+        MinVersion: "10.0.19041"
+
+  resources:
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: windowsTerminal
+      directives:
+        description: Ensure Windows Terminal is installed.
+        allowPrerelease: true
+      settings:
+        id: Microsoft.WindowsTerminal
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: glazewm
+      directives:
+        description: Ensure GlazeWM is installed.
+        allowPrerelease: true
+      settings:
+        id: glzr-io.glazewm
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: yazi
+      directives:
+        description: Ensure Yazi is installed.
+        allowPrerelease: true
+      settings:
+        id: sxyazi.yazi
+        source: winget
+
+    - resource: PSDscResources/Script
+      id: linkDotfiles
+      directives:
+        description: Ensure dotfiles are linked to the expected Windows locations.
+        securityContext: elevated
+        allowPrerelease: true
+      settings:
+        GetScript: |
+          & (Join-Path "${WinGetConfigRoot}" "scripts\link-dotfiles.get.ps1")
+        TestScript: |
+          & (Join-Path "${WinGetConfigRoot}" "scripts\link-dotfiles.test.ps1")
+        SetScript: |
+          & (Join-Path "${WinGetConfigRoot}" "scripts\link-dotfiles.set.ps1")

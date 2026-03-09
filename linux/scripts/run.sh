@@ -34,7 +34,7 @@ log() {
     fi
 }
 
-log "RUN: env: $env -- grep: $grep"
+log "RUN: env: $DEV_ENV -- grep: $grep"
 
 runs_dir=`find $script_dir/runs -mindepth 1 -maxdepth 1 -executable`
 

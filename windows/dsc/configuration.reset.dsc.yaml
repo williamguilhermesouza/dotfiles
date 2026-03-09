@@ -1,0 +1,39 @@
+properties:
+  configurationVersion: 0.2.0
+
+  assertions:
+    - resource: Microsoft.Windows.Developer/OsVersion
+      directives:
+        description: Verify this configuration runs on Windows 10/11.
+        allowPrerelease: true
+      settings:
+        MinVersion: "10.0.19041"
+
+  resources:
+    - resource: PSDscResources/Script
+      id: resetDotfiles
+      directives:
+        description: Remove managed links and restore previous backups when available.
+        securityContext: elevated
+        allowPrerelease: true
+      settings:
+        GetScript: |
+          & (Join-Path "${WinGetConfigRoot}" "scripts\reset-dotfiles.get.ps1")
+        TestScript: |
+          & (Join-Path "${WinGetConfigRoot}" "scripts\reset-dotfiles.test.ps1")
+        SetScript: |
+          & (Join-Path "${WinGetConfigRoot}" "scripts\reset-dotfiles.set.ps1")
+
+    - resource: PSDscResources/Script
+      id: uninstallManagedPackages
+      directives:
+        description: Uninstall packages installed by the dev configuration if present.
+        securityContext: elevated
+        allowPrerelease: true
+      settings:
+        GetScript: |
+          & (Join-Path "${WinGetConfigRoot}" "scripts\reset-packages.get.ps1")
+        TestScript: |
+          & (Join-Path "${WinGetConfigRoot}" "scripts\reset-packages.test.ps1")
+        SetScript: |
+          & (Join-Path "${WinGetConfigRoot}" "scripts\reset-packages.set.ps1")

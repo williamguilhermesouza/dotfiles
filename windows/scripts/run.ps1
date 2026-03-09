@@ -34,7 +34,12 @@ function Log($msg) {
 
 Log "RUN: env: $env:DEV_ENV -- grep: $grep"
 
-$runsDir = Join-Path $scriptDir "runs_windows"
+$runsDir = Join-Path $scriptDir "runs"
+
+if (-not (Test-Path -LiteralPath $runsDir)) {
+    Write-Host "runs directory not found: $runsDir"
+    exit 1
+}
 
 # Get executable scripts (ps1 files). Run link script last.
 $scripts = Get-ChildItem -Path $runsDir -File |

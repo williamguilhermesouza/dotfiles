@@ -31,6 +31,10 @@ log "env: $DEV_ENV"
 
 update_files() {
     log "copying over files from: $1"
+    if [[ ! -d "$1" ]]; then
+        log "source directory not found, skipping: $1"
+        return
+    fi
     pushd $1 &> /dev/null
     (
         configs=`find . -mindepth 1 -maxdepth 1 -type d`
@@ -63,8 +67,8 @@ copy() {
     fi
 }
 
-update_files $DEV_ENV/env/.config $XDG_CONFIG_HOME
-update_files $DEV_ENV/env/.local $HOME/.local
+update_files $DEV_ENV/config $XDG_CONFIG_HOME
+update_files $DEV_ENV/local $HOME/.local
 
 #copy $DEV_ENV/tmux-sessionizer/tmux-sessionizer $HOME/.local/scripts/tmux-sessionizer
 #copy $DEV_ENV/env/.zsh_profile $HOME/.zsh_profile
