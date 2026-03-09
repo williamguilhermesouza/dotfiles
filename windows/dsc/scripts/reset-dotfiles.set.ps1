@@ -21,6 +21,22 @@ function Convert-ToAbsolutePath {
   return [System.IO.Path]::GetFullPath((Join-Path $BasePath $Path))
 }
 
+function Normalize-PathForCompare {
+  param(
+    [Parameter(Mandatory = $true)][string]$Path
+  )
+
+  $normalized = $Path.Trim()
+  if ($normalized.StartsWith("\\?\")) {
+    $normalized = $normalized.Substring(4)
+  } elseif ($normalized.StartsWith("\??\")) {
+    $normalized = $normalized.Substring(4)
+  }
+
+  $normalized = [System.IO.Path]::GetFullPath($normalized)
+  return $normalized.TrimEnd("\")
+}
+
 function Test-IsManagedTarget {
   param(
     [Parameter(Mandatory = $true)][string]$Source,
@@ -32,7 +48,7 @@ function Test-IsManagedTarget {
   }
 
   $item = Get-Item -LiteralPath $Target -Force
-  $expectedSource = Convert-ToAbsolutePath -Path $Source -BasePath (Get-Location).Path
+  $expectedSource = Normalize-PathForCompare -Path (Convert-ToAbsolutePath -Path $Source -BasePath (Get-Location).Path)
 
   if ($item.LinkType -eq "SymbolicLink" -or $item.LinkType -eq "Junction") {
     $linkedPath = $item.Target
@@ -41,7 +57,7 @@ function Test-IsManagedTarget {
     }
 
     if (-not [string]::IsNullOrWhiteSpace($linkedPath)) {
-      $actualSource = Convert-ToAbsolutePath -Path $linkedPath -BasePath (Split-Path -Path $Target -Parent)
+      $actualSource = Normalize-PathForCompare -Path (Convert-ToAbsolutePath -Path $linkedPath -BasePath (Split-Path -Path $Target -Parent))
       if ($actualSource -ieq $expectedSource) {
         return $true
       }
@@ -51,6 +67,8 @@ function Test-IsManagedTarget {
       try {
         $resolvedTarget = (Resolve-Path -LiteralPath $Target).Path
         $resolvedSource = (Resolve-Path -LiteralPath $Source).Path
+        $resolvedTarget = Normalize-PathForCompare -Path $resolvedTarget
+        $resolvedSource = Normalize-PathForCompare -Path $resolvedSource
         return ($resolvedTarget -eq $resolvedSource)
       } catch {
         return $false
@@ -59,8 +77,12 @@ function Test-IsManagedTarget {
   }
 
   if ($item.LinkType -eq "HardLink" -and (Test-Path -LiteralPath $Source)) {
-    $resolvedSource = (Resolve-Path -LiteralPath $Source).Path
-    $hardLinks = @(Get-Item -LiteralPath $Target -Force | Select-Object -ExpandProperty Target)
+    $resolvedSource = Normalize-PathForCompare -Path (Resolve-Path -LiteralPath $Source).Path
+    $hardLinks = @(
+      Get-Item -LiteralPath $Target -Force |
+      Select-Object -ExpandProperty Target |
+      ForEach-Object { Normalize-PathForCompare -Path ([string]$_) }
+    )
     return ($hardLinks -contains $resolvedSource)
   }
 

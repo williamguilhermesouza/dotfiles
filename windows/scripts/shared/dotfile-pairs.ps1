@@ -4,7 +4,12 @@ $ErrorActionPreference = "Stop"
 function Resolve-RepoRoot {
   $candidates = @()
 
+  # Prefer paths derived from this script location to avoid relying on external env vars.
+  $candidates += (Join-Path $PSScriptRoot "..\..\..")
+  $candidates += (Join-Path $PSScriptRoot "..\..")
+
   if (-not [string]::IsNullOrWhiteSpace($env:DEV_ENV)) {
+    $candidates += (Join-Path $env:DEV_ENV "dotfiles")
     $candidates += $env:DEV_ENV
   }
 
@@ -15,9 +20,6 @@ function Resolve-RepoRoot {
     }
   }
 
-  $candidates += (Join-Path $PSScriptRoot "..\..\..")
-  $candidates += (Join-Path $PSScriptRoot "..\..")
-
   foreach ($candidate in $candidates) {
     try {
       $resolved = (Resolve-Path -LiteralPath $candidate).Path
@@ -25,12 +27,14 @@ function Resolve-RepoRoot {
       continue
     }
 
-    if (Test-Path -LiteralPath (Join-Path $resolved "config")) {
+    $hasConfig = Test-Path -LiteralPath (Join-Path $resolved "config")
+    $hasMarker = Test-Path -LiteralPath (Join-Path $resolved "windows\scripts\shared\dotfile-pairs.ps1")
+    if ($hasConfig -and $hasMarker) {
       return $resolved
     }
   }
 
-  throw "Could not resolve repository root. Set DEV_ENV or XDG_CONFIG_HOME."
+  throw "Could not resolve repository root from script location or DEV_ENV."
 }
 
 function Get-ManagedLinkPairs {

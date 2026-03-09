@@ -37,6 +37,15 @@ properties:
         id: sxyazi.yazi
         source: winget
 
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: zebar
+      directives:
+        description: Ensure Zebar is installed.
+        allowPrerelease: true
+      settings:
+        id: glzr-io.zebar
+        source: winget
+
     - resource: PSDscResources/Script
       id: linkDotfiles
       directives:

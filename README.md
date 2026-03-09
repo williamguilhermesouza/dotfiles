@@ -29,7 +29,7 @@ Use the run script from anywhere:
 run setenv
 ```
 
-This runs `winget configure` with `windows/dsc/configuration.dev.dsc.yaml` (installs apps and links managed dotfiles).
+This runs `winget configure` with `windows/dsc/configuration.dev.dsc.yaml` (installs apps like Windows Terminal, GlazeWM, Zebar, and Yazi, and links managed dotfiles).
 
 ### 3) Reset environment (unset)
 To undo the applied environment safely:

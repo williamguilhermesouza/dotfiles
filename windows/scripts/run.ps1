@@ -2,14 +2,10 @@
 
 # Resolve script directory (equivalent to bash BASH_SOURCE logic)
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$repoRoot = (Resolve-Path (Join-Path $scriptDir "..\..\..")).Path
 
-if (-not $env:DEV_ENV) {
-    Write-Host "env var DEV_ENV needs to be present"
-    exit 1
-}
-
-# Ensure DEV_ENV is exported to child processes
-$env:DEV_ENV = $env:DEV_ENV
+# Ensure DEV_ENV is always correct for this repository.
+$env:DEV_ENV = $repoRoot
 
 $grep = ""
 $dryRun = $false

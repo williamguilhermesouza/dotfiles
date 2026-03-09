@@ -5,3 +5,6 @@ $configFile = (Resolve-Path (Join-Path $PSScriptRoot "..\..\dsc\configuration.re
 
 Write-Host "Resetting environment from: $configFile"
 winget configure -f $configFile --accept-configuration-agreements
+if ($LASTEXITCODE -ne 0) {
+  throw "winget configure reset failed with exit code $LASTEXITCODE"
+}
