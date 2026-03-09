@@ -1,17 +1,24 @@
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
+$sharedPairsPath = Join-Path $PSScriptRoot "..\..\scripts\shared\dotfile-pairs.ps1"
+. $sharedPairsPath
+
 function Get-LinkPairs {
-  $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path
-  @(
-    @{ Source = (Join-Path $repoRoot "config\nvim"); Target = (Join-Path $env:LOCALAPPDATA "nvim"); IsDirectory = $true }
-    @{ Source = (Join-Path $repoRoot "config\vim"); Target = (Join-Path $HOME ".vim"); IsDirectory = $true }
-    @{ Source = (Join-Path $repoRoot "config\ideavim\.ideavimrc"); Target = (Join-Path $HOME ".ideavimrc"); IsDirectory = $false }
-    @{ Source = (Join-Path $repoRoot "config\vsvim\.vsvimrc"); Target = (Join-Path $HOME ".vsvimrc"); IsDirectory = $false }
-    @{ Source = (Join-Path $repoRoot "config\vsvim\.vsvimrc"); Target = (Join-Path $HOME "_vsvimrc"); IsDirectory = $false }
-    @{ Source = (Join-Path $repoRoot "config\windows-terminal\settings.json"); Target = (Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"); IsDirectory = $false }
-    @{ Source = (Join-Path $repoRoot "config\windows-terminal\settings.json"); Target = (Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json"); IsDirectory = $false }
+  return Get-ManagedLinkPairs
+}
+
+function Convert-ToAbsolutePath {
+  param(
+    [Parameter(Mandatory = $true)][string]$Path,
+    [Parameter(Mandatory = $true)][string]$BasePath
   )
+
+  if ([System.IO.Path]::IsPathRooted($Path)) {
+    return [System.IO.Path]::GetFullPath($Path)
+  }
+
+  return [System.IO.Path]::GetFullPath((Join-Path $BasePath $Path))
 }
 
 function Test-IsManagedTarget {
@@ -25,23 +32,34 @@ function Test-IsManagedTarget {
   }
 
   $item = Get-Item -LiteralPath $Target -Force
-  $resolvedSource = $null
-  try {
-    $resolvedSource = (Resolve-Path -LiteralPath $Source).Path
-  } catch {
-    return $false
-  }
+  $expectedSource = Convert-ToAbsolutePath -Path $Source -BasePath (Get-Location).Path
 
   if ($item.LinkType -eq "SymbolicLink" -or $item.LinkType -eq "Junction") {
-    try {
-      $resolvedTarget = (Resolve-Path -LiteralPath $Target).Path
-    } catch {
-      return $false
+    $linkedPath = $item.Target
+    if ($linkedPath -is [array]) {
+      $linkedPath = $linkedPath[0]
     }
-    return ($resolvedTarget -eq $resolvedSource)
+
+    if (-not [string]::IsNullOrWhiteSpace($linkedPath)) {
+      $actualSource = Convert-ToAbsolutePath -Path $linkedPath -BasePath (Split-Path -Path $Target -Parent)
+      if ($actualSource -ieq $expectedSource) {
+        return $true
+      }
+    }
+
+    if (Test-Path -LiteralPath $Source) {
+      try {
+        $resolvedTarget = (Resolve-Path -LiteralPath $Target).Path
+        $resolvedSource = (Resolve-Path -LiteralPath $Source).Path
+        return ($resolvedTarget -eq $resolvedSource)
+      } catch {
+        return $false
+      }
+    }
   }
 
-  if ($item.LinkType -eq "HardLink") {
+  if ($item.LinkType -eq "HardLink" -and (Test-Path -LiteralPath $Source)) {
+    $resolvedSource = (Resolve-Path -LiteralPath $Source).Path
     $hardLinks = @(Get-Item -LiteralPath $Target -Force | Select-Object -ExpandProperty Target)
     return ($hardLinks -contains $resolvedSource)
   }
@@ -78,8 +96,16 @@ foreach ($pair in (Get-LinkPairs)) {
     return $false
   }
 
-  if ((-not (Test-Path -LiteralPath $pair.Target)) -and (Get-LatestBackupPath -Target $pair.Target)) {
+  $backup = Get-LatestBackupPath -Target $pair.Target
+  if ((-not (Test-Path -LiteralPath $pair.Target)) -and $backup) {
     return $false
+  }
+
+  if ((Test-Path -LiteralPath $pair.Target) -and $backup) {
+    $item = Get-Item -LiteralPath $pair.Target -Force
+    if (-not $item.LinkType) {
+      return $false
+    }
   }
 }
 

@@ -1,7 +1,10 @@
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
-$repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path
+$sharedPairsPath = Join-Path $PSScriptRoot "..\..\scripts\shared\dotfile-pairs.ps1"
+. $sharedPairsPath
+
+$repoRoot = Resolve-RepoRoot
 @{
   Result = "repoRoot=$repoRoot; mode=reset"
 }

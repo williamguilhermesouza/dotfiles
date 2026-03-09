@@ -14,7 +14,7 @@ cd dotfiles
 ## Windows
 
 ### 1) Set up environment variables and PATH
-Run the dev env bootstrap once in PowerShell to make `DEV_ENV`, `XDG_HOME`, `XDG_CONFIG_HOME` permanent and add `windows/scripts` to your user `PATH`:
+Run the dev env bootstrap once in PowerShell to make `DEV_ENV` permanent and add `windows/scripts` to your user `PATH`:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\windows\dev_env.ps1
@@ -29,7 +29,7 @@ Use the run script from anywhere:
 run setenv
 ```
 
-This runs `winget configure` with `windows/dsc/configuration.dev.dsc.yaml`.
+This runs `winget configure` with `windows/dsc/configuration.dev.dsc.yaml` (installs apps and links managed dotfiles).
 
 ### 3) Reset environment (unset)
 To undo the applied environment safely:
@@ -38,4 +38,4 @@ To undo the applied environment safely:
 run unsetenv
 ```
 
-This runs `winget configure` with `windows/dsc/configuration.reset.dsc.yaml`.
+This runs `winget configure` with `windows/dsc/configuration.reset.dsc.yaml` (removes managed config links, restores backups when available, and does not uninstall applications).

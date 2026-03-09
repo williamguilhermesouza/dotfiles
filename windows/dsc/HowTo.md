@@ -19,5 +19,4 @@ winget configure -f .\windows\dsc\configuration.reset.dsc.yaml --accept-configur
 Reset behavior:
 - Removes only dotfile targets that are links managed by this repo.
 - Restores previous backups (`*.backup.YYYYMMDDHHMMSS`) when available.
-- Uninstalls packages managed by dev config if installed.
 - If nothing was previously configured, it does nothing.

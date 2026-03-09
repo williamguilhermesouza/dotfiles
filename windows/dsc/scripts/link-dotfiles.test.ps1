@@ -1,19 +1,13 @@
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
-$repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path
-$pairs = @(
-  @{ Source = (Join-Path $repoRoot "config\nvim"); Target = (Join-Path $env:LOCALAPPDATA "nvim") }
-  @{ Source = (Join-Path $repoRoot "config\vim"); Target = (Join-Path $HOME ".vim") }
-  @{ Source = (Join-Path $repoRoot "config\ideavim\.ideavimrc"); Target = (Join-Path $HOME ".ideavimrc") }
-  @{ Source = (Join-Path $repoRoot "config\vsvim\.vsvimrc"); Target = (Join-Path $HOME ".vsvimrc") }
-  @{ Source = (Join-Path $repoRoot "config\vsvim\.vsvimrc"); Target = (Join-Path $HOME "_vsvimrc") }
-  @{ Source = (Join-Path $repoRoot "config\windows-terminal\settings.json"); Target = (Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json") }
-  @{ Source = (Join-Path $repoRoot "config\windows-terminal\settings.json"); Target = (Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json") }
-)
+$sharedPairsPath = Join-Path $PSScriptRoot "..\..\scripts\shared\dotfile-pairs.ps1"
+. $sharedPairsPath
+
+$pairs = Get-ManagedLinkPairs
 
 foreach ($pair in $pairs) {
-  if (-not (Test-Path -LiteralPath $pair.Source)) { return $false }
+  if (-not (Test-Path -LiteralPath $pair.Source)) { continue }
   if (-not (Test-Path -LiteralPath $pair.Target)) { return $false }
   $item = Get-Item -LiteralPath $pair.Target -Force
 

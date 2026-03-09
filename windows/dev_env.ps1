@@ -2,13 +2,10 @@
 
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $projectRoot = (Resolve-Path (Join-Path $scriptDir "..")).Path
-$devEnv = $projectRoot
-$configDir = Join-Path $projectRoot "config"
+$devEnv = (Resolve-Path (Join-Path $projectRoot ".." )).Path
 $scriptsDir = Join-Path $projectRoot "windows\scripts"
 
 $env:DEV_ENV = $devEnv
-$env:XDG_HOME = $configDir
-$env:XDG_CONFIG_HOME = $configDir
 
 function Set-UserEnvVar {
     param(
@@ -53,14 +50,10 @@ function Add-ToUserPath {
 }
 
 Set-UserEnvVar -Name "DEV_ENV" -Value $devEnv
-Set-UserEnvVar -Name "XDG_HOME" -Value $configDir
-Set-UserEnvVar -Name "XDG_CONFIG_HOME" -Value $configDir
 Add-ToUserPath -Entry $scriptsDir
 
 # Keep current session in sync with user-level PATH update.
 $env:Path = [Environment]::GetEnvironmentVariable("Path", "User") + ";" + [Environment]::GetEnvironmentVariable("Path", "Machine")
 
 Write-Host "DEV_ENV=$($env:DEV_ENV)"
-Write-Host "XDG_HOME=$($env:XDG_HOME)"
-Write-Host "XDG_CONFIG_HOME=$($env:XDG_CONFIG_HOME)"
 Write-Host "Added to user PATH (if missing): $scriptsDir"

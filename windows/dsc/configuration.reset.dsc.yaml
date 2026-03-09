@@ -23,17 +23,3 @@ properties:
           & (Join-Path "${WinGetConfigRoot}" "scripts\reset-dotfiles.test.ps1")
         SetScript: |
           & (Join-Path "${WinGetConfigRoot}" "scripts\reset-dotfiles.set.ps1")
-
-    - resource: PSDscResources/Script
-      id: uninstallManagedPackages
-      directives:
-        description: Uninstall packages installed by the dev configuration if present.
-        securityContext: elevated
-        allowPrerelease: true
-      settings:
-        GetScript: |
-          & (Join-Path "${WinGetConfigRoot}" "scripts\reset-packages.get.ps1")
-        TestScript: |
-          & (Join-Path "${WinGetConfigRoot}" "scripts\reset-packages.test.ps1")
-        SetScript: |
-          & (Join-Path "${WinGetConfigRoot}" "scripts\reset-packages.set.ps1")

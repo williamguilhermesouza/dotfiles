@@ -1,6 +1,9 @@
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
+$sharedPairsPath = Join-Path $PSScriptRoot "..\..\scripts\shared\dotfile-pairs.ps1"
+. $sharedPairsPath
+
 function Ensure-Link {
   param(
     [Parameter(Mandatory = $true)][string]$Source,
@@ -52,38 +55,14 @@ function Ensure-Link {
   } catch {
     $isElevationError = $_.FullyQualifiedErrorId -like "*NewItemSymbolicLinkElevationRequired*" -or
       $_.Exception -is [System.UnauthorizedAccessException]
-    if (-not $isElevationError) { throw }
-  }
-
-  if ($IsDirectory) {
-    New-Item -ItemType Junction -Path $Target -Target $Source | Out-Null
-    return
-  }
-
-  $resolvedSource = (Resolve-Path -LiteralPath $Source).Path
-  $sourceRoot = [System.IO.Path]::GetPathRoot($resolvedSource)
-  $targetRoot = [System.IO.Path]::GetPathRoot($Target)
-  if ($sourceRoot -eq $targetRoot) {
-    try {
-      New-Item -ItemType HardLink -Path $Target -Target $Source | Out-Null
-      return
-    } catch {
+    if ($isElevationError) {
+      throw "Failed to create symbolic link '$Target' -> '$Source'. Symbolic link privileges are required. Re-run PowerShell elevated or enable Developer Mode."
     }
+    throw
   }
-
-  Copy-Item -LiteralPath $Source -Destination $Target -Force
 }
 
-$repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path
-$pairs = @(
-  @{ Source = (Join-Path $repoRoot "config\nvim"); Target = (Join-Path $env:LOCALAPPDATA "nvim"); IsDirectory = $true }
-  @{ Source = (Join-Path $repoRoot "config\vim"); Target = (Join-Path $HOME ".vim"); IsDirectory = $true }
-  @{ Source = (Join-Path $repoRoot "config\ideavim\.ideavimrc"); Target = (Join-Path $HOME ".ideavimrc"); IsDirectory = $false }
-  @{ Source = (Join-Path $repoRoot "config\vsvim\.vsvimrc"); Target = (Join-Path $HOME ".vsvimrc"); IsDirectory = $false }
-  @{ Source = (Join-Path $repoRoot "config\vsvim\.vsvimrc"); Target = (Join-Path $HOME "_vsvimrc"); IsDirectory = $false }
-  @{ Source = (Join-Path $repoRoot "config\windows-terminal\settings.json"); Target = (Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"); IsDirectory = $false }
-  @{ Source = (Join-Path $repoRoot "config\windows-terminal\settings.json"); Target = (Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json"); IsDirectory = $false }
-)
+$pairs = Get-ManagedLinkPairs
 
 foreach ($pair in $pairs) {
   Ensure-Link -Source $pair.Source -Target $pair.Target -IsDirectory $pair.IsDirectory
