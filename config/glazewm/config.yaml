@@ -120,8 +120,10 @@ window_behavior:
       shown_on_top: false
 
 workspaces:
-  - name: '1'
-  - name: '2'
+  - name: 'Browser'
+    bind_to_monitor: 1
+  - name: 'Code'
+    bind_to_monitor: 1
   - name: '3'
   - name: '4'
   - name: '5'
@@ -280,9 +282,9 @@ keybindings:
     bindings: ['alt+d']
 
   # Change focus to a workspace defined in `workspaces` config.
-  - commands: ['focus --workspace 1']
+  - commands: ['focus --workspace Browser']
     bindings: ['alt+1']
-  - commands: ['focus --workspace 2']
+  - commands: ['focus --workspace Code']
     bindings: ['alt+2']
   - commands: ['focus --workspace 3']
     bindings: ['alt+3']
@@ -311,9 +313,9 @@ keybindings:
     bindings: ['alt+shift+s']
 
   # Move focused window to a workspace defined in `workspaces` config.
-  - commands: ['move --workspace 1', 'focus --workspace 1']
+  - commands: ['move --workspace Browser', 'focus --workspace Browser']
     bindings: ['alt+shift+1']
-  - commands: ['move --workspace 2', 'focus --workspace 2']
+  - commands: ['move --workspace Code', 'focus --workspace Code']
     bindings: ['alt+shift+2']
   - commands: ['move --workspace 3', 'focus --workspace 3']
     bindings: ['alt+shift+3']
