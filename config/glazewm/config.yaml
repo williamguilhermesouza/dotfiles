@@ -120,8 +120,8 @@ window_behavior:
       shown_on_top: false
 
 workspaces:
-  - name: 'Browser'
-  - name: 'Code'
+  - name: '1'
+  - name: '2'
   - name: '3'
   - name: '4'
   - name: '5'
@@ -136,7 +136,7 @@ window_rules:
       # Ignores any Zebar windows.
       - window_process: { equals: 'zebar' }
 
-      # Ignores picture-in-picture windows for browsers.
+      # Ignores picture-in-picture windows for 1s.
       - window_title: { regex: '[Pp]icture.in.[Pp]icture' }
         window_class: { regex: 'Chrome_WidgetWin_1|MozillaDialogClass' }
 
@@ -280,9 +280,9 @@ keybindings:
     bindings: ['alt+d']
 
   # Change focus to a workspace defined in `workspaces` config.
-  - commands: ['focus --workspace Browser']
+  - commands: ['focus --workspace 1']
     bindings: ['alt+1']
-  - commands: ['focus --workspace Code']
+  - commands: ['focus --workspace 2']
     bindings: ['alt+2']
   - commands: ['focus --workspace 3']
     bindings: ['alt+3']
@@ -311,9 +311,9 @@ keybindings:
     bindings: ['alt+shift+s']
 
   # Move focused window to a workspace defined in `workspaces` config.
-  - commands: ['move --workspace Browser', 'focus --workspace Browser']
+  - commands: ['move --workspace 1', 'focus --workspace 1']
     bindings: ['alt+shift+1']
-  - commands: ['move --workspace Code', 'focus --workspace Code']
+  - commands: ['move --workspace 2', 'focus --workspace 2']
     bindings: ['alt+shift+2']
   - commands: ['move --workspace 3', 'focus --workspace 3']
     bindings: ['alt+shift+3']
