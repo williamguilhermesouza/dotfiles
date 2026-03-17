@@ -16,6 +16,10 @@
             "keys": "ctrl+c"
         },
         {
+            "id": "Terminal.PasteFromClipboard",
+            "keys": "ctrl+v"
+        },
+        {
             "id": null,
             "keys": "alt+shift+up"
         },
@@ -24,16 +28,12 @@
             "keys": "ctrl+h"
         },
         {
-            "id": "Terminal.PasteFromClipboard",
-            "keys": "ctrl+v"
+            "id": "Terminal.MoveFocusDown",
+            "keys": "ctrl+j"
         },
         {
             "id": "Terminal.ResizePaneLeft",
             "keys": "ctrl+shift+h"
-        },
-        {
-            "id": "Terminal.MoveFocusDown",
-            "keys": "ctrl+j"
         },
         {
             "id": "Terminal.MoveFocusUp",
@@ -56,12 +56,12 @@
             "keys": "ctrl+shift+minus"
         },
         {
-            "id": null,
-            "keys": "alt+shift+left"
-        },
-        {
             "id": "Terminal.SplitPaneRight",
             "keys": "ctrl+shift+plus"
+        },
+        {
+            "id": null,
+            "keys": "alt+shift+left"
         },
         {
             "id": null,
@@ -158,6 +158,18 @@
                 "hidden": false,
                 "name": "Ubuntu",
                 "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
+            },
+            {
+                "guid": "{4d367bcb-c899-5ffb-8ace-ee67f85ffe07}",
+                "hidden": true,
+                "name": "Developer Command Prompt for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{f8983366-2b7f-57f6-beb9-90cb101c7ee2}",
+                "hidden": true,
+                "name": "Developer PowerShell for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
             }
         ]
     },

@@ -11,6 +11,151 @@ properties:
 
   resources:
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Git
+      directives:
+        description: Install Git
+        allowPrerelease: true 
+      settings:
+        id: Git.git
+        source: winget
+
+    - resource: GitDsc/GitConfigUserName
+      directives:
+       description: Configure Git
+       allowPrerelease: true
+      dependsOn:
+       - Git
+      settings:
+        UserName: "William Souza"
+        ConfigLocation: "Global"
+
+    - resource: GitDsc/GitConfigUserEmail
+      directives:
+       description: Configure Git
+       allowPrerelease: true
+      dependsOn:
+       - Git
+      settings:
+        UserEmail: "williamguilhermesouza@gmail.com"
+        ConfigLocation: "Global"
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Neovim
+      directives:
+        description: Install Neovim
+        allowPrerelease: true
+      settings:
+        id: Neovim.Neovim
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: FD
+      directives:
+        description: Install fd
+        allowPrerelease: true
+      settings:
+        id: sharkdp.fd
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: FZF
+      directives:
+        description: Install fzf
+        allowPrerelease: true
+      settings:
+        id: junegunn.fzf
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Ripgrep
+      directives:
+        description: Install Ripgrep
+        allowPrerelease: true
+      settings:
+        id: BurntSushi.ripgrep.MSVC
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: LazyGit
+      directives:
+        description: Install LazyGit
+        allowPrerelease: true
+      settings:
+        id: JesseDuffield.lazygit
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: JQ
+      directives:
+        description: Install JQ
+        allowPrerelease: true
+      settings:
+        id: jqlang.jq
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: HTACG.tidy
+      directives:
+        description: Install tidy-html5
+      settings:
+        id: jqlang.jq
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: D2 Diagram scription engine
+      directives:
+        description: Install D2
+        allowPrerelease: true
+      settings:
+        id: Terrastruct.D2
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Visual_Studio_Code
+      directives:
+        description: Install Visual Studio Code
+        allowPrerelease: true
+      settings:
+        id: Microsoft.VisualStudioCode
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Visual_Studio_2022
+      directives:
+        description: Install Visual Studio
+        allowPrerelease: true
+      settings:
+        id: Microsoft.VisualStudio.2022.Community
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Node.js
+      directives:
+        description: Install Node.js
+        allowPrerelease: true
+      settings:
+        id: OpenJS.NodeJS
+        # source: winget
+#
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: LinqPad_9
+      directives:
+        description: Install LinqPad 9
+        allowPrerelease: true
+      settings:
+        id: LINQPad.LINQPad.9
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: ILSpy
+      directives:
+        description: Install ILSpy
+        allowPrerelease: true
+      settings:
+        id: icsharpcode.ILSpy
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: windowsTerminal
       directives:
         description: Ensure Windows Terminal is installed.
@@ -59,3 +204,32 @@ properties:
           & (Join-Path "${WinGetConfigRoot}" "scripts\link-dotfiles.test.ps1")
         SetScript: |
           & (Join-Path "${WinGetConfigRoot}" "scripts\link-dotfiles.set.ps1")
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: PowerToys
+      directives:
+        description: Install PowerToys
+        allowPrerelease: true
+      settings:
+        id: Microsoft.PowerToys
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: bat
+      directives:
+        description: Install bat
+        allowPrerelease: true
+      settings:
+        id: sharkdp.bat
+        source: winget
+
+    - resource: PSDscResources/Script
+      id: Install_Z_Module_PowerShell_Gallery
+      directives:
+        description: Install Z module from PowerShell Gallery
+      settings:
+        GetScript: |
+          return (Get-Module -ListAvailable -Name Z -ErrorAction SilentlyContinue) -ne $null
+        TestScript: |
+          return (Get-Module -ListAvailable -Name Z -ErrorAction SilentlyContinue) -ne $null
+        SetScript: |
+          Install-Module -Name Z -RequiredVersion '1.1.9' -Force -Confirm:$false -AcceptLicense
