@@ -3,3 +3,5 @@ nvim/plugged/
 
 # Local lazy.nvim plugin dir if root is ever set inside config repo
 nvim/lazy/
+
+errors.log
