@@ -233,3 +233,19 @@ properties:
           return (Get-Module -ListAvailable -Name Z -ErrorAction SilentlyContinue) -ne $null
         SetScript: |
           Install-Module -Name Z -RequiredVersion '1.1.9' -Force -Confirm:$false -AcceptLicense
+
+    - resource: PSDscResources/Script
+      id: Setup_PowerShell_Profile
+      directives:
+        description: Ensure PowerShell profile loads Z and is executable for current user.
+        allowPrerelease: true
+      dependsOn:
+        - linkDotfiles
+        - Install_Z_Module_PowerShell_Gallery
+      settings:
+        GetScript: |
+          & (Join-Path "${WinGetConfigRoot}" "scripts\setup-powershell-profile.get.ps1")
+        TestScript: |
+          & (Join-Path "${WinGetConfigRoot}" "scripts\setup-powershell-profile.test.ps1")
+        SetScript: |
+          & (Join-Path "${WinGetConfigRoot}" "scripts\setup-powershell-profile.set.ps1")
