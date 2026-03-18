@@ -1,12 +1,21 @@
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
-$sharedPairsPath = Join-Path $PSScriptRoot "..\..\scripts\shared\dotfile-pairs.ps1"
-. $sharedPairsPath
-
-function Get-LinkPairs {
-  return Get-ManagedLinkPairs
-}
+$repoRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..\..")).Path
+$pairs = @(
+  @{ Source = (Join-Path $repoRoot "config\nvim"); Target = (Join-Path $env:LOCALAPPDATA "nvim") }
+  @{ Source = (Join-Path $repoRoot "config\vim"); Target = (Join-Path $HOME ".vim") }
+  @{ Source = (Join-Path $repoRoot "config\ideavim\.ideavimrc"); Target = (Join-Path $HOME ".ideavimrc") }
+  @{ Source = (Join-Path $repoRoot "config\vsvim\.vsvimrc"); Target = (Join-Path $HOME ".vsvimrc") }
+  @{ Source = (Join-Path $repoRoot "config\vsvim\.vsvimrc"); Target = (Join-Path $HOME "_vsvimrc") }
+  @{ Source = (Join-Path $repoRoot "config\windows-terminal\settings.json"); Target = (Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json") }
+  @{ Source = (Join-Path $repoRoot "config\windows-terminal\settings.json"); Target = (Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json") }
+  @{ Source = (Join-Path $repoRoot "config\yazi"); Target = (Join-Path $env:APPDATA "yazi\config") }
+  @{ Source = (Join-Path $repoRoot "config\glazewm"); Target = (Join-Path $HOME ".glzr\glazewm") }
+  @{ Source = (Join-Path $repoRoot "config\zebar"); Target = (Join-Path $HOME ".glzr\zebar") }
+  @{ Source = (Join-Path $repoRoot "config\powershell\profile.ps1"); Target = (Join-Path $HOME "Documents\PowerShell\Microsoft.PowerShell_profile.ps1") }
+  @{ Source = (Join-Path $repoRoot "config\powershell\profile.ps1"); Target = (Join-Path $HOME "Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1") }
+)
 
 function Convert-ToAbsolutePath {
   param(
@@ -113,22 +122,16 @@ function Get-LatestBackupPath {
   return $latest.FullName
 }
 
-foreach ($pair in (Get-LinkPairs)) {
+foreach ($pair in $pairs) {
   $targetExists = Test-Path -LiteralPath $pair.Target
   $managed = Test-IsManagedTarget -Source $pair.Source -Target $pair.Target
   $backup = Get-LatestBackupPath -Target $pair.Target
 
   if ($managed -or ($targetExists -and $backup)) {
     Remove-Item -LiteralPath $pair.Target -Force -Recurse
-    Write-Host "Removed managed target: $($pair.Target)"
   }
 
-  if (-not (Test-Path -LiteralPath $pair.Target)) {
-    if ($backup) {
-      Move-Item -LiteralPath $backup -Destination $pair.Target
-      Write-Host "Restored backup: $($pair.Target) <= $backup"
-    } elseif ($managed) {
-      Write-Host "No backup found for target after unlink: $($pair.Target)"
-    }
+  if (-not (Test-Path -LiteralPath $pair.Target) -and $backup) {
+    Move-Item -LiteralPath $backup -Destination $pair.Target
   }
 }

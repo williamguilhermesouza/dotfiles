@@ -18,8 +18,10 @@ properties:
         allowPrerelease: true
       settings:
         GetScript: |
-          & (Join-Path "${WinGetConfigRoot}" "scripts\reset-dotfiles.get.ps1")
+          @{
+            Result = "Dotfile reset is always applied."
+          }
         TestScript: |
-          & (Join-Path "${WinGetConfigRoot}" "scripts\reset-dotfiles.test.ps1")
+          return $false
         SetScript: |
           & (Join-Path "${WinGetConfigRoot}" "scripts\reset-dotfiles.set.ps1")

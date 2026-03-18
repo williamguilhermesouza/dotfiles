@@ -37,9 +37,8 @@ if (-not (Test-Path -LiteralPath $runsDir)) {
     exit 1
 }
 
-# Get executable scripts (ps1 files). Run link script last.
-$scripts = Get-ChildItem -Path $runsDir -File |
-    Sort-Object @{ Expression = { if ($_.Name -eq "link-dotfiles.ps1") { 1 } else { 0 } } }, Name
+# Get executable scripts (ps1 files).
+$scripts = Get-ChildItem -Path $runsDir -File | Sort-Object Name
 
 foreach ($s in $scripts) {
     $scriptName = [System.IO.Path]::GetFileNameWithoutExtension($s.Name)

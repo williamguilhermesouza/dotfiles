@@ -1,14 +1,32 @@
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
-$sharedPairsPath = Join-Path $PSScriptRoot "..\..\scripts\shared\dotfile-pairs.ps1"
-. $sharedPairsPath
+$repoRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..\..")).Path
+$pairs = @(
+  @{ Source = (Join-Path $repoRoot "config\nvim"); Target = (Join-Path $env:LOCALAPPDATA "nvim") }
+  @{ Source = (Join-Path $repoRoot "config\vim"); Target = (Join-Path $HOME ".vim") }
+  @{ Source = (Join-Path $repoRoot "config\ideavim\.ideavimrc"); Target = (Join-Path $HOME ".ideavimrc") }
+  @{ Source = (Join-Path $repoRoot "config\vsvim\.vsvimrc"); Target = (Join-Path $HOME ".vsvimrc") }
+  @{ Source = (Join-Path $repoRoot "config\vsvim\.vsvimrc"); Target = (Join-Path $HOME "_vsvimrc") }
+  @{ Source = (Join-Path $repoRoot "config\windows-terminal\settings.json"); Target = (Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json") }
+  @{ Source = (Join-Path $repoRoot "config\windows-terminal\settings.json"); Target = (Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json") }
+  @{ Source = (Join-Path $repoRoot "config\yazi"); Target = (Join-Path $env:APPDATA "yazi\config") }
+  @{ Source = (Join-Path $repoRoot "config\glazewm"); Target = (Join-Path $HOME ".glzr\glazewm") }
+  @{ Source = (Join-Path $repoRoot "config\zebar"); Target = (Join-Path $HOME ".glzr\zebar") }
+  @{ Source = (Join-Path $repoRoot "config\powershell\profile.ps1"); Target = (Join-Path $HOME "Documents\PowerShell\Microsoft.PowerShell_profile.ps1") }
+  @{ Source = (Join-Path $repoRoot "config\powershell\profile.ps1"); Target = (Join-Path $HOME "Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1") }
+)
+
+$allowedPolicies = @("RemoteSigned", "Unrestricted", "Bypass")
+$currentPolicy = Get-ExecutionPolicy -Scope CurrentUser
+if ($allowedPolicies -notcontains $currentPolicy) {
+  Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force
+}
 
 function Ensure-Link {
   param(
     [Parameter(Mandatory = $true)][string]$Source,
-    [Parameter(Mandatory = $true)][string]$Target,
-    [Parameter(Mandatory = $true)][bool]$IsDirectory
+    [Parameter(Mandatory = $true)][string]$Target
   )
 
   if (-not (Test-Path -LiteralPath $Source)) {
@@ -51,7 +69,6 @@ function Ensure-Link {
 
   try {
     New-Item -ItemType SymbolicLink -Path $Target -Target $Source | Out-Null
-    return
   } catch {
     $isElevationError = $_.FullyQualifiedErrorId -like "*NewItemSymbolicLinkElevationRequired*" -or
       $_.Exception -is [System.UnauthorizedAccessException]
@@ -62,8 +79,6 @@ function Ensure-Link {
   }
 }
 
-$pairs = Get-ManagedLinkPairs
-
 foreach ($pair in $pairs) {
-  Ensure-Link -Source $pair.Source -Target $pair.Target -IsDirectory $pair.IsDirectory
+  Ensure-Link -Source $pair.Source -Target $pair.Target
 }

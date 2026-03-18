@@ -85,6 +85,15 @@ properties:
         source: winget
 
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Carapace
+      directives:
+        description: Install Carapace
+        allowPrerelease: true
+      settings:
+        id: rsteube.Carapace
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: JQ
       directives:
         description: Install JQ
@@ -199,9 +208,11 @@ properties:
         allowPrerelease: true
       settings:
         GetScript: |
-          & (Join-Path "${WinGetConfigRoot}" "scripts\link-dotfiles.get.ps1")
+          @{
+            Result = "Dotfile sync is always applied."
+          }
         TestScript: |
-          & (Join-Path "${WinGetConfigRoot}" "scripts\link-dotfiles.test.ps1")
+          return $false
         SetScript: |
           & (Join-Path "${WinGetConfigRoot}" "scripts\link-dotfiles.set.ps1")
 
@@ -233,19 +244,3 @@ properties:
           return (Get-Module -ListAvailable -Name Z -ErrorAction SilentlyContinue) -ne $null
         SetScript: |
           Install-Module -Name Z -RequiredVersion '1.1.9' -Force -Confirm:$false -AcceptLicense
-
-    - resource: PSDscResources/Script
-      id: Setup_PowerShell_Profile
-      directives:
-        description: Ensure PowerShell profile loads Z and is executable for current user.
-        allowPrerelease: true
-      dependsOn:
-        - linkDotfiles
-        - Install_Z_Module_PowerShell_Gallery
-      settings:
-        GetScript: |
-          & (Join-Path "${WinGetConfigRoot}" "scripts\setup-powershell-profile.get.ps1")
-        TestScript: |
-          & (Join-Path "${WinGetConfigRoot}" "scripts\setup-powershell-profile.test.ps1")
-        SetScript: |
-          & (Join-Path "${WinGetConfigRoot}" "scripts\setup-powershell-profile.set.ps1")
