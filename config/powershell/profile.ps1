@@ -12,16 +12,38 @@ Set-Alias -Name bat -Value cat -Option AllScope -Force
 
 if ($host.Name -eq 'ConsoleHost')
 {
-	Set-PSReadLineOption -EditMode Windows
-	Set-PSReadLineOption -PredictionViewStyle ListView
-	Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+	$psReadLineCommand = Get-Command -Name Set-PSReadLineOption -ErrorAction SilentlyContinue
+	if ($psReadLineCommand) {
+		Set-PSReadLineOption -EditMode Windows
 
-	Set-PSReadLineOption -Colors @{ "Selection" = "`e[7m" }
-	Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+		if ($psReadLineCommand.Parameters.ContainsKey("PredictionViewStyle")) {
+			Set-PSReadLineOption -PredictionViewStyle ListView
+		}
 
-	$carapaceCache = "$env:TEMP\carapace_init.ps1"
-	if (-not (Test-Path $carapaceCache) -or (Get-Item $carapaceCache).LastWriteTime -lt (Get-Item (Get-Command carapace).Source).LastWriteTime) {
-		carapace _carapace | Out-String | Set-Content $carapaceCache
+		if ($psReadLineCommand.Parameters.ContainsKey("PredictionSource")) {
+			Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+		}
+
+		try {
+			Set-PSReadLineOption -Colors @{ "Selection" = "`e[7m" }
+		} catch {
+		}
+
+		Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 	}
-	. $carapaceCache
+
+	$carapaceCommand = Get-Command -Name carapace -ErrorAction SilentlyContinue
+	if ($carapaceCommand) {
+		$carapaceCache = "$env:TEMP\carapace_init.ps1"
+		try {
+			if (-not (Test-Path $carapaceCache) -or (Get-Item $carapaceCache).LastWriteTime -lt (Get-Item $carapaceCommand.Source).LastWriteTime) {
+				carapace _carapace | Out-String | Set-Content $carapaceCache
+			}
+
+			if (Test-Path $carapaceCache) {
+				. $carapaceCache
+			}
+		} catch {
+		}
+	}
 }

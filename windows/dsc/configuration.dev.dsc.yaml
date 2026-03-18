@@ -200,8 +200,19 @@ properties:
         id: glzr-io.zebar
         source: winget
 
+    - resource: PSDscResources/Environment
+      id: Dotfiles_Config_Path
+      directives:
+        description: Set DOTFILES_CONFIG_PATH to the repo config directory.
+        allowPrerelease: false
+      settings:
+        name: DOTFILES_CONFIG_PATH
+        value: '${WinGetConfigRoot}/../../config'
+
     - resource: PSDscResources/Script
       id: linkDotfiles
+      dependsOn:
+        - Dotfiles_Config_Path
       directives:
         description: Ensure dotfiles are linked to the expected Windows locations.
         securityContext: elevated

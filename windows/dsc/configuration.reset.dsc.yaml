@@ -10,8 +10,19 @@ properties:
         MinVersion: "10.0.19041"
 
   resources:
+    - resource: PSDscResources/Environment
+      id: Dotfiles_Config_Path
+      directives:
+        description: Set DOTFILES_CONFIG_PATH to the repo config directory.
+        allowPrerelease: false
+      settings:
+        name: DOTFILES_CONFIG_PATH
+        value: '${WinGetConfigRoot}/../../config'
+
     - resource: PSDscResources/Script
       id: resetDotfiles
+      dependsOn:
+        - Dotfiles_Config_Path
       directives:
         description: Remove managed links and restore previous backups when available.
         securityContext: elevated

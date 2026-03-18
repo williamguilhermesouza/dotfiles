@@ -1,27 +1,39 @@
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
-$repoRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..\..")).Path
-$pairs = @(
-  @{ Source = (Join-Path $repoRoot "config\nvim"); Target = (Join-Path $env:LOCALAPPDATA "nvim") }
-  @{ Source = (Join-Path $repoRoot "config\vim"); Target = (Join-Path $HOME ".vim") }
-  @{ Source = (Join-Path $repoRoot "config\ideavim\.ideavimrc"); Target = (Join-Path $HOME ".ideavimrc") }
-  @{ Source = (Join-Path $repoRoot "config\vsvim\.vsvimrc"); Target = (Join-Path $HOME ".vsvimrc") }
-  @{ Source = (Join-Path $repoRoot "config\vsvim\.vsvimrc"); Target = (Join-Path $HOME "_vsvimrc") }
-  @{ Source = (Join-Path $repoRoot "config\windows-terminal\settings.json"); Target = (Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json") }
-  @{ Source = (Join-Path $repoRoot "config\windows-terminal\settings.json"); Target = (Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json") }
-  @{ Source = (Join-Path $repoRoot "config\yazi"); Target = (Join-Path $env:APPDATA "yazi\config") }
-  @{ Source = (Join-Path $repoRoot "config\glazewm"); Target = (Join-Path $HOME ".glzr\glazewm") }
-  @{ Source = (Join-Path $repoRoot "config\zebar"); Target = (Join-Path $HOME ".glzr\zebar") }
-  @{ Source = (Join-Path $repoRoot "config\powershell\profile.ps1"); Target = (Join-Path $HOME "Documents\PowerShell\Microsoft.PowerShell_profile.ps1") }
-  @{ Source = (Join-Path $repoRoot "config\powershell\profile.ps1"); Target = (Join-Path $HOME "Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1") }
-)
+function Resolve-ConfigRoot {
+  $configuredPath = [System.Environment]::GetEnvironmentVariable("DOTFILES_CONFIG_PATH", "Process")
+  if ([string]::IsNullOrWhiteSpace($configuredPath)) {
+    $configuredPath = [System.Environment]::GetEnvironmentVariable("DOTFILES_CONFIG_PATH", "User")
+  }
 
-$allowedPolicies = @("RemoteSigned", "Unrestricted", "Bypass")
-$currentPolicy = Get-ExecutionPolicy -Scope CurrentUser
-if ($allowedPolicies -notcontains $currentPolicy) {
-  Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force
+  if (-not [string]::IsNullOrWhiteSpace($configuredPath)) {
+    return (Resolve-Path -LiteralPath $configuredPath).Path
+  }
+
+  $repoRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..\..\..")).Path
+  return (Join-Path $repoRoot "config")
 }
+
+$configRoot = Resolve-ConfigRoot
+$documentsPath = [System.Environment]::GetFolderPath("MyDocuments")
+$windowsPowerShellProfilePath = Join-Path (Join-Path $documentsPath "WindowsPowerShell") "Microsoft.PowerShell_profile.ps1"
+$powerShellProfilePath = Join-Path (Join-Path $documentsPath "PowerShell") "Microsoft.PowerShell_profile.ps1"
+
+$pairs = @(
+  @{ Source = (Join-Path $configRoot "nvim"); Target = (Join-Path $env:LOCALAPPDATA "nvim") }
+  @{ Source = (Join-Path $configRoot "vim"); Target = (Join-Path $HOME ".vim") }
+  @{ Source = (Join-Path $configRoot "ideavim\.ideavimrc"); Target = (Join-Path $HOME ".ideavimrc") }
+  @{ Source = (Join-Path $configRoot "vsvim\.vsvimrc"); Target = (Join-Path $HOME ".vsvimrc") }
+  @{ Source = (Join-Path $configRoot "vsvim\.vsvimrc"); Target = (Join-Path $HOME "_vsvimrc") }
+  @{ Source = (Join-Path $configRoot "windows-terminal\settings.json"); Target = (Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json") }
+  @{ Source = (Join-Path $configRoot "windows-terminal\settings.json"); Target = (Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json") }
+  @{ Source = (Join-Path $configRoot "yazi"); Target = (Join-Path $env:APPDATA "yazi\config") }
+  @{ Source = (Join-Path $configRoot "glazewm"); Target = (Join-Path $HOME ".glzr\glazewm") }
+  @{ Source = (Join-Path $configRoot "zebar"); Target = (Join-Path $HOME ".glzr\zebar") }
+  @{ Source = (Join-Path $configRoot "powershell\profile.ps1"); Target = $powerShellProfilePath }
+  @{ Source = (Join-Path $configRoot "powershell\profile.ps1"); Target = $windowsPowerShellProfilePath }
+)
 
 function Ensure-Link {
   param(

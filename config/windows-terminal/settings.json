@@ -116,7 +116,7 @@
             {
                 "backgroundImage": null,
                 "backgroundImageOpacity": 0.25,
-                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoExit -ExecutionPolicy Bypass",
                 "experimental.retroTerminalEffect": false,
                 "font": 
                 {
