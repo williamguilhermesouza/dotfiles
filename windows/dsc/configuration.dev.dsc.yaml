@@ -49,6 +49,15 @@ properties:
         source: winget
 
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: PowerShell_Core
+      directives:
+        description: Install PowerShell 7
+        allowPrerelease: true
+      settings:
+        id: Microsoft.Powershell
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: FD
       directives:
         description: Install fd
