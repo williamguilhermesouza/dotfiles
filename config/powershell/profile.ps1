@@ -8,7 +8,7 @@ if (Get-Command -Name z -ErrorAction SilentlyContinue) {
   Set-Alias -Name cd -Value z -Option AllScope -Force
 }
 
-Set-Alias -Name bat -Value cat -Option AllScope -Force
+Set-Alias -Name cat -Value bat -Option AllScope -Force
 
 if ($host.Name -eq 'ConsoleHost')
 {
