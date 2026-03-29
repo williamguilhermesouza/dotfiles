@@ -74,14 +74,14 @@ nnoremap <leader>gE :action GotoPreviousError<CR>
 nnoremap <c-s>f :action FindInPath<CR>
 nnoremap <c-p> :action GotoFile<CR>
 
-nnoremap <leader>u :action FindUsages<CR>
+nnoremap gu :action FindUsages<CR>
 nnoremap <leader>os :action FileStructurePopup<CR>
 
-" nnoremap <leader>gs :action GotoSymbol<CR>
-" nnoremap <leader>gc :action GotoClass<CR>
+nnoremap gs :action GotoSymbol<CR>
+nnoremap gc :action GotoClass<CR>
 nnoremap gi :action GotoImplementation<CR>
 nnoremap gd :action GotoDeclaration<CR>
-nnoremap gs :action GotoSuperMethod<CR>
+" nnoremap gs :action GotoSuperMethod<CR>
 " nnoremap gt :action GotoTest<CR>
 " nnoremap <leader>ga :action GotoAction<CR> " open window to issue commands
 " nnoremap <leader>b :action ShowNavBar<CR>
