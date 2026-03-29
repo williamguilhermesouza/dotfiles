@@ -44,7 +44,7 @@ gaps:
   scale_with_dpi: true
 
   # Gap between adjacent windows.
-  inner_gap: '20px'
+  inner_gap: '5px'
 
   # Gap between windows and the screen edge.
   outer_gap:
@@ -201,11 +201,11 @@ keybindings:
 
   # Resize focused window by a percentage or pixel amount.
   - commands: ['resize --width -2%']
-    bindings: ['alt+u']
+    bindings: ['alt+y']
   - commands: ['resize --width +2%']
-    bindings: ['alt+p']
-  - commands: ['resize --height +2%']
     bindings: ['alt+o']
+  - commands: ['resize --height +2%']
+    bindings: ['alt+u']
   - commands: ['resize --height -2%']
     bindings: ['alt+i']
 
@@ -304,13 +304,13 @@ keybindings:
   # Move the focused window's parent workspace to a monitor in a given
   # direction.
   - commands: ['move-workspace --direction left']
-    bindings: ['alt+shift+a']
+    bindings: ['alt+shift+n']
   - commands: ['move-workspace --direction right']
-    bindings: ['alt+shift+f']
+    bindings: ['alt+shift+.']
   - commands: ['move-workspace --direction up']
-    bindings: ['alt+shift+d']
+    bindings: ['alt+shift+,']
   - commands: ['move-workspace --direction down']
-    bindings: ['alt+shift+s']
+    bindings: ['alt+shift+m']
 
   # Move focused window to a workspace defined in `workspaces` config.
   - commands: ['move --workspace 1', 'focus --workspace 1']

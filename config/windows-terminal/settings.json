@@ -55,6 +55,7 @@
             "keys": "alt+shift+d"
         }
     ],
+    "launchMode": "focus",
     "minimizeToNotificationArea": false,
     "newTabMenu": 
     [
