@@ -1,7 +1,7 @@
 local nvim_config = vim.fn.stdpath("config")
 
 vim.keymap.set("n", "<leader>oc", function()
-  vim.cmd("vsplit " .. vim.fn.fnameescape(nvim_config .. "/init.lua"))
+  vim.cmd("vsplit " .. vim.fn.fnameescape(nvim_config .. "/lua/config/keymaps.lua"))
 end, { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>sc", function()
