@@ -5,6 +5,7 @@ set number
 set relativenumber
 set ignorecase
 set incsearch
+set nohlsearch
 set cursorline
 set tabstop=4
 set shiftwidth=4
