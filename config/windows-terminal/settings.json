@@ -106,7 +106,7 @@
                 "opacity": 77,
                 "padding": "8",
                 "source": "Windows.Terminal.PowershellCore",
-                "startingDirectory": "D:\\Documentos\\projetos",
+                "startingDirectory": "%DEV_ENV%",
                 "useAcrylic": true
             },
             {
@@ -150,7 +150,7 @@
                 "opacity": 100,
                 "padding": "24",
                 "scrollbarState": "hidden",
-                "startingDirectory": "D:\\Documentos\\projetos",
+                "startingDirectory": "%DEV_ENV%",
                 "useAcrylic": false
             },
             {

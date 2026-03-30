@@ -49,15 +49,23 @@ if ($host.Name -eq 'ConsoleHost')
 }
 
 function OpenGlazeConfig {
-    # $glazeConfigPath = "$env:DEV_ENV\config\glazewm\config.yaml"
-    nvim D:\Documentos\projetos\dotfiles\config\glazewm\config.yaml
+    
+    if (-not $env:DEV_ENV) {
+        throw "DEV_ENV environment variable is not set."
+    }
+
+    nvim $env:DEV_ENV\dotfiles\config\glazewm\config.yaml
 }
 
 Set-Alias ogc OpenGlazeConfig
 
 
 function OpenVimConfig {
-    nvim D:\Documentos\projetos\dotfiles\config\vim\init.vim
+    if (-not $env:DEV_ENV) {
+        throw "DEV_ENV environment variable is not set."
+    }
+
+    nvim $env:DEV_ENV\dotfiles\config\vim\init.vim
 }
 
 Set-Alias ovc OpenVimConfig
