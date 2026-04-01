@@ -1,88 +1,36 @@
 #!/usr/bin/env bash
-# primeagen dev env setup script, removes curr setting and copies over the new ones
-# source: https://github.com/ThePrimeagen/dev/blob/master/dev-env
 
-dry_run="0"
-
-if [ -z "$XDG_CONFIG_HOME" ]; then
-    echo "no xdg config hom"
-    echo "using ~/.config"
-    XDG_CONFIG_HOME=$HOME/.config
+if [[ -n "${BASH_SOURCE[0]-}" ]]; then
+    SCRIPT_PATH="${BASH_SOURCE[0]}"
+    IS_SOURCED=0
+    if [[ "${BASH_SOURCE[0]-}" != "${0-}" ]]; then
+        IS_SOURCED=1
+    fi
+elif [[ -n "${ZSH_VERSION-}" ]]; then
+    SCRIPT_PATH="${(%):-%N}"
+    IS_SOURCED=0
+    if [[ "${SCRIPT_PATH}" != "${0-}" ]]; then
+        IS_SOURCED=1
+    fi
+else
+    SCRIPT_PATH="$0"
+    IS_SOURCED=0
 fi
 
-if [ -z "$DEV_ENV" ]; then
-    echo "env var DEV_ENV needs to be present"
-    exit 1
+SCRIPT_DIR="$(cd "$(dirname "${SCRIPT_PATH}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+SCRIPTS_DIR="${REPO_ROOT}/linux/scripts"
+
+export DEV_ENV="${REPO_ROOT}"
+
+case ":${PATH}:" in
+    *":${SCRIPTS_DIR}:"*) ;;
+    *) export PATH="${PATH}:${SCRIPTS_DIR}" ;;
+esac
+
+echo "DEV_ENV=${DEV_ENV}"
+echo "Added to PATH (if missing): ${SCRIPTS_DIR}"
+
+if [[ "${IS_SOURCED}" == "0" ]]; then
+    echo "Tip: run 'source ${SCRIPT_DIR}/dev-env.sh' to keep DEV_ENV and PATH in the current shell."
 fi
-
-if [[ $1 == "--dry" ]]; then
-    dry_run="1"
-fi
-
-log() {
-    if [[ $dry_run == "1" ]]; then
-        echo "[DRY_RUN]: $1"
-    else
-        echo "$1"
-    fi
-}
-
-log "env: $DEV_ENV"
-
-update_files() {
-    log "copying over files from: $1"
-    if [[ ! -d "$1" ]]; then
-        log "source directory not found, skipping: $1"
-        return
-    fi
-    pushd $1 &> /dev/null
-    (
-        configs=`find . -mindepth 1 -maxdepth 1 -type d`
-        for c in $configs; do
-            directory=${2%/}/${c#./}
-            log "    removing: rm -rf $directory"
-
-            if [[ $dry_run == "0" ]]; then
-                rm -rf $directory
-            fi
-
-            log "    copying env: cp $c $2"
-            if [[ $dry_run == "0" ]]; then
-                cp -r ./$c $2
-            fi
-        done
-
-    )
-    popd &> /dev/null
-}
-
-copy() {
-    log "removing: $2"
-    if [[ $dry_run == "0" ]]; then
-        rm $2
-    fi
-    log "copying: $1 to $2"
-    if [[ $dry_run == "0" ]]; then
-        cp $1 $2
-    fi
-}
-
-update_files $DEV_ENV/config $XDG_CONFIG_HOME
-update_files $DEV_ENV/local $HOME/.local
-
-#copy $DEV_ENV/tmux-sessionizer/tmux-sessionizer $HOME/.local/scripts/tmux-sessionizer
-#copy $DEV_ENV/env/.zsh_profile $HOME/.zsh_profile
-#copy $DEV_ENV/env/.zshrc $HOME/.zshrc
-#copy $DEV_ENV/env/.xprofile $HOME/.xprofile
-#copy $DEV_ENV/env/.tmux-sessionizer $HOME/.tmux-sessionizer
-#copy $DEV_ENV/dev-env $HOME/.local/scripts/dev-env
-
-# build daydream's client and server
-#pushd $DEV_ENV/daydream &> /dev/null
-#./build
-#popd &> /dev/null
-
-#mkdir -p $HOME/.local/bin
-#copy $DEV_ENV/daydream/opencode-client $HOME/.local/bin/opencode-client
-#copy $DEV_ENV/daydream/opencode-server $HOME/.local/bin/opencode-server
-#hyprctl reload
