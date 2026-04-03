@@ -3,8 +3,14 @@ local mux = wezterm.mux
 local config = wezterm.config_builder()
 local startup_dir = os.getenv("DEV_ENV") or os.getenv("HOME") or wezterm.home_dir
 
+local is_linux = string.find(wezterm.target_triple, "linux")
+local is_windows = string.find(wezterm.target_triple, "windows")
+
 -- Start with PowerShell Core
-config.default_prog = { "pwsh.exe" }
+if is_windows then
+    config.default_prog = { "pwsh.exe" }
+end
+
 config.default_cwd = startup_dir
 
 -- No borders, no tab bar
