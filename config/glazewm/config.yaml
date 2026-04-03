@@ -167,9 +167,9 @@ binding_modes:
   - name: 'resize'
     keybindings:
       - commands: ['resize --width -2%']
-        bindings: ['h', 'left']
+        bindings: ['l', 'left']
       - commands: ['resize --width +2%']
-        bindings: ['l', 'right']
+        bindings: ['h', 'right']
       - commands: ['resize --height +2%']
         bindings: ['k', 'up']
       - commands: ['resize --height -2%']
@@ -201,13 +201,13 @@ keybindings:
 
   # Resize focused window by a percentage or pixel amount.
   - commands: ['resize --width -2%']
-    bindings: ['alt+y']
-  - commands: ['resize --width +2%']
     bindings: ['alt+o']
+  - commands: ['resize --width +2%']
+    bindings: ['alt+y']
   - commands: ['resize --height +2%']
-    bindings: ['alt+u']
-  - commands: ['resize --height -2%']
     bindings: ['alt+i']
+  - commands: ['resize --height -2%']
+    bindings: ['alt+u']
 
   # As an alternative to the resize keybindings above, resize mode enables
   # resizing via arrow keys or HJKL. The binding mode is defined above with
@@ -304,13 +304,13 @@ keybindings:
   # Move the focused window's parent workspace to a monitor in a given
   # direction.
   - commands: ['move-workspace --direction left']
-    bindings: ['alt+shift+n']
+    bindings: ['alt+shift+y']
   - commands: ['move-workspace --direction right']
-    bindings: ['alt+shift+.']
+    bindings: ['alt+shift+o']
   - commands: ['move-workspace --direction up']
-    bindings: ['alt+shift+,']
+    bindings: ['alt+shift+i']
   - commands: ['move-workspace --direction down']
-    bindings: ['alt+shift+m']
+    bindings: ['alt+shift+u']
 
   # Move focused window to a workspace defined in `workspaces` config.
   - commands: ['move --workspace 1', 'focus --workspace 1']
