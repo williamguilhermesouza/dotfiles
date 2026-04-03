@@ -16,10 +16,13 @@ config.default_cwd = startup_dir
 -- No borders, no tab bar
 config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
-config.enable_tab_bar = false
+config.tab_bar_at_bottom = true
+config.use_fancy_tab_bar = true
 
 config.font = wezterm.font("JetBrains Mono", { weight = "Medium" })
 config.font_size = 12
+config.tab_max_width = 32
+config.switch_to_last_active_tab_when_closing_tab = true
 
 
 -- Color scheme — high contrast, easy on projectors
@@ -33,10 +36,55 @@ config.window_padding = {
   bottom = 16,
 }
 
+config.leader = {
+  key = 'a',
+  mods = 'CTRL',
+  timeout_milliseconds = 2000,
+}
+
 -- Hide scrollbar, steady block cursor
 config.enable_scroll_bar = false
 config.default_cursor_style = "SteadyBlock"
 config.keys = {
+    {
+        key = '[',
+        mods = 'LEADER',
+        action = wezterm.action.ActivateCopyMode,
+    },
+    {
+        key = 'n',
+        mods = 'LEADER',
+        action = wezterm.action.ActivateTabRelative(1),
+    },
+    {
+        key = 'p',
+        mods = 'LEADER',
+        action = wezterm.action.ActivateTabRelative(-1),
+    },
+    {
+        key = 'w',
+        mods = 'LEADER',
+        action = wezterm.action.ShowTabNavigator,
+    },
+    {
+        key = ',',
+        mods = 'LEADER',
+        action = wezterm.action.PromptInputLine {
+          description = 'Enter new name for tab',
+          action = wezterm.action_callback(
+            function(window, pane, line)
+              if line then
+                window:active_tab():set_title(line)
+              end
+            end
+          ),
+        },
+    },
+    {
+        key = 'q',
+        mods = 'LEADER',
+        action = wezterm.action.CloseCurrentTab{ confirm = true },
+    },
   { key = "1", mods = "CTRL", action = wezterm.action.ActivateTab(0) },
   { key = "2", mods = "CTRL", action = wezterm.action.ActivateTab(1) },
   { key = "3", mods = "CTRL", action = wezterm.action.ActivateTab(2) },
