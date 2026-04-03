@@ -33,5 +33,6 @@ link_safe() {
 link_safe "${REPO_ROOT}/config/nvim" "${HOME}/.config/nvim"
 link_safe "${REPO_ROOT}/config/vim" "${HOME}/.vim"
 link_safe "${REPO_ROOT}/config/ideavim/.ideavimrc" "${HOME}/.ideavimrc"
+link_safe "${REPO_ROOT}/config/wezterm/wezterm.lua" "${HOME}/.wezterm.lua"
 
 echo "Done."

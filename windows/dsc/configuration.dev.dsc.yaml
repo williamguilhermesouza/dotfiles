@@ -183,6 +183,15 @@ properties:
         source: winget
 
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: wezterm
+      directives:
+        description: Ensure WezTerm is installed.
+        allowPrerelease: true
+      settings:
+        id: wez.wezterm
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: glazewm
       directives:
         description: Ensure GlazeWM is installed.
@@ -259,8 +268,12 @@ properties:
         description: Install Z module from PowerShell Gallery
       settings:
         GetScript: |
-          return (Get-Module -ListAvailable -Name Z -ErrorAction SilentlyContinue) -ne $null
+          $moduleInstalled = $null -ne (Get-Module -ListAvailable -Name Z -ErrorAction SilentlyContinue | Select-Object -First 1)
+          @{
+            Result = $moduleInstalled
+          }
         TestScript: |
-          return (Get-Module -ListAvailable -Name Z -ErrorAction SilentlyContinue) -ne $null
+          $moduleInstalled = $null -ne (Get-Module -ListAvailable -Name Z -ErrorAction SilentlyContinue | Select-Object -First 1)
+          return [bool]$moduleInstalled
         SetScript: |
           Install-Module -Name Z -RequiredVersion '1.1.9' -Force -Confirm:$false -AcceptLicense

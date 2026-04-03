@@ -24,6 +24,7 @@ $pairs = @(
   @{ Source = (Join-Path $configRoot "vsvim\.vsvimrc"); Target = (Join-Path $HOME "_vsvimrc") }
   @{ Source = (Join-Path $configRoot "windows-terminal\settings.json"); Target = (Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json") }
   @{ Source = (Join-Path $configRoot "windows-terminal\settings.json"); Target = (Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json") }
+  @{ Source = (Join-Path $configRoot "wezterm\wezterm.lua"); Target = (Join-Path $HOME ".wezterm.lua") }
   @{ Source = (Join-Path $configRoot "yazi"); Target = (Join-Path $env:APPDATA "yazi\config") }
   @{ Source = (Join-Path $configRoot "glazewm"); Target = (Join-Path $HOME ".glzr\glazewm") }
   @{ Source = (Join-Path $configRoot "zebar"); Target = (Join-Path $HOME ".glzr\zebar") }
