@@ -12,6 +12,14 @@ if is_windows then
 end
 
 config.default_cwd = startup_dir
+config.unix_domains = {
+  {
+    name = 'unix',
+  },
+}
+
+-- Auto-connect on startup
+-- config.default_gui_startup_args = { 'connect', 'unix' }
 
 -- No borders, no tab bar
 config.window_decorations = "NONE"
@@ -65,6 +73,68 @@ config.keys = {
         key = 'w',
         mods = 'LEADER',
         action = wezterm.action.ShowTabNavigator,
+    },
+    {
+        key = 'a',
+        mods = 'LEADER',
+        action = wezterm.action.AttachDomain 'unix',
+    },
+
+      -- Detach from muxer
+    {
+        key = 'd',
+        mods = 'LEADER',
+        action = wezterm.action.DetachDomain { DomainName = 'unix' },
+    },
+    -- Rename current session; analagous to command in tmux
+    {
+        key = '$',
+        mods = 'LEADER|SHIFT',
+        action = wezterm.action.PromptInputLine {
+          description = 'Enter new name for session',
+          action = wezterm.action_callback(
+            function(window, pane, line)
+              if line then
+                mux.rename_workspace(
+                  window:mux_window():get_workspace(),
+                  line
+                )
+              end
+            end
+          ),
+        },
+    },
+    -- Show list of workspaces
+    {
+        key = 's',
+        mods = 'LEADER',
+        action = wezterm.action.ShowLauncherArgs { flags = 'WORKSPACES' },
+    },
+    { key = 'h', mods = 'CTRL', action = wezterm.action.ActivatePaneDirection 'Left' },
+    { key = 'j', mods = 'CTRL', action = wezterm.action.ActivatePaneDirection 'Down' },
+    { key = 'k', mods = 'CTRL', action = wezterm.action.ActivatePaneDirection 'Up' },
+    { key = 'l', mods = 'CTRL', action = wezterm.action.ActivatePaneDirection 'Right' },
+    { key = 'h', mods = 'CTRL|SHIFT', action = wezterm.action.AdjustPaneSize { 'Left', 5 }, },
+    { key = 'l', mods = 'CTRL|SHIFT', action = wezterm.action.AdjustPaneSize { 'Right', 5 }, },
+    { key = 'k', mods = 'CTRL|SHIFT', action = wezterm.action.AdjustPaneSize { 'Up', 5 }, },
+    { key = 'j', mods = 'CTRL|SHIFT', action = wezterm.action.AdjustPaneSize { 'Down', 5 }, },
+    { key = 'h', mods = 'LEADER', action = wezterm.action.SplitVertical{ domain = 'CurrentPaneDomain' } },
+    { key = 'v', mods = 'LEADER', action = wezterm.action.SplitHorizontal{ domain = 'CurrentPaneDomain' } },
+    { key = '{', mods = 'LEADER|SHIFT', action = wezterm.action.PaneSelect { mode = 'SwapWithActiveKeepFocus' } },
+    {
+      key = 'c',
+      mods = 'LEADER',
+      action = wezterm.action.CloseCurrentPane { confirm = false },
+    },
+    {
+        key = ';',
+        mods = 'LEADER',
+        action = wezterm.action.ActivatePaneDirection('Prev'),
+    },
+    {
+        key = '.',
+        mods = 'LEADER',
+        action = wezterm.action.ActivatePaneDirection('Next'),
     },
     {
         key = ',',
