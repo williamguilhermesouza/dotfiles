@@ -19,6 +19,9 @@ $configRoot = Resolve-ConfigRoot
 $documentsPath = [System.Environment]::GetFolderPath("MyDocuments")
 $windowsPowerShellProfilePath = Join-Path (Join-Path $documentsPath "WindowsPowerShell") "Microsoft.PowerShell_profile.ps1"
 $powerShellProfilePath = Join-Path (Join-Path $documentsPath "PowerShell") "Microsoft.PowerShell_profile.ps1"
+$weztermConfigDir = Join-Path $HOME ".config\wezterm"
+$weztermSessionManagerRepoUrl = "https://github.com/danielcopper/wezterm-session-manager.git"
+$weztermSessionManagerTarget = Join-Path $weztermConfigDir "wezterm-session-manager"
 
 $pairs = @(
   @{ Source = (Join-Path $configRoot "nvim"); Target = (Join-Path $env:LOCALAPPDATA "nvim") }
@@ -92,6 +95,48 @@ function Ensure-Link {
   }
 }
 
+function Ensure-GitClone {
+  param(
+    [Parameter(Mandatory = $true)][string]$RepositoryUrl,
+    [Parameter(Mandatory = $true)][string]$TargetPath
+  )
+
+  $gitCommand = Get-Command git -ErrorAction SilentlyContinue
+  if ($null -eq $gitCommand) {
+    throw "Git is required to clone '$RepositoryUrl', but it was not found in PATH."
+  }
+
+  $targetParent = Split-Path -Path $TargetPath -Parent
+  if (-not [string]::IsNullOrWhiteSpace($targetParent)) {
+    New-Item -ItemType Directory -Path $targetParent -Force | Out-Null
+  }
+
+  if (Test-Path -LiteralPath $TargetPath) {
+    $gitDirectory = Join-Path $TargetPath ".git"
+    if (-not (Test-Path -LiteralPath $gitDirectory)) {
+      throw "Cannot manage '$TargetPath' because it already exists and is not a git repository."
+    }
+
+    $remoteUrl = (& git -C $TargetPath remote get-url origin 2>$null)
+    if ($LASTEXITCODE -ne 0) {
+      throw "Cannot determine the git remote for '$TargetPath'."
+    }
+
+    if ($remoteUrl.Trim() -ne $RepositoryUrl) {
+      throw "Cannot manage '$TargetPath' because it points to '$($remoteUrl.Trim())' instead of '$RepositoryUrl'."
+    }
+
+    return
+  }
+
+  & git clone $RepositoryUrl $TargetPath
+  if ($LASTEXITCODE -ne 0) {
+    throw "Failed to clone '$RepositoryUrl' into '$TargetPath'."
+  }
+}
+
 foreach ($pair in $pairs) {
   Ensure-Link -Source $pair.Source -Target $pair.Target
 }
+
+Ensure-GitClone -RepositoryUrl $weztermSessionManagerRepoUrl -TargetPath $weztermSessionManagerTarget

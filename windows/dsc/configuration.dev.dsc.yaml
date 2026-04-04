@@ -231,6 +231,8 @@ properties:
       id: linkDotfiles
       dependsOn:
         - Dotfiles_Config_Path
+        - Git
+        - wezterm
       directives:
         description: Ensure dotfiles are linked to the expected Windows locations.
         securityContext: elevated
