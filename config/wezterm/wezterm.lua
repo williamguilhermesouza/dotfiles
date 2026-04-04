@@ -14,7 +14,7 @@ end
 config.default_cwd = startup_dir
 
 -- No borders, no tab bar
-config.window_decorations = "RESIZE"
+config.window_decorations = "NONE"
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = true
@@ -84,6 +84,11 @@ config.keys = {
         key = 'q',
         mods = 'LEADER',
         action = wezterm.action.CloseCurrentTab{ confirm = true },
+    },
+    {
+        key = 'o',
+        mods = 'LEADER',
+        action = wezterm.action.SpawnTab("CurrentPaneDomain"),
     },
   { key = "1", mods = "CTRL", action = wezterm.action.ActivateTab(0) },
   { key = "2", mods = "CTRL", action = wezterm.action.ActivateTab(1) },
