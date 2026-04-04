@@ -2,6 +2,7 @@ local wezterm = require("wezterm")
 local mux = wezterm.mux
 local config = wezterm.config_builder()
 local startup_dir = os.getenv("DEV_ENV") or os.getenv("HOME") or wezterm.home_dir
+local session_manager = require 'wezterm-session-manager/session-manager'
 
 local is_linux = string.find(wezterm.target_triple, "linux")
 local is_windows = string.find(wezterm.target_triple, "windows")
@@ -49,6 +50,10 @@ config.leader = {
   mods = 'CTRL',
   timeout_milliseconds = 2000,
 }
+
+wezterm.on("save_session", function(window) session_manager.save_state(window) end)
+wezterm.on("load_session", function(window) session_manager.load_state(window) end)
+wezterm.on("restore_session", function(window) session_manager.restore_state(window) end)
 
 -- Hide scrollbar, steady block cursor
 config.enable_scroll_bar = false
@@ -109,6 +114,21 @@ config.keys = {
         key = 's',
         mods = 'LEADER',
         action = wezterm.action.ShowLauncherArgs { flags = 'WORKSPACES' },
+    },
+    {
+        key = 's',
+        mods = 'LEADER|SHIFT',
+        action  = wezterm.action({ EmitEvent = "save_session" }),
+    },
+    {
+        key = 'L',
+        mods = 'LEADER|SHIFT',
+        action  = wezterm.action({ EmitEvent = "load_session" }),
+    },
+    {
+        key = 'R',
+        mods = 'LEADER|SHIFT',
+        action  = wezterm.action({ EmitEvent = "restore_session" }),
     },
     { key = 'h', mods = 'CTRL', action = wezterm.action.ActivatePaneDirection 'Left' },
     { key = 'j', mods = 'CTRL', action = wezterm.action.ActivatePaneDirection 'Down' },
