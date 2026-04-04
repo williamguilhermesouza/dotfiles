@@ -155,12 +155,11 @@ window_rules:
         window_class: { not_regex: 'OpusApp' }
       - window_process: { equals: 'POWERPNT' }
         window_class: { not_regex: 'PPTFrameClass' }
-        window_rules:
-  # ignore quake window
-  - commands: ['ignore']
+      - window_title: { regex: 'Quake|Windows Terminal - Quake' } 
+  - commands: ['set-tiling']
     match:
-      - window_title: { regex: 'Quake|Windows Terminal - Quake' } # Modify regex based on actual title
-      # You can add window_class or window_process for more precision
+      - window_process: { regex: '^(wezterm|wezterm-gui)(\\.exe)?$' }
+      - window_class: { regex: 'org\\.wezfurlong\\.wezterm' }
 
 binding_modes:
   # When enabled, the focused window can be resized via arrow keys or HJKL.
