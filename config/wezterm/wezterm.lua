@@ -1,4 +1,5 @@
-local wezterm = require("wezterm")
+
+local wezterm = require 'wezterm'
 local mux = wezterm.mux
 local config = wezterm.config_builder()
 local startup_dir = os.getenv("DEV_ENV") or os.getenv("HOME") or wezterm.home_dir
@@ -36,6 +37,14 @@ config.switch_to_last_active_tab_when_closing_tab = true
 
 -- Color scheme — high contrast, easy on projectors
 config.color_scheme = "Tokyo Night Storm"
+config.colors = {
+    tab_bar = {
+        active_tab = {
+            fg_color = '#073642',
+            bg_color = '#2aa198',
+        }
+    }
+}
 
 -- Window padding — breathing room around content
 config.window_padding = {
