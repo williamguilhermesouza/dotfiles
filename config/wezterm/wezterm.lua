@@ -116,7 +116,7 @@ config.keys = {
         action = wezterm.action.ShowLauncherArgs { flags = 'WORKSPACES' },
     },
     {
-        key = 's',
+        key = 'S',
         mods = 'LEADER|SHIFT',
         action  = wezterm.action({ EmitEvent = "save_session" }),
     },
