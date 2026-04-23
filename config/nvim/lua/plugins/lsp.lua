@@ -32,7 +32,19 @@ return {
         },
         config = function()
             require("conform").setup({
-                formatters_by_ft = {},
+                formatters_by_ft = {
+                    lua = { "stylua" },
+                    javascript = { "prettier" },
+                    typescript = { "prettier" },
+                    javascriptreact = { "prettier" },
+                    typescriptreact = { "prettier" },
+                    json = { "prettier" },
+                    css = { "prettier" },
+                    html = { "prettier" },
+                    python = { "black" },
+                    go = { "goimports", "gofmt" },
+                    cs = { "csharpier" },
+                },
             })
 
             local cmp = require("cmp")
@@ -54,6 +66,7 @@ return {
                 "pyright",
                 "jsonls",
                 "omnisharp",
+                "gopls",
             }
             if ok_mason_lsp then
                 mason_lspconfig.setup({
@@ -81,26 +94,32 @@ return {
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)
                     local opts = { buffer = args.buf, remap = false }
+                    if vim.lsp.inlay_hint then
+                        vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+                    end
                     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
                     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
                     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-                    vim.keymap.set("n", "<leader>vws", function()
+                    vim.keymap.set("n", "gws", function()
                         vim.ui.input({ prompt = "Workspace Symbol > " }, function(query)
                             if query and query ~= "" then
                                 vim.lsp.buf.workspace_symbol(query)
                             end
                         end)
                     end, opts)
-                    vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
-                    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-                    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-                    vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
-                    vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, opts)
-                    vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
+                    vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+                    vim.keymap.set("n", "gE", vim.diagnostic.goto_prev, opts)
+                    vim.keymap.set("n", "ge", vim.diagnostic.goto_next, opts)
+                    vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts)
+                    vim.keymap.set("n", "gu", vim.lsp.buf.references, opts)
+                    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
                     vim.keymap.set("n", "<leader>f", function()
                         require("conform").format({ async = true, lsp_fallback = true })
                     end, opts)
                     vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
+                    vim.keymap.set("n", "<leader>oi", function()
+                        vim.lsp.buf.code_action({ apply = true, context = { only = { "source.organizeImports" } }, })
+                    end, opts)
                 end,
             })
 
@@ -121,6 +140,10 @@ return {
                                 indent_size = "2",
                             },
                         },
+                        completion = {
+                            callSnippet = "Replace",
+                        },
+                        telemetry = { enable = false },
                     },
                 },
             })
@@ -141,10 +164,58 @@ return {
                 },
             })
 
-            setup_server("vtsls", { capabilities = capabilities })
-            setup_server("pyright", { capabilities = capabilities })
-            setup_server("jsonls", { capabilities = capabilities })
-            setup_server("omnisharp", { capabilities = capabilities })
+            setup_server("vtsls", {
+                capabilities = capabilities,
+                settings = {
+                    typescript = {
+                        inlayHints = {
+                            parameterNames = { enabled = "all" },
+                            parameterTypes = { enabled = true },
+                            variableTypes = { enabled = true },
+                            propertyDeclarationTypes = { enabled = true },
+                            functionLikeReturnTypes = { enabled = true },
+                        },
+                    },
+                },
+            })
+            setup_server("pyright", {
+                capabilities = capabilities,
+                settings = {
+                    python = {
+                        analysis = {
+                            typeCheckingMode = "basic", -- or "strict"
+                            autoSearchPaths = true,
+                            useLibraryCodeForTypes = true,
+                        },
+                    },
+                },
+            })
+            setup_server("jsonls", {
+                capabilities = capabilities,
+                settings = {
+                    json = {
+                        validate = { enable = true },
+                    },
+                },
+            })
+            setup_server("omnisharp", {
+                capabilities = capabilities,
+                enable_import_completion = true,
+                organize_imports_on_format = true,
+                enable_roslyn_analyzers = true,
+            })
+            setup_server("gopls", {
+                capabilities = capabilities,
+                settings = {
+                    gopls = {
+                        analyses = {
+                            unusedparams = true,
+                            shadow = true,
+                        },
+                        staticcheck = true,
+                    },
+                },
+            })
 
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
             cmp.setup({
@@ -156,7 +227,7 @@ return {
                 mapping = cmp.mapping.preset.insert({
                     ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
                     ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-                    ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
                     ["<C-Space>"] = cmp.mapping.complete(),
                 }),
                 sources = cmp.config.sources({
