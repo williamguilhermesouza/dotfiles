@@ -64,7 +64,7 @@ nnoremap <leader>gr :action RecentFiles<CR>
 nnoremap <leader>l :action RecentLocations<CR>
 
 " show local history
-nnoremap <leader>h  :action LocalHistory.ShowHistory<CR>
+" nnoremap <leader>h  :action LocalHistory.ShowHistory<CR>
 
 " error navigation
 nnoremap <leader>ge :action GotoNextError<CR>
