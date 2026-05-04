@@ -67,8 +67,8 @@ nnoremap <leader>l :action RecentLocations<CR>
 " nnoremap <leader>h  :action LocalHistory.ShowHistory<CR>
 
 " error navigation
-nnoremap <leader>ge :action GotoNextError<CR>
-nnoremap <leader>gE :action GotoPreviousError<CR>
+nnoremap ge :action GotoNextError<CR>
+nnoremap gE :action GotoPreviousError<CR>
 
 " code search and navigation, review
 nnoremap <c-s>f :action FindInPath<CR>
