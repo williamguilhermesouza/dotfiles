@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+IS_ZSH=0
+
 if [[ -n "${BASH_SOURCE[0]-}" ]]; then
     SCRIPT_PATH="${BASH_SOURCE[0]}"
     IS_SOURCED=0
@@ -8,6 +10,7 @@ if [[ -n "${BASH_SOURCE[0]-}" ]]; then
     fi
 elif [[ -n "${ZSH_VERSION-}" ]]; then
     SCRIPT_PATH="${(%):-%N}"
+    IS_ZSH=1
     IS_SOURCED=0
     if [[ "${SCRIPT_PATH}" != "${0-}" ]]; then
         IS_SOURCED=1
@@ -28,7 +31,14 @@ case ":${PATH}:" in
     *) export PATH="${PATH}:${SCRIPTS_DIR}" ;;
 esac
 
+if [[ "${IS_ZSH}" == "1" ]]; then
+    echo "export DEV_ENV=$DEV_ENV" >> ~/.zshrc
+else
+    echo "export DEV_ENV=$DEV_ENV" >> ~/.bashrc
+fi
+
 echo "DEV_ENV=${DEV_ENV}"
+echo "DEV_ENV set at bashrc"
 echo "Added to PATH (if missing): ${SCRIPTS_DIR}"
 
 if [[ "${IS_SOURCED}" == "0" ]]; then
