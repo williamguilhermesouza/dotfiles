@@ -18,25 +18,25 @@ return {
         end,
       },
       {
-        "<C-h>",
+        "<leader>h",
         function()
           require("harpoon"):list():select(1)
         end,
       },
       {
-        "<C-j>",
+        "<leader>j",
         function()
           require("harpoon"):list():select(2)
         end,
       },
       {
-        "<C-k>",
+        "<leader>k",
         function()
           require("harpoon"):list():select(3)
         end,
       },
       {
-        "<C-l>",
+        "<leader>l",
         function()
           require("harpoon"):list():select(4)
         end,
