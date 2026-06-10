@@ -110,7 +110,7 @@ return {
                     vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
                     vim.keymap.set("n", "gE", vim.diagnostic.goto_prev, opts)
                     vim.keymap.set("n", "ge", vim.diagnostic.goto_next, opts)
-                    vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts)
+                    vim.keymap.set("n", "ga", vim.lsp.buf.code_action, opts)
                     vim.keymap.set("n", "gu", vim.lsp.buf.references, opts)
                     vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
                     vim.keymap.set("n", "<leader>f", function()
