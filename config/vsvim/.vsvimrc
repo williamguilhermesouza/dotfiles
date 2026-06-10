@@ -60,7 +60,7 @@ nnoremap gi :vsc Edit.GoToImplementation<CR>
 nnoremap gs :vsc Edit.GoToBase<CR>
 
 " Find usages
-nnoremap <leader>u :vsc Edit.FindAllReferences<CR>
+nnoremap gu :vsc Edit.FindAllReferences<CR>
 
 " Go to file
 nnoremap <C-p> :vsc Edit.GoToFile<CR>
