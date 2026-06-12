@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+apt-get install -y git
 read -rp "Enter your git username: " username
 read -rp "Enter your git email: " email
 git config --global user.name $username
