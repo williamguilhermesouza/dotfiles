@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+pushd ~/personal/dotfiles
+git add .
+git commit -m 'automated dev commit'
+git push
+popd
+
