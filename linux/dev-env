@@ -65,8 +65,8 @@ copy() {
     fi
 }
 
-update_files $DEV_ENV/config/nvim $XDG_CONFIG_HOME/nvim
-update_files $DEV_ENV/linux/scripts $HOME/.local/scripts
+copy $DEV_ENV/config/nvim $XDG_CONFIG_HOME/nvim
+copy $DEV_ENV/linux/scripts $HOME/.local/scripts
 
 # copy $DEV_ENV/tmux-sessionizer/tmux-sessionizer $HOME/.local/scripts/tmux-sessionizer
 # copy $DEV_ENV/config/zsh/.zsh_profile $HOME/.zsh_profile
