@@ -1,0 +1,5 @@
+#!/bin/bash
+
+./run cli-tools
+./run nvim
+./run zsh
