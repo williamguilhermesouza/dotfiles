@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if [ -z "$DEV_ENV" ]; then
+    echo "env var DEV_ENV needs to be present"
+    exit 1
+fi
+
+echo "Removing old nvim configs"
+rm -rf ~/.config/nvim
+echo "Copying $DEV_ENV/config/nvim to ~/.config/nvim"
+cp -r $DEV_ENV/config/nvim ~/.config/nvim
