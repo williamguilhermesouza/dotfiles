@@ -1,7 +1,4 @@
-#!/usr/bin/env bash
-
-# ==== part of primeagen dev-env script ====
-# source on https://raw.githubusercontent.com/ThePrimeagen/dev/refs/heads/master/dev-env
+#!/bin/bash
 
 dry_run="0"
 
@@ -75,9 +72,10 @@ copy_force() {
     fi
 }
 
-copy_force $DEV_ENV/config/nvim $XDG_CONFIG_HOME/nvim
-copy_force $DEV_ENV/linux/scripts $HOME/.local/scripts
-copy $DEV_ENV/config/zsh/.zshrc $HOME/.zshrc
-copy $DEV_ENV/linux/dev-env $HOME/.local/scripts/dev-env
+copy_force $XDG_CONFIG_HOME/nvim $DEV_ENV/config/nvim
+copy_force $HOME/.local/scripts $DEV_ENV/linux/scripts
+copy $HOME/.local/scripts/dev-env $DEV_ENV/linux/dev-env
+copy $HOME/.zshrc $DEV_ENV/config/zsh/.zshrc
 
+rm $DEV_ENV/linux/scripts/dev-env
 mkdir -p $HOME/.local/bin
