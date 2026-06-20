@@ -163,4 +163,4 @@ export PATH="$HOME/Android/Sdk/platform-tools:$PATH"
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 export PATH=$PATH:$HOME/.local/opt/go/bin
 export PATH=$PATH:$HOME/go/bin
-export DEV_ENV=/home/bill/Documentos/projetos/dotfiles
+export DEV_ENV=/home/bill/personal/dotfiles
