@@ -76,6 +76,8 @@ copy_force() {
 }
 
 copy_force $DEV_ENV/config/nvim $XDG_CONFIG_HOME/nvim
+copy_force $DEV_ENV/config/vim $HOME/.vim
+
 copy_force $DEV_ENV/linux/scripts $HOME/.local/scripts
 copy $DEV_ENV/config/zsh/.zshrc $HOME/.zshrc
 copy $DEV_ENV/linux/dev-env $HOME/.local/scripts/dev-env
