@@ -5,6 +5,11 @@ if [ -z "$DEV_ENV" ]; then
     exit 1
 fi
 
+echo "Removing old vim base configs"
+rm -rf ~/.vim
+echo "Copying $DEV_ENV/config/vim to ~/.vim"
+cp -r $DEV_ENV/config/vim ~/.vim
+
 echo "Removing old nvim configs"
 rm -rf ~/.config/nvim
 echo "Copying $DEV_ENV/config/nvim to ~/.config/nvim"
