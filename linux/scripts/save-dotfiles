@@ -76,7 +76,7 @@ copy_force $XDG_CONFIG_HOME/nvim $DEV_ENV/config/nvim
 copy_force $HOME/.local/scripts $DEV_ENV/linux/scripts
 copy $HOME/.local/scripts/dev-env $DEV_ENV/linux/dev-env
 copy $HOME/.zshrc $DEV_ENV/config/zsh/.zshrc
-copy $HOME/wezterm.lua $DEV_ENV/config/wezterm/wezterm.lua
+copy $HOME/.wezterm.lua $DEV_ENV/config/wezterm/wezterm.lua
 
 rm $DEV_ENV/linux/scripts/dev-env
 mkdir -p $HOME/.local/bin
