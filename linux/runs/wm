@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
+HYPRBUNTU_SETUP_PATH="$HOME/.local/bin"
+mkdir -p "$HYPRBUNTU_SETUP_PATH"
+curl -o "$HYPRBUNTU_SETUP_PATH/setup-hyprbuntu.sh" "https://gitlab.com/kralos/hyprbuntu/-/raw/main/setup-hyprbuntu.sh"
+#############################################
+# Read the source like a responsible person #
+#############################################
+chmod ugo+x "$HYPRBUNTU_SETUP_PATH/setup-hyprbuntu.sh"
+"$HYPRBUNTU_SETUP_PATH/setup-hyprbuntu.sh"
 
-sudo apt install -y \
-    sway \
-    waybar
