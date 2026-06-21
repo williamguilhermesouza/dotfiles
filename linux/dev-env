@@ -66,21 +66,20 @@ copy() {
 
 copy_force() {
     log "removing force: $2"
-    if [[ $dry_run == "0" && -f $2 ]]; then
-        rm -rf $2
+    if [[ $dry_run == "0" && -e $2 ]]; then
+        rm -rf "$2"
     fi
     log "copying force: $1 to $2"
     if [[ $dry_run == "0" ]]; then
-        cp -r $1 $2
+        mkdir -p "$2"
+        cp -r "$1" "$2"
     fi
 }
 
-copy_force $DEV_ENV/config/nvim $XDG_CONFIG_HOME/nvim
+copy_force $DEV_ENV/config/nvim/. $XDG_CONFIG_HOME/nvim/
 copy_force $DEV_ENV/config/vim $HOME/.vim
 
-copy_force $DEV_ENV/linux/scripts $HOME/.local/scripts
+copy_force $DEV_ENV/linux/scripts/. $HOME/.local/scripts/
 copy $DEV_ENV/config/zsh/.zshrc $HOME/.zshrc
 copy $DEV_ENV/config/wezterm/wezterm.lua $HOME/.wezterm.lua
 copy $DEV_ENV/linux/dev-env $HOME/.local/scripts/dev-env
-
-mkdir -p $HOME/.local/bin
