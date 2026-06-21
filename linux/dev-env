@@ -80,7 +80,7 @@ copy_force $DEV_ENV/config/vim $HOME/.vim
 
 copy_force $DEV_ENV/linux/scripts $HOME/.local/scripts
 copy $DEV_ENV/config/zsh/.zshrc $HOME/.zshrc
-copy $DEV_ENV/config/wezterm/wezterm.lua $HOME/wezterm.lua
+copy $DEV_ENV/config/wezterm/wezterm.lua $HOME/.wezterm.lua
 copy $DEV_ENV/linux/dev-env $HOME/.local/scripts/dev-env
 
 mkdir -p $HOME/.local/bin

@@ -7,3 +7,6 @@ sudo chmod 644 /usr/share/keyrings/wezterm-fury.gpg
 
 sudo apt update
 sudo apt install wezterm-nightly -y
+
+# getting wezterm session manager
+git clone https://github.com/danielcopper/wezterm-session-manager.git ~/.config/wezterm/wezterm-session-manager
