@@ -1,0 +1,143 @@
+@define-color background #111318;
+@define-color foreground #e5e9f0;
+
+* {
+  min-height: 0;
+  border: none;
+  border-radius: 0;
+  font-family: "Noto Sans", "FontAwesome", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+window#waybar {
+  color: @foreground;
+  background: transparent;
+}
+
+window#waybar > box {
+  padding: 3px 6px;
+  border: 1px solid alpha(@foreground, 0.12);
+  border-radius: 12px;
+  background: alpha(@background, 0.92);
+  box-shadow: 0 6px 18px alpha(#000000, 0.28);
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  padding: 0 2px;
+}
+
+#workspaces {
+  padding: 0 3px;
+}
+
+#workspaces button {
+  min-width: 12px;
+  padding: 0 4px;
+  color: alpha(@foreground, 0.38);
+  background: transparent;
+  transition: color 150ms ease, background 150ms ease;
+}
+
+#workspaces button:hover {
+  color: @foreground;
+  background: alpha(@foreground, 0.08);
+  border-radius: 7px;
+}
+
+#workspaces button.active {
+  color: #89b4fa;
+}
+
+#workspaces button.urgent {
+  color: #f38ba8;
+}
+
+#window {
+  margin-left: 4px;
+  color: alpha(@foreground, 0.68);
+  font-weight: 500;
+}
+
+window#waybar.empty #window {
+  padding: 0;
+  margin: 0;
+}
+
+#clock {
+  padding: 0 12px;
+  color: @foreground;
+  font-size: 13px;
+}
+
+#mpris,
+#pulseaudio,
+#network,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#custom-tray-toggle,
+#custom-system-toggle,
+#tray {
+  padding: 0 7px;
+}
+
+#mpris {
+  color: alpha(@foreground, 0.72);
+  font-weight: 500;
+}
+
+#mpris.paused {
+  color: alpha(@foreground, 0.42);
+}
+
+#group-tray-drawer,
+#group-system-drawer {
+  border-radius: 8px;
+  background: alpha(@foreground, 0.05);
+}
+
+#custom-tray-toggle,
+#custom-system-toggle {
+  color: alpha(@foreground, 0.72);
+}
+
+.drawer-child {
+  color: alpha(@foreground, 0.72);
+}
+
+#pulseaudio.muted,
+#network.disconnected {
+  color: alpha(@foreground, 0.38);
+}
+
+#battery.charging,
+#battery.plugged {
+  color: #a6e3a1;
+}
+
+#battery.warning:not(.charging) {
+  color: #fab387;
+}
+
+#battery.critical:not(.charging),
+#temperature.critical {
+  color: #f38ba8;
+}
+
+tooltip {
+  padding: 8px;
+  border: 1px solid alpha(@foreground, 0.14);
+  border-radius: 9px;
+  color: @foreground;
+  background: @background;
+  box-shadow: 0 5px 16px alpha(#000000, 0.35);
+}
+
+tooltip label {
+  color: @foreground;
+  font-weight: 500;
+}
