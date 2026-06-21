@@ -78,6 +78,7 @@ copy_force() {
 
 copy_force $DEV_ENV/config/nvim/. $XDG_CONFIG_HOME/nvim/
 copy_force $DEV_ENV/config/hypr/. $XDG_CONFIG_HOME/hypr/
+copy_force $DEV_ENV/config/waybar/. $XDG_CONFIG_HOME/waybar/
 copy $DEV_ENV/config/vim/init.vim $HOME/.vim/init.vim
 
 copy_force $DEV_ENV/linux/scripts/. $HOME/.local/scripts/
