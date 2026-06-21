@@ -18,10 +18,14 @@
   "modules-right": [
     "mpris",
     "group/tray-drawer",
-    "group/system-drawer",
+    "cpu",
+    "memory",
+    "temperature",
     "pulseaudio",
     "network",
-    "battery"
+    "network#speed",
+    "battery",
+    "custom/power"
   ],
 
   "hyprland/workspaces": {
@@ -98,18 +102,6 @@
     "spacing": 8
   },
 
-  "group/system-drawer": {
-    "orientation": "inherit",
-    "drawer": {
-      "transition-duration": 250,
-      "children-class": "drawer-child"
-    },
-    "modules": ["custom/system-toggle", "cpu", "memory", "temperature"]
-  },
-  "custom/system-toggle": {
-    "format": "≡",
-    "tooltip-format": "System usage"
-  },
   "cpu": {
     "interval": 3,
     "format": "CPU {usage}%",
@@ -154,6 +146,14 @@
     "tooltip-format-disconnected": "Network disconnected\n\nClick to choose a network"
   },
 
+  "network#speed": {
+    "interval": 2,
+    "format-wifi": "↓ {bandwidthDownBytes}  ↑ {bandwidthUpBytes}",
+    "format-ethernet": "↓ {bandwidthDownBytes}  ↑ {bandwidthUpBytes}",
+    "format-disconnected": "",
+    "tooltip": false
+  },
+
   "battery": {
     "interval": 10,
     "states": {
@@ -166,5 +166,11 @@
     "format-full": " {capacity}%",
     "format-icons": ["", "", "", "", ""],
     "tooltip-format": "{timeTo}\nPower: {power} W"
+  },
+
+  "custom/power": {
+    "format": "",
+    "on-click": "$HOME/.config/waybar/scripts/power-menu.sh",
+    "tooltip-format": "Power menu"
   }
 }

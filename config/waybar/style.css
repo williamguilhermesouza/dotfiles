@@ -80,7 +80,7 @@ window#waybar.empty #window {
 #memory,
 #temperature,
 #custom-tray-toggle,
-#custom-system-toggle,
+#custom-power,
 #tray {
   padding: 0 7px;
 }
@@ -94,14 +94,12 @@ window#waybar.empty #window {
   color: alpha(@foreground, 0.42);
 }
 
-#group-tray-drawer,
-#group-system-drawer {
+#group-tray-drawer {
   border-radius: 8px;
   background: alpha(@foreground, 0.05);
 }
 
-#custom-tray-toggle,
-#custom-system-toggle {
+#custom-tray-toggle {
   color: alpha(@foreground, 0.72);
 }
 
@@ -126,6 +124,41 @@ window#waybar.empty #window {
 #battery.critical:not(.charging),
 #temperature.critical {
   color: #f38ba8;
+}
+
+#network.speed {
+  padding-left: 0;
+  color: alpha(@foreground, 0.58);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+#cpu,
+#memory,
+#temperature {
+  color: alpha(@foreground, 0.72);
+  background: alpha(@foreground, 0.05);
+}
+
+#cpu {
+  padding-left: 9px;
+  border-radius: 8px 0 0 8px;
+}
+
+#temperature {
+  padding-right: 9px;
+  border-radius: 0 8px 8px 0;
+}
+
+#custom-power {
+  margin-left: 2px;
+  color: #f38ba8;
+  border-radius: 8px;
+}
+
+#custom-power:hover {
+  color: @background;
+  background: #f38ba8;
 }
 
 tooltip {
