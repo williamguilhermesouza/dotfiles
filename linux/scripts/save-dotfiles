@@ -74,6 +74,7 @@ copy_force() {
 }
 
 copy_force $XDG_CONFIG_HOME/nvim/. $DEV_ENV/config/nvim/
+copy_force $XDG_CONFIG_HOME/hypr/. $DEV_ENV/config/hypr/
 copy_force $HOME/.local/scripts/. $DEV_ENV/linux/scripts/
 copy $HOME/.local/scripts/dev-env $DEV_ENV/linux/dev-env
 copy $HOME/.zshrc $DEV_ENV/config/zsh/.zshrc
