@@ -48,11 +48,12 @@ local menu        = "hyprlauncher"
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 -- Or execute your favorite apps at launch like this:
 --
--- hl.on("hyprland.start", function () 
+hl.on("hyprland.start", function () 
 --   hl.exec_cmd(terminal)
 --   hl.exec_cmd("nm-applet")
-hl.exec_cmd("waybar & hyprpaper")
--- end)
+    hl.exec_cmd("pkill waybar; waybar")
+    hl.exec_cmd("pkill hyprpaper; hyprpaper")
+end)
 
 
 -------------------------------
@@ -257,16 +258,17 @@ hl.device({
 ---- KEYBINDINGS ----
 ---------------------
 
-local mainMod = "SUPER" -- Sets "Windows" key as main modifier
+local mainMod = "ALT" -- Sets "Windows" key as main modifier
+local shiftMod = mainMod .. " + SHIFT"
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
-local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
+local closeWindowBind = hl.bind(shiftMod .. " + Q", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+hl.bind(shiftMod .. " + E", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
@@ -276,6 +278,48 @@ hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
 
+-- Move focus with mainMod + vim keys
+hl.bind(mainMod .. " + h",  hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + l", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + k",    hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + j",  hl.dsp.focus({ direction = "down" }))
+
+-- move windows
+hl.bind(shiftMod .. " + h", hl.dsp.window.move({ direction = "left" }))
+hl.bind(shiftMod .. " + l", hl.dsp.window.move({ direction = "right" }))
+hl.bind(shiftMod .. " + k", hl.dsp.window.move({ direction = "up" }))
+hl.bind(shiftMod .. " + j", hl.dsp.window.move({ direction = "down" }))
+
+-- Switch to a submap called `resize`.
+hl.bind("ALT + R", hl.dsp.submap("resize"))
+
+-- Start a submap called "resize".
+hl.define_submap("resize", function()
+
+    -- Set repeating binds for resizing the active window.
+    hl.bind("right", hl.dsp.window.resize({ x = 10, y = 0, relative = true}), { repeating = true })
+    hl.bind("left", hl.dsp.window.resize({ x = -10, y = 0, relative = true}), { repeating = true })
+    hl.bind("up", hl.dsp.window.resize({ x = 0, y = 10, relative = true}), { repeating = true })
+    hl.bind("down", hl.dsp.window.resize({ x = 0, y = -10, relative = true}), { repeating = true })
+
+    -- Use `reset` to go back to the global submap
+    hl.bind("escape", hl.dsp.submap("reset"))
+
+end)
+
+-- Keybinds further down will be global again...
+
+-- resize windows
+hl.bind(mainMod .. " + y", hl.dsp.window.resize({ x = -10, y = 0, relative = true}), { repeating = true })
+hl.bind(mainMod .. " + o", hl.dsp.window.resize({ x = 10, y = 0, relative = true}), { repeating = true })
+hl.bind(mainMod .. " + i", hl.dsp.window.resize({ x = 0, y = -10, relative = true}), { repeating = true })
+hl.bind(mainMod .. " + u", hl.dsp.window.resize({ x = 0, y = 10, relative = true}), { repeating = true })
+
+-- move windows between workspaces
+hl.bind(shiftMod .. " + y", hl.dsp.exec_cmd("hyprctl dispatch movecurrentworkspacetomonitor l"))
+hl.bind(shiftMod .. " + o", hl.dsp.exec_cmd("hyprctl dispatch movecurrentworkspacetomonitor r"))
+hl.bind(shiftMod .. " + i", hl.dsp.exec_cmd("hyprctl dispatch movecurrentworkspacetomonitor u"))
+hl.bind(shiftMod .. " + u", hl.dsp.exec_cmd("hyprctl dispatch movecurrentworkspacetomonitor d"))
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
