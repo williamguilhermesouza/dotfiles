@@ -28,3 +28,8 @@ hl.bind("ALT + PRINT",
 
 hl.bind("SHIFT + PRINT",
     hl.dsp.exec_cmd(hyprshot .. " -m output"))
+
+-- Hyprlock
+
+hl.bind("SUPER + L",
+    hl.dsp.exec_cmd("hyprlock"))
