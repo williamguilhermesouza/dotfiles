@@ -35,7 +35,7 @@ hl.monitor({
 
 -- Set programs that you use
 local terminal    = "wezterm"
-local fileManager = "thunar"
+local fileManager = "nautilus"
 local menu        = "hyprlauncher"
 
 
