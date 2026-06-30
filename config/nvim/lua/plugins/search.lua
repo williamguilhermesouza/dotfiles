@@ -44,25 +44,25 @@ return {
         end,
       },
       {
-        "<leader>pws",
+        "<leader>pws", -- search for the word under cursor project wide
         function()
           require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") })
         end,
       },
       {
-        "<leader>pWs",
+        "<leader>pWs", -- search for the exact word project wide
         function()
           require("telescope.builtin").grep_string({ search = vim.fn.expand("<cWORD>") })
         end,
       },
       {
-        "<leader>ps",
+        "<leader>ps", -- search for the input str project wide
         function()
           require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > ") })
         end,
       },
       {
-        "<leader>vh",
+        "<leader>vh", -- search nvim help docs
         function()
           require("telescope.builtin").help_tags()
         end,

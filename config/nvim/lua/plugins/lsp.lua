@@ -44,6 +44,8 @@ return {
                     python = { "black" },
                     go = { "goimports", "gofmt" },
                     cs = { "csharpier" },
+                    c = { "clang-format" },
+                    cpp = { "clang-format" },
                 },
             })
 
@@ -67,6 +69,7 @@ return {
                 "jsonls",
                 "omnisharp",
                 "gopls",
+                "clangd",
             }
             if ok_mason_lsp then
                 mason_lspconfig.setup({
@@ -179,6 +182,7 @@ return {
                 },
             })
             setup_server("pyright", {
+                filetypes = { "python" },
                 capabilities = capabilities,
                 settings = {
                     python = {
@@ -199,6 +203,7 @@ return {
                 },
             })
             setup_server("omnisharp", {
+                filetypes = { "cs" },
                 capabilities = capabilities,
                 enable_import_completion = true,
                 organize_imports_on_format = true,
@@ -206,6 +211,7 @@ return {
             })
             setup_server("gopls", {
                 capabilities = capabilities,
+                filetypes = { "go", "gomod", "gowork", "gotmpl" },
                 settings = {
                     gopls = {
                         analyses = {
@@ -215,6 +221,9 @@ return {
                         staticcheck = true,
                     },
                 },
+            })
+            setup_server("clangd", {
+                capabilities = capabilities,
             })
 
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
