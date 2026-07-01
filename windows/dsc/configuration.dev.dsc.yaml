@@ -120,15 +120,6 @@ properties:
         source: winget
 
     - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: D2 Diagram scription engine
-      directives:
-        description: Install D2
-        allowPrerelease: true
-      settings:
-        id: Terrastruct.D2
-        source: winget
-
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: Visual_Studio_Code
       directives:
         description: Install Visual Studio Code
@@ -209,14 +200,15 @@ properties:
         id: sxyazi.yazi
         source: winget
 
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: zebar
-      directives:
-        description: Ensure Zebar is installed.
-        allowPrerelease: true
-      settings:
-        id: glzr-io.zebar
-        source: winget
+    # don't need this as it should be installed with glazewm
+    # - resource: Microsoft.WinGet.DSC/WinGetPackage
+    #   id: zebar
+    #   directives:
+    #     description: Ensure Zebar is installed.
+    #     allowPrerelease: true
+    #   settings:
+    #     id: glzr-io.zebar
+    #     source: winget
 
     - resource: PSDscResources/Environment
       id: Dotfiles_Config_Path
@@ -255,6 +247,7 @@ properties:
       settings:
         id: Microsoft.PowerToys
         source: winget
+
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: bat
       directives:
