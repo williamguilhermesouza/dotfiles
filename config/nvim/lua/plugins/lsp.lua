@@ -31,22 +31,29 @@ return {
             "j-hui/fidget.nvim",
         },
         config = function()
+            local has_go = vim.fn.executable("go") == 1
+
+            local formatters = {
+                lua = { "stylua" },
+                javascript = { "prettier" },
+                typescript = { "prettier" },
+                javascriptreact = { "prettier" },
+                typescriptreact = { "prettier" },
+                json = { "prettier" },
+                css = { "prettier" },
+                html = { "prettier" },
+                python = { "black" },
+                cs = { "csharpier" },
+                c = { "clang-format" },
+                cpp = { "clang-format" },
+            }
+
+            if has_go then
+                formatters.go = { "goimports", "gofmt" }
+            end
+
             require("conform").setup({
-                formatters_by_ft = {
-                    lua = { "stylua" },
-                    javascript = { "prettier" },
-                    typescript = { "prettier" },
-                    javascriptreact = { "prettier" },
-                    typescriptreact = { "prettier" },
-                    json = { "prettier" },
-                    css = { "prettier" },
-                    html = { "prettier" },
-                    python = { "black" },
-                    go = { "goimports", "gofmt" },
-                    cs = { "csharpier" },
-                    c = { "clang-format" },
-                    cpp = { "clang-format" },
-                },
+                formatters_by_ft = formatters,
             })
 
             local cmp = require("cmp")
@@ -68,9 +75,13 @@ return {
                 "pyright",
                 "jsonls",
                 "omnisharp",
-                "gopls",
                 "clangd",
             }
+
+            if has_go then
+                table.insert(servers, "gopls")
+            end
+
             if ok_mason_lsp then
                 mason_lspconfig.setup({
                     ensure_installed = servers,
@@ -209,19 +220,21 @@ return {
                 organize_imports_on_format = true,
                 enable_roslyn_analyzers = true,
             })
-            setup_server("gopls", {
-                capabilities = capabilities,
-                filetypes = { "go", "gomod", "gowork", "gotmpl" },
-                settings = {
-                    gopls = {
-                        analyses = {
-                            unusedparams = true,
-                            shadow = true,
+            if has_go then
+                setup_server("gopls", {
+                    capabilities = capabilities,
+                    filetypes = { "go", "gomod", "gowork", "gotmpl" },
+                    settings = {
+                        gopls = {
+                            analyses = {
+                                unusedparams = true,
+                                shadow = true,
+                            },
+                            staticcheck = true,
                         },
-                        staticcheck = true,
                     },
-                },
-            })
+                })
+            end
             setup_server("clangd", {
                 capabilities = capabilities,
             })

@@ -2,6 +2,9 @@ return {
   {
     "mfussenegger/nvim-dap",
     ft = { "cs" },
+    cond = function()
+        return vim.fn.executable("netcoredbg") == 1 
+    end,
     dependencies = {
       "rcarriga/nvim-dap-ui",
       "nvim-neotest/nvim-nio",
