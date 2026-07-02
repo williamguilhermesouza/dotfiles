@@ -68,6 +68,16 @@ return {
             require("mason").setup()
 
             local ok_mason_lsp, mason_lspconfig = pcall(require, "mason-lspconfig")
+            
+            -- Intercept notifications to silence the OmniSharp 'nil' bug
+            local original_notify = vim.notify
+            vim.notify = function(msg, level, opts)
+                if msg and msg:find("INVALID_SERVER_MESSAGE: nil") then
+                    return -- Do nothing, silently drop this error
+                end
+                original_notify(msg, level, opts)
+            end
+
             local servers = {
                 "lua_ls",
                 "vtsls",
