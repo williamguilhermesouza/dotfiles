@@ -45,8 +45,8 @@ nnoremap [[ :action MethodUp<CR>
 nnoremap ]] :action MethodDown<CR>
 
 " comment code
-nnoremap <c-k>c :action CommentByLineComment<CR>
-vnoremap <c-k>c :action CommentByLineComment<CR>
+nnoremap gc :action CommentByLineComment<CR>
+vnoremap gc :action CommentByLineComment<CR>
 
 " open refactor menu
 nnoremap <leader>r :action Refactorings.QuickListPopupAction<CR>
