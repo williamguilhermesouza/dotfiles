@@ -115,114 +115,115 @@ return {
                 end
             end
 
+            local lsp_attach = vim.api.nvim_create_augroup("user_lsp_attach", { clear = true })
             vim.api.nvim_create_autocmd("LspAttach", {
+                group = lsp_attach,
                 callback = function(args)
-                    local opts = { buffer = args.buf, remap = false }
+                    local function map(mode, lhs, rhs, desc)
+                        vim.keymap.set(mode, lhs, rhs, { buffer = args.buf, remap = false, desc = desc })
+                    end
+
                     if vim.lsp.inlay_hint then
                         vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
                     end
-                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-                    vim.keymap.set("n", "gws", function()
+                    map("n", "gd", vim.lsp.buf.definition, "LSP definition")
+                    map("n", "gi", vim.lsp.buf.implementation, "LSP implementation")
+                    map("n", "K", vim.lsp.buf.hover, "LSP hover")
+                    map("n", "gws", function()
                         vim.ui.input({ prompt = "Workspace Symbol > " }, function(query)
                             if query and query ~= "" then
                                 vim.lsp.buf.workspace_symbol(query)
                             end
                         end)
-                    end, opts)
-                    vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
-                    vim.keymap.set("n", "gE", vim.diagnostic.goto_prev, opts)
-                    vim.keymap.set("n", "ge", vim.diagnostic.goto_next, opts)
-                    vim.keymap.set("n", "ga", vim.lsp.buf.code_action, opts)
-                    vim.keymap.set("n", "gu", vim.lsp.buf.references, opts)
-                    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts)
-                    vim.keymap.set("n", "<leader>f", function()
+                    end, "LSP workspace symbols")
+                    map("n", "<leader>d", vim.diagnostic.open_float, "Diagnostics float")
+                    map("n", "gE", vim.diagnostic.goto_prev, "Previous diagnostic")
+                    map("n", "ge", vim.diagnostic.goto_next, "Next diagnostic")
+                    map("n", "ga", vim.lsp.buf.code_action, "LSP code action")
+                    map("n", "gu", vim.lsp.buf.references, "LSP references")
+                    map("n", "<leader>r", vim.lsp.buf.rename, "LSP rename")
+                    map("n", "<leader>f", function()
                         require("conform").format({ async = true, lsp_fallback = true })
-                    end, opts)
-                    vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
-                    vim.keymap.set("n", "<leader>oi", function()
+                    end, "Format buffer")
+                    map("i", "<C-h>", vim.lsp.buf.signature_help, "Signature help")
+                    map("n", "<leader>oi", function()
                         vim.lsp.buf.code_action({ apply = true, context = { only = { "source.organizeImports" } }, })
-                    end, opts)
+                    end, "Organize imports")
                 end,
             })
 
-            setup_server("lua_ls", {
-                capabilities = capabilities,
-                settings = {
-                    Lua = {
-                        runtime = { version = "LuaJIT" },
-                        diagnostics = { globals = { "vim" } },
-                        workspace = {
-                            library = vim.api.nvim_get_runtime_file("", true),
-                            checkThirdParty = false,
+            local server_configs = {
+                lua_ls = {
+                    settings = {
+                        Lua = {
+                            runtime = { version = "LuaJIT" },
+                            diagnostics = { globals = { "vim" } },
+                            workspace = {
+                                library = vim.api.nvim_get_runtime_file("", true),
+                                checkThirdParty = false,
+                            },
+                            format = {
+                                enable = true,
+                                defaultConfig = {
+                                    indent_style = "space",
+                                    indent_size = "2",
+                                },
+                            },
+                            completion = {
+                                callSnippet = "Replace",
+                            },
+                            telemetry = { enable = false },
                         },
-                        format = {
-                            enable = true,
-                            defaultConfig = {
-                                indent_style = "space",
-                                indent_size = "2",
+                    },
+                },
+                tailwindcss = {
+                    filetypes = {
+                        "html",
+                        "css",
+                        "scss",
+                        "javascript",
+                        "javascriptreact",
+                        "typescript",
+                        "typescriptreact",
+                        "vue",
+                        "svelte",
+                        "heex",
+                    },
+                },
+                vtsls = {
+                    settings = {
+                        typescript = {
+                            inlayHints = {
+                                parameterNames = { enabled = "all" },
+                                parameterTypes = { enabled = true },
+                                variableTypes = { enabled = true },
+                                propertyDeclarationTypes = { enabled = true },
+                                functionLikeReturnTypes = { enabled = true },
                             },
                         },
-                        completion = {
-                            callSnippet = "Replace",
-                        },
-                        telemetry = { enable = false },
                     },
                 },
-            })
-
-            setup_server("tailwindcss", {
-                capabilities = capabilities,
-                filetypes = {
-                    "html",
-                    "css",
-                    "scss",
-                    "javascript",
-                    "javascriptreact",
-                    "typescript",
-                    "typescriptreact",
-                    "vue",
-                    "svelte",
-                    "heex",
-                },
-            })
-
-            setup_server("vtsls", {
-                capabilities = capabilities,
-                settings = {
-                    typescript = {
-                        inlayHints = {
-                            parameterNames = { enabled = "all" },
-                            parameterTypes = { enabled = true },
-                            variableTypes = { enabled = true },
-                            propertyDeclarationTypes = { enabled = true },
-                            functionLikeReturnTypes = { enabled = true },
+                pyright = {
+                    filetypes = { "python" },
+                    settings = {
+                        python = {
+                            analysis = {
+                                typeCheckingMode = "basic", -- or "strict"
+                                autoSearchPaths = true,
+                                useLibraryCodeForTypes = true,
+                            },
                         },
                     },
                 },
-            })
-            setup_server("pyright", {
-                filetypes = { "python" },
-                capabilities = capabilities,
-                settings = {
-                    python = {
-                        analysis = {
-                            typeCheckingMode = "basic", -- or "strict"
-                            autoSearchPaths = true,
-                            useLibraryCodeForTypes = true,
+                jsonls = {
+                    settings = {
+                        json = {
+                            validate = { enable = true },
                         },
                     },
                 },
-            })
-            setup_server("jsonls", {
-                capabilities = capabilities,
-                settings = {
-                    json = {
-                        validate = { enable = true },
-                    },
-                },
-            })
+                clangd = {},
+            }
             -- setup_server("omnisharp", {
             --     filetypes = { "cs" },
             --     capabilities = capabilities,
@@ -231,8 +232,7 @@ return {
             --     enable_roslyn_analyzers = true,
             -- })
             if has_go then
-                setup_server("gopls", {
-                    capabilities = capabilities,
+                server_configs.gopls = {
                     filetypes = { "go", "gomod", "gowork", "gotmpl" },
                     settings = {
                         gopls = {
@@ -243,11 +243,12 @@ return {
                             staticcheck = true,
                         },
                     },
-                })
+                }
             end
-            setup_server("clangd", {
-                capabilities = capabilities,
-            })
+
+            for server, opts in pairs(server_configs) do
+                setup_server(server, opts)
+            end
 
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
             cmp.setup({
