@@ -13,14 +13,12 @@ return {
 	},
 	version = "*",
 	config = function()
-		require('toggleterm').setup({
+		local opts = {
 
 			start_in_insert = true,
 			terminal_mappings = true,
 			insert_mappings = true,
 			-- direction = 'float',
-			-- shell = "pwsh.exe -NoLogo -NoProfile",
-			shell = "pwsh.exe -NoLogo",
 			auto_scroll = true,
 			-- persist_mode = true,
 			persist_size = true,
@@ -28,7 +26,13 @@ return {
 			  on_open = function(term)
 				vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<Esc>", "<Esc>", { noremap = true, silent = true })
 			end,
-		})
+		}
+
+		if vim.fn.has('win32') == 1 or vim.fn.has('win64') == 1 then
+			opts.shell = "pwsh.exe -NoLogo"
+		end
+
+		require('toggleterm').setup(opts)
 		-- function _lazygit_toggle()
 		-- local Terminal = require('toggleterm.terminal').Terminal
 		-- local lazygit = Terminal:new({ cmd = 'lazygit', hidden = true, direction = 'float' })
