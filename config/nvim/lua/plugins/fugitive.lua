@@ -16,13 +16,12 @@ return {
           end
 
           local bufnr = vim.api.nvim_get_current_buf()
-          local opts = { buffer = bufnr, remap = false }
           vim.keymap.set("n", "<leader>gP", function()
             vim.cmd("Git push")
-          end, opts, { desc = "Git push" })
+          end, { buffer = bufnr, remap = false, desc = "Git push" })
           vim.keymap.set("n", "<leader>gp", function()
             vim.cmd("Git pull --rebase")
-          end, opts, { desc = "Git pull rebase" })
+          end, { buffer = bufnr, remap = false, desc = "Git pull rebase" })
         end,
       })
     end,
