@@ -49,7 +49,7 @@ nnoremap <leader>j :lprev<CR>zz
 nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 
 " make current file executable
-nnoremap <silent> <leader>x :!chmod +x %<CR>
+"nnoremap <silent> <leader>x :!chmod +x %<CR>
 
 " source current file
 nnoremap <leader><enter> :source %<CR>
