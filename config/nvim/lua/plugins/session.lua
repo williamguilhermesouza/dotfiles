@@ -28,6 +28,31 @@ return {
 						end
 					end,
 				},
+                -- manually triggering events after session load
+				post_restore_cmds = {
+					function()
+						vim.defer_fn(function()
+							for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+								if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].buftype == '' then
+									local name = vim.api.nvim_buf_get_name(buf)
+									if name ~= '' and vim.fn.filereadable(name) == 1 then
+										if vim.bo[buf].filetype == '' then
+											local detected = vim.filetype.match({ buf = buf, filename = name })
+											if detected then
+												vim.bo[buf].filetype = detected
+											end
+										end
+
+										pcall(vim.api.nvim_exec_autocmds, 'BufReadPost', { buffer = buf, modeline = false })
+										pcall(vim.api.nvim_exec_autocmds, 'FileType', { buffer = buf, modeline = false })
+										pcall(vim.api.nvim_exec_autocmds, 'BufWinEnter', { buffer = buf, modeline = false })
+										pcall(vim.treesitter.start, buf)
+									end
+								end
+							end
+						end, 50)
+					end,
+				},
 			})
 			-- vim.keymap.set('n', '<leader>ss', function() require("auto-session.session-lens").search_session() end, { desc = "Search Session" })
 			vim.keymap.set('n', '<leader>ss', "<cmd>AutoSession search<CR>", { desc = "Search Session" })
