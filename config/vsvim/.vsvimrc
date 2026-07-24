@@ -75,11 +75,13 @@ nnoremap <C-i> :vsc View.NavigateForward<CR>
 " ------------------------------------------------------------
 
 " Comment selection
-"nnoremap <C-k>c :vsc Edit.CommentSelection<CR>
-"vnoremap <C-k>c :vsc Edit.CommentSelection<CR>
+nnoremap gcc :vsc Edit.CommentSelection<CR>
+nnoremap gcu :vsc Edit.UncommentSelection<CR>
+vnoremap gcc :vsc Edit.CommentSelection<CR>
+vnoremap gcu :vsc Edit.UncommentSelection<CR>
 
 " Quick actions / lightbulb
-"nnoremap <leader>r :vsc Edit.QuickActions<CR>" review
+nnoremap ga :vsc View.QuickActions<CR>
 
 " Format document
 nnoremap <leader>f :vsc Edit.FormatDocument<CR>
@@ -124,5 +126,5 @@ nnoremap <leader>gb :vsc Team.Git.Annotate<CR>
 "nnoremap <C-e> :vsc View.BookmarkWindow<CR> " should be set on vs
 
 " Next / Previous bookmark
-"nnoremap <C-h> :vsc Edit.GoToNextBookmark<CR> " should be set on vs
-"nnoremap <C-l> :vsc Edit.GoToPreviousBookmark<CR> " should be set on vs
+"nnoremap <C-h> :vsc Edit.NextBookmark<CR> " should be set on vs
+"nnoremap <C-l> :vsc Edit.PreviousBookmark<CR> " should be set on vs
