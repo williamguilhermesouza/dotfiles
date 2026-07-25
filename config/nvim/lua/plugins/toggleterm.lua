@@ -4,12 +4,10 @@ return {
 	-- cmd = "ToggleTerm",
 	keys = {
 
-		{ '<leader>t',     '<cmd>:1ToggleTerm direction=float<CR>',              mode = { 'n' } },
-		{ '<C-c>',     '<cmd>:1ToggleTerm direction=float<CR>',              mode = { 't' } },
+		--{ '<leader>t',     '<cmd>:1ToggleTerm direction=float<CR>',              mode = { 'n', 't' } },
 		{ 'gt',     '<cmd>:2ToggleTerm direction=horizontal size=20<CR>', mode = { 'n', 't' } },
 		{ 'gT',     '<cmd>:3ToggleTerm direction=vertical size=100<CR>',  mode = { 'n', 't' } },
-		{ '<leader>T',     '<cmd>:4ToggleTerm direction=float<CR>',              mode = { 'n' } },
-		{ '<C-c>',     '<cmd>:4ToggleTerm direction=float<CR>',              mode = { 't' } },
+		--{ '<leader>T',     '<cmd>:4ToggleTerm direction=float<CR>',              mode = { 'n', 't' } },
 		{ '<leader>gl', function() end,                                       mode = { 'n', } },
 		{ '<leader>fr', function() end,                                       mode = { 'n', } },
 	},
