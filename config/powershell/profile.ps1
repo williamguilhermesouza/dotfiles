@@ -215,3 +215,39 @@ Set-Alias ovc OpenVimConfig
 if ($DEBUG -eq 1) {
     "PS Profile load: $($swTotal.ElapsedMilliseconds) ms"
 }
+
+
+### work env specifics ###
+$institucionalFolder = "C:\git\institucional-bitbucket\atg-institucional"
+$algoAdapterFolder = "C:\git\atg-algoadapter"
+$mtbFolder = "C:\git\atg-mtb\Src\ATG.MTB\Src\MTBTrader"
+
+function runlocal {
+    & RunLocalEnv.ps1
+}
+
+function stoplocal {
+    & StopLocalEnv.ps1
+}
+
+function gotomtb {
+    cd $mtbFolder
+}
+
+function gotoinst {
+    cd $institucionalFolder
+}
+
+function dockeredit {
+    nvim (Join-Path $institucionalFolder "docker\docker-compose.yml")
+}
+
+function dockerrun {
+    & (Join-Path $institucionalFolder "docker\run.bat")
+}
+
+function dockersetenv {
+    (Get-NetIPAddress -AddressFamily IPv4 -InterfaceAlias "Ethernet 4").IPAddress | Set-Clipboard
+    (Get-NetIPAddress -AddressFamily IPv4 -InterfaceAlias "Ethernet 4").IPAddress # just to output the ip in case of error copying
+    & (Join-Path $institucionalFolder "docker\SetEnv.bat")
+}
