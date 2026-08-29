@@ -568,6 +568,26 @@ return {
                 },
                 pyright = {
                     filetypes = { "python" },
+                    root_markers = {
+                        "pyproject.toml",
+                        "setup.py",
+                        "setup.cfg",
+                        "requirements.txt",
+                        ".git",
+                    },
+                    before_init = function(_, config)
+                        local root = config.root_dir
+
+                        if not root then
+                            return
+                        end
+
+                        local venv_python = root .. "/.venv/bin/python"
+
+                        if vim.fn.executable(venv_python) == 1 then
+                            config.settings.python.pythonPath = venv_python
+                        end
+                    end,
                     settings = {
                         python = {
                             analysis = {
