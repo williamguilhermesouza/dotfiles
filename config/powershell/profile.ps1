@@ -17,8 +17,18 @@ if ($DEBUG -eq 1) {
 #     $sw.Restart()
 # }
 
-if (Get-Command -Name z -ErrorAction SilentlyContinue) {
+# Cheap folder check instead of `Get-Command z`, which triggers a full command
+# discovery (~800ms). The z module is not imported here: PowerShell autoloads
+# it the first time `cd` runs.
+if (Test-Path -LiteralPath (Join-Path (Split-Path $PROFILE) 'Modules\z')) {
   Set-Alias -Name cd -Value z -Option AllScope -Force
+}
+
+# Turn off as-you-type suggestions (PSReadLine defaults to history-based
+# predictions). Wrapped in try because older PSReadLine (Windows PowerShell 5.1)
+# has no -PredictionSource.
+if ($host.Name -eq 'ConsoleHost') {
+  try { Set-PSReadLineOption -PredictionSource None } catch {}
 }
 
 Set-Alias -Name cat -Value bat -Option AllScope -Force
@@ -140,55 +150,55 @@ function Select-HistoryCommand
 	}
 }
 
-if ($host.Name -eq 'ConsoleHost')
-{
-	$psReadLineCommand = Get-Command -Name Set-PSReadLineOption -ErrorAction SilentlyContinue
-	if ($psReadLineCommand) {
-		Set-PSReadLineOption -EditMode Windows
-
-		if ($psReadLineCommand.Parameters.ContainsKey("PredictionViewStyle")) {
-			Set-PSReadLineOption -PredictionViewStyle ListView
-		}
-
-		if ($psReadLineCommand.Parameters.ContainsKey("PredictionSource")) {
-			Set-PSReadLineOption -PredictionSource HistoryAndPlugin
-		}
-
-		try {
-			Set-PSReadLineOption -Colors @{ "Selection" = "`e[7m" }
-		} catch {
-		}
-
-		Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
-        Set-PSReadLineKeyHandler -Key Ctrl+r -ScriptBlock { Set-HistoryCommandLine }
-	}
-
-    if ($DEBUG -eq 1) {
-	   "PSReadLine: $($sw.ElapsedMilliseconds) ms"
-	   $sw.Restart()
-    }
-
-    # Fast path: if the cache exists, just load it -- no per-startup staleness
-	# check (the old Get-Command + two Get-Item calls cost ~100ms every shell).
-	# Freshness is handled out-of-band by Update-CarapaceCache (manual or via the
-	# winget DSC config). If the cache is missing, generate it once here.
-	# NOTE: this dot-source is intentionally synchronous. Deferring it via an
-	# OnIdle engine event was tried and rejected: event actions run in a child
-	# job scope, so carapace's Register-ArgumentCompleter calls never reach the
-	# session, breaking Tab completion.
-	$carapaceCache = Get-CarapaceCachePath
-	if (-not (Test-Path -LiteralPath $carapaceCache)) {
-		Update-CarapaceCache
-	}
-	if (Test-Path -LiteralPath $carapaceCache) {
-		. $carapaceCache
-	}
-
-    if ($DEBUG -eq 1) {
-	   "Carapace: $($sw.ElapsedMilliseconds) ms"
-	   $sw.Restart()
-    }
-}
+# if ($host.Name -eq 'ConsoleHost')
+# {
+# 	$psReadLineCommand = Get-Command -Name Set-PSReadLineOption -ErrorAction SilentlyContinue
+# 	if ($psReadLineCommand) {
+# 		Set-PSReadLineOption -EditMode Windows
+#
+# 		if ($psReadLineCommand.Parameters.ContainsKey("PredictionViewStyle")) {
+# 			Set-PSReadLineOption -PredictionViewStyle ListView
+# 		}
+#
+# 		if ($psReadLineCommand.Parameters.ContainsKey("PredictionSource")) {
+# 			Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+# 		}
+#
+# 		try {
+# 			Set-PSReadLineOption -Colors @{ "Selection" = "`e[7m" }
+# 		} catch {
+# 		}
+#
+# 		Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+#         Set-PSReadLineKeyHandler -Key Ctrl+r -ScriptBlock { Set-HistoryCommandLine }
+# 	}
+#
+#     if ($DEBUG -eq 1) {
+# 	   "PSReadLine: $($sw.ElapsedMilliseconds) ms"
+# 	   $sw.Restart()
+#     }
+#
+#     # Fast path: if the cache exists, just load it -- no per-startup staleness
+# 	# check (the old Get-Command + two Get-Item calls cost ~100ms every shell).
+# 	# Freshness is handled out-of-band by Update-CarapaceCache (manual or via the
+# 	# winget DSC config). If the cache is missing, generate it once here.
+# 	# NOTE: this dot-source is intentionally synchronous. Deferring it via an
+# 	# OnIdle engine event was tried and rejected: event actions run in a child
+# 	# job scope, so carapace's Register-ArgumentCompleter calls never reach the
+# 	# session, breaking Tab completion.
+# 	$carapaceCache = Get-CarapaceCachePath
+# 	if (-not (Test-Path -LiteralPath $carapaceCache)) {
+# 		Update-CarapaceCache
+# 	}
+# 	if (Test-Path -LiteralPath $carapaceCache) {
+# 		. $carapaceCache
+# 	}
+#
+#     if ($DEBUG -eq 1) {
+# 	   "Carapace: $($sw.ElapsedMilliseconds) ms"
+# 	   $sw.Restart()
+#     }
+# }
 
 function OpenGlazeConfig {
 

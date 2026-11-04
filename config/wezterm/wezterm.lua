@@ -55,7 +55,7 @@ config.window_padding = {
 }
 
 config.leader = {
-  key = 'a',
+  key = ' ',
   mods = 'CTRL',
   timeout_milliseconds = 2000,
 }

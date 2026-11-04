@@ -5,4 +5,4 @@ nvim/plugged/
 nvim/lazy/
 .codex
 
-errors.log
+*./errors.log
