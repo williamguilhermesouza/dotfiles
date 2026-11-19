@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Backing up $XDG_CONFIG_HOME/nvim"
+cp -r $XDG_CONFIG_HOME/nvim $XDG_CONFIG_HOME/nvim_bkp
