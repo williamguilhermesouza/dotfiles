@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if [ -z "$DEV_ENV" ]; then
+    echo "env var DEV_ENV needs to be present"
+    exit 1
+fi
+
+echo "Removing old waybar configs"
+rm -rf ~/.config/waybar
+echo "Copying $DEV_ENV/config/waybar to ~/.config/waybar"
+cp -r $DEV_ENV/config/waybar ~/.config/waybar

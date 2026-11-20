@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Backing up ~/.config/waybar"
+cp -r ~/.config/waybar ~/.config/waybar_bkp

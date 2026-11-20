@@ -8,3 +8,4 @@ curl -o "$HYPRBUNTU_SETUP_PATH/setup-hyprbuntu.sh" "https://gitlab.com/kralos/hy
 chmod ugo+x "$HYPRBUNTU_SETUP_PATH/setup-hyprbuntu.sh"
 "$HYPRBUNTU_SETUP_PATH/setup-hyprbuntu.sh"
 
+sudo apt update && sudo apt install -y wofi
