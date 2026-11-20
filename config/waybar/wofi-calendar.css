@@ -1,0 +1,16 @@
+window {
+  margin: 0;
+  border: 1px solid rgba(205, 214, 244, 0.18);
+  border-radius: 16px;
+  background-color: rgba(17, 19, 24, 0.97);
+  color: #e5e9f0;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 13px;
+}
+
+#outer-box { padding: 12px 16px; }
+#scroll { margin: 0; }
+#inner-box { margin: 0; }
+#entry { padding: 2px 6px; border-radius: 7px; }
+#entry:selected { background-color: transparent; color: #e5e9f0; }
+#entry:hover { background-color: rgba(205, 214, 244, 0.08); }

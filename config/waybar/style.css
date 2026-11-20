@@ -29,6 +29,24 @@ window#waybar > box {
   padding: 0 2px;
 }
 
+#workspaces,
+#window,
+#clock,
+#custom-weather,
+#hyprland-language,
+#bluetooth,
+#mpris,
+#pulseaudio,
+#network,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#custom-power,
+#tray {
+  min-height: 26px;
+}
+
 #workspaces {
   padding: 0 3px;
 }
@@ -67,8 +85,14 @@ window#waybar.empty #window {
 }
 
 #clock {
-  padding: 0 12px;
+  padding: 0 10px;
   color: @foreground;
+  font-size: 13px;
+}
+
+#custom-weather {
+  padding: 0 8px;
+  color: alpha(@foreground, 0.82);
   font-size: 13px;
 }
 
@@ -89,6 +113,13 @@ window#waybar.empty #window {
 #hyprland-language,
 #bluetooth {
   color: alpha(@foreground, 0.72);
+}
+
+#network {
+  min-width: 14px;
+  padding: 0 7px;
+  font-family: "FontAwesome";
+  font-size: 13px;
 }
 
 #bluetooth.disabled,
@@ -122,13 +153,6 @@ window#waybar.empty #window {
 #battery.critical:not(.charging),
 #temperature.critical {
   color: #f38ba8;
-}
-
-#network.speed {
-  padding-left: 0;
-  color: alpha(@foreground, 0.58);
-  font-size: 11px;
-  font-weight: 500;
 }
 
 #cpu,

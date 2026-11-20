@@ -13,19 +13,19 @@
     "hyprland/window"
   ],
   "modules-center": [
-    "clock"
+    "clock",
+    "custom/weather"
   ],
   "modules-right": [
     "mpris",
     "tray",
-    "hyprland/language",
-    "bluetooth",
     "cpu",
     "memory",
     "temperature",
-    "pulseaudio",
+    "hyprland/language",
+    "bluetooth",
     "network",
-    "network#speed",
+    "pulseaudio",
     "battery",
     "custom/power"
   ],
@@ -60,7 +60,8 @@
   "clock": {
     "format": "{:%H:%M}",
     "format-alt": "{:%a, %d %b  %H:%M}",
-    "tooltip-format": "<b>{:%B %Y}</b>\n<tt>{calendar}</tt>",
+    "tooltip": false,
+    "on-click": "$HOME/.config/waybar/scripts/calendar-menu.py",
     "calendar": {
       "mode": "month",
       "weeks-pos": "right",
@@ -83,8 +84,18 @@
     "format-off": "󰂲",
     "format-connected": " {device_alias}",
     "format-connected-battery": " {device_alias} {device_battery_percentage}%",
-    "tooltip-format": "{controller_alias}\n{status} · {num_connections} connected",
-    "on-click": "$HOME/.config/waybar/scripts/bluetooth-menu.sh"
+    "tooltip-format": "{controller_alias}\n{status} · {num_connections} connected\nLeft click: devices · Right click: toggle",
+    "on-click": "$HOME/.config/waybar/scripts/bluetooth-menu.sh",
+    "on-click-right": "$HOME/.config/waybar/scripts/bluetooth-menu.sh --toggle"
+  },
+
+  "custom/weather": {
+    "exec": "$HOME/.config/waybar/scripts/weather.sh",
+    "return-type": "json",
+    "interval": 900,
+    "format": "{text}",
+    "on-click": "$HOME/.config/waybar/scripts/weather-menu.sh",
+    "tooltip": true
   },
 
   "mpris": {
@@ -120,8 +131,11 @@
   },
   "temperature": {
     "interval": 3,
+    "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon",
+    "input-filename": "temp1_input",
     "critical-threshold": 80,
-    "format": "{icon} {temperatureC}°",
+    "format": "{icon} CPU {temperatureC}°",
+    "tooltip-format": "CPU package temperature · {temperatureC}°C",
     "format-icons": ["", "", ""]
   },
 
@@ -136,7 +150,7 @@
     "scroll-step": 5,
     "on-click": "$HOME/.config/waybar/scripts/sound-menu.sh",
     "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-    "tooltip-format": "{desc}\nVolume: {volume}%\n\nLeft click: floating audio controls\nRight click: mute"
+    "tooltip-format": "{desc}\nVolume: {volume}%\n\nLeft click: audio controls\nRight click: mute"
   },
 
   "network": {
@@ -145,17 +159,9 @@
     "format-ethernet": "↕",
     "format-disconnected": "×",
     "on-click": "$HOME/.config/waybar/scripts/wifi-menu.sh",
-    "tooltip-format-wifi": "{essid}\n{ipaddr}\n↓ {bandwidthDownBytes}  ↑ {bandwidthUpBytes}\n\nClick: floating network menu",
-    "tooltip-format-ethernet": "Ethernet · {ipaddr}\n↓ {bandwidthDownBytes}  ↑ {bandwidthUpBytes}",
-    "tooltip-format-disconnected": "Network disconnected\n\nClick to choose a network"
-  },
-
-  "network#speed": {
-    "interval": 2,
-    "format-wifi": "↓ {bandwidthDownBytes}  ↑ {bandwidthUpBytes}",
-    "format-ethernet": "↓ {bandwidthDownBytes}  ↑ {bandwidthUpBytes}",
-    "format-disconnected": "",
-    "tooltip": false
+    "tooltip-format-wifi": "{essid}\n{ipaddr}\nSignal: {signalStrength}%\n↓ {bandwidthDownBytes}   ↑ {bandwidthUpBytes}",
+    "tooltip-format-ethernet": "Ethernet · {ipaddr}\n↓ {bandwidthDownBytes}   ↑ {bandwidthUpBytes}",
+    "tooltip-format-disconnected": "Network disconnected"
   },
 
   "battery": {

@@ -19,5 +19,5 @@ window {
 }
 #scroll { margin: 4px; }
 #inner-box { margin: 2px; }
-#entry { padding: 8px 10px; border-radius: 7px; }
+#entry { padding: 8px 5px; border-radius: 7px; }
 #entry:selected { background-color: #313849; color: #89b4fa; }

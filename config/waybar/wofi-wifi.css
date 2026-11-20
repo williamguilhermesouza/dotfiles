@@ -1,0 +1,23 @@
+window {
+  margin: 0;
+  border: 1px solid rgba(205, 214, 244, 0.18);
+  border-radius: 12px;
+  background-color: #111318;
+  color: #e5e9f0;
+  font-family: "Noto Sans Mono", monospace;
+  font-size: 12px;
+}
+
+#outer-box { padding: 8px; }
+#input {
+  margin: 4px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 8px;
+  background-color: rgba(205, 214, 244, 0.08);
+  color: #e5e9f0;
+}
+#scroll { margin: 4px; }
+#inner-box { margin: 2px; }
+#entry { padding: 8px 5px; border-radius: 7px; }
+#entry:selected { background-color: #313849; color: #89b4fa; }
