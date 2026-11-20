@@ -17,7 +17,9 @@
   ],
   "modules-right": [
     "mpris",
-    "group/tray-drawer",
+    "tray",
+    "hyprland/language",
+    "bluetooth",
     "cpu",
     "memory",
     "temperature",
@@ -69,6 +71,22 @@
     }
   },
 
+  "hyprland/language": {
+    "format": "{short}",
+    "tooltip": true,
+    "on-click": "hyprctl switchxkblayout all next"
+  },
+
+  "bluetooth": {
+    "format": "",
+    "format-disabled": "󰂲",
+    "format-off": "󰂲",
+    "format-connected": " {device_alias}",
+    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+    "tooltip-format": "{controller_alias}\n{status} · {num_connections} connected",
+    "on-click": "$HOME/.config/waybar/scripts/bluetooth-menu.sh"
+  },
+
   "mpris": {
     "format": "{status_icon} {dynamic}",
     "format-paused": "{status_icon} {dynamic}",
@@ -85,18 +103,6 @@
     }
   },
 
-  "group/tray-drawer": {
-    "orientation": "inherit",
-    "drawer": {
-      "transition-duration": 250,
-      "children-class": "drawer-child"
-    },
-    "modules": ["custom/tray-toggle", "tray"]
-  },
-  "custom/tray-toggle": {
-    "format": "▸",
-    "tooltip-format": "System tray"
-  },
   "tray": {
     "icon-size": 15,
     "spacing": 8
@@ -130,8 +136,7 @@
     "scroll-step": 5,
     "on-click": "$HOME/.config/waybar/scripts/sound-menu.sh",
     "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-    "on-click-middle": "xdg-terminal-exec wiremix",
-    "tooltip-format": "{desc}\nVolume: {volume}%\n\nLeft click: volume menu\nRight click: mute\nMiddle click: mixer"
+    "tooltip-format": "{desc}\nVolume: {volume}%\n\nLeft click: floating audio controls\nRight click: mute"
   },
 
   "network": {
@@ -140,8 +145,7 @@
     "format-ethernet": "↕",
     "format-disconnected": "×",
     "on-click": "$HOME/.config/waybar/scripts/wifi-menu.sh",
-    "on-click-right": "xdg-terminal-exec nmtui",
-    "tooltip-format-wifi": "{essid}\n{ipaddr}\n↓ {bandwidthDownBytes}  ↑ {bandwidthUpBytes}\n\nLeft click: network menu\nRight click: advanced settings",
+    "tooltip-format-wifi": "{essid}\n{ipaddr}\n↓ {bandwidthDownBytes}  ↑ {bandwidthUpBytes}\n\nClick: floating network menu",
     "tooltip-format-ethernet": "Ethernet · {ipaddr}\n↓ {bandwidthDownBytes}  ↑ {bandwidthUpBytes}",
     "tooltip-format-disconnected": "Network disconnected\n\nClick to choose a network"
   },
@@ -165,12 +169,13 @@
     "format-plugged": " {capacity}%",
     "format-full": " {capacity}%",
     "format-icons": ["", "", "", "", ""],
-    "tooltip-format": "{timeTo}\nPower: {power} W"
+    "tooltip-format": "{timeTo}\nPower: {power} W",
+    "on-click": "$HOME/.config/waybar/scripts/battery-menu.sh"
   },
 
   "custom/power": {
     "format": "",
     "on-click": "$HOME/.config/waybar/scripts/power-menu.sh",
-    "tooltip-format": "Power menu"
+    "tooltip-format": "Power menu · floating actions"
   }
 }

@@ -72,6 +72,8 @@ window#waybar.empty #window {
   font-size: 13px;
 }
 
+#hyprland-language,
+#bluetooth,
 #mpris,
 #pulseaudio,
 #network,
@@ -79,10 +81,19 @@ window#waybar.empty #window {
 #cpu,
 #memory,
 #temperature,
-#custom-tray-toggle,
 #custom-power,
 #tray {
   padding: 0 7px;
+}
+
+#hyprland-language,
+#bluetooth {
+  color: alpha(@foreground, 0.72);
+}
+
+#bluetooth.disabled,
+#bluetooth.off {
+  color: alpha(@foreground, 0.38);
 }
 
 #mpris {
@@ -92,19 +103,6 @@ window#waybar.empty #window {
 
 #mpris.paused {
   color: alpha(@foreground, 0.42);
-}
-
-#group-tray-drawer {
-  border-radius: 8px;
-  background: alpha(@foreground, 0.05);
-}
-
-#custom-tray-toggle {
-  color: alpha(@foreground, 0.72);
-}
-
-.drawer-child {
-  color: alpha(@foreground, 0.72);
 }
 
 #pulseaudio.muted,
