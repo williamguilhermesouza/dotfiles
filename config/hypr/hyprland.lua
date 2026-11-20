@@ -48,6 +48,7 @@ local chrome      = "google-chrome"
 
 local reloadWaybar = "pkill waybar; waybar"
 local keyboardToggle = "hyprctl switchxkblayout current next"
+local monitorWorkspaces = require("monitor-workspaces")
 
 
 -------------------
@@ -340,21 +341,22 @@ hl.bind(shiftMod .. " + y", hl.dsp.workspace.move({ monitor = "l" }))
 hl.bind(shiftMod .. " + o", hl.dsp.workspace.move({ monitor = "r" }))
 hl.bind(shiftMod .. " + i", hl.dsp.workspace.move({ monitor = "u" }))
 hl.bind(shiftMod .. " + u", hl.dsp.workspace.move({ monitor = "d" }))
--- Switch workspaces with mainMod + [0-9]
--- Move active window to a workspace with mainMod + SHIFT + [0-9]
+-- Each monitor owns a block of ten workspaces. The helper maps the digit to
+-- the same slot on whichever monitor is focused.
 for i = 1, 10 do
+    local slot = i
     local key = i % 10 -- 10 maps to key 0
-    hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
-    hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
+    hl.bind(mainMod .. " + " .. key, function() monitorWorkspaces.focus(slot) end)
+    hl.bind(mainMod .. " + SHIFT + " .. key, function() monitorWorkspaces.move_window(slot) end)
 end
 
 -- Example special workspace (scratchpad)
 hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
 
--- Scroll through existing workspaces with mainMod + scroll
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
+-- Scroll through this monitor's workspace slots with mainMod + scroll.
+hl.bind(mainMod .. " + mouse_down", function() monitorWorkspaces.step(1) end)
+hl.bind(mainMod .. " + mouse_up",   function() monitorWorkspaces.step(-1) end)
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
