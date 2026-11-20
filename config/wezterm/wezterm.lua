@@ -147,8 +147,8 @@ config.keys = {
     { key = 'l', mods = 'CTRL|SHIFT', action = wezterm.action.AdjustPaneSize { 'Right', 5 }, },
     { key = 'k', mods = 'CTRL|SHIFT', action = wezterm.action.AdjustPaneSize { 'Up', 5 }, },
     { key = 'j', mods = 'CTRL|SHIFT', action = wezterm.action.AdjustPaneSize { 'Down', 5 }, },
-    { key = '%', mods = 'LEADER|SHIFT', action = wezterm.action.SplitVertical{ domain = 'CurrentPaneDomain' } },
-    { key = '"', mods = 'LEADER|SHIFT', action = wezterm.action.SplitHorizontal{ domain = 'CurrentPaneDomain' } },
+    { key = '"', mods = 'LEADER|SHIFT', action = wezterm.action.SplitVertical{ domain = 'CurrentPaneDomain' } },
+    { key = '%', mods = 'LEADER|SHIFT', action = wezterm.action.SplitHorizontal{ domain = 'CurrentPaneDomain' } },
     { key = '}', mods = 'LEADER|SHIFT', action = wezterm.action.PaneSelect { mode = 'SwapWithActiveKeepFocus' } },
     {
         key = 'x',
