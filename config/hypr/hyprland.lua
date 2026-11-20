@@ -47,6 +47,7 @@ local obsidian    = "obsidian"
 local chrome      = "google-chrome"
 
 local reloadWaybar = "pkill waybar; waybar"
+local keyboardToggle = "hyprctl switchxkblayout current next"
 
 
 -------------------
@@ -235,10 +236,10 @@ hl.config({
 
 hl.config({
     input = {
-        kb_layout  = "us",
-        kb_variant = "",
+        kb_layout  = "us,br",
+        kb_variant = ",abnt2",
         kb_model   = "",
-        kb_options = "",
+        kb_options = "grp:alt_shift_toggle",
         kb_rules   = "",
 
         follow_mouse = 1,
@@ -305,6 +306,9 @@ hl.bind(shiftMod .. " + j", hl.dsp.window.move({ direction = "down" }))
 hl.bind(shiftMod .. " + O", hl.dsp.exec_cmd(obsidian))
 hl.bind(shiftMod .. " + RETURN", hl.dsp.exec_cmd(chrome))
 hl.bind(shiftMod .. " + W", hl.dsp.exec_cmd(reloadWaybar))
+
+-- keyboard
+hl.bind("SUPER + SPACE", hl.dsp.exec_cmd(keyboardToggle))
 
 -- Switch to a submap called `resize`.
 -- hl.bind("ALT + R", hl.dsp.submap("resize"))
