@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if command -v herdr >/dev/null 2>&1; then
+    echo "Herdr is already on PATH."
+    exit 0
+fi
+
+if ! command -v curl >/dev/null 2>&1; then
+    if ! command -v apt-get >/dev/null 2>&1; then
+        echo "curl is required, and this script can install it only on Ubuntu/Debian." >&2
+        exit 1
+    fi
+    sudo apt-get update
+    sudo apt-get install -y curl
+fi
+
+install_script="$(mktemp)"
+trap 'rm -f "$install_script"' EXIT
+
+curl -fsSL https://herdr.dev/install.sh -o "$install_script"
+HERDR_INSTALL_DIR="$HOME/.local/bin" sh "$install_script"
+
+if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    echo "Add $HOME/.local/bin to PATH if the herdr command is not found in new terminals."
+fi

@@ -45,6 +45,9 @@ local fileManager = "nautilus"
 local menu        = "hyprlauncher --toggle"
 local obsidian    = "obsidian"
 local chrome      = "google-chrome"
+local chromium    = "chromium"
+local cliampPlaylist = '$HOME/Music/cliamp/Omarchy/omarchy-community.m3u'
+local cliampLaunch = 'if [ -s "' .. cliampPlaylist .. '" ]; then exec cliamp "' .. cliampPlaylist .. '"; else exec cliamp; fi'
 
 local reloadWaybar = "pkill waybar; waybar"
 local keyboardToggle = "hyprctl switchxkblayout current next"
@@ -310,6 +313,9 @@ hl.bind(shiftMod .. " + j", hl.dsp.window.move({ direction = "down" }))
 hl.bind(shiftMod .. " + O", hl.dsp.exec_cmd(obsidian))
 hl.bind(shiftMod .. " + RETURN", hl.dsp.exec_cmd(chrome))
 hl.bind(shiftMod .. " + W", hl.dsp.exec_cmd(reloadWaybar))
+hl.bind("SUPER + SHIFT + Y", hl.dsp.exec_cmd(chromium .. " --app=https://youtube.com/"))
+hl.bind("SUPER + CTRL + RETURN", hl.dsp.exec_cmd(terminal .. " start -- herdr"))
+hl.bind("SUPER + SHIFT + ALT + M", hl.dsp.exec_cmd(terminal .. " start -- sh -lc '" .. cliampLaunch .. "'"))
 
 -- keyboard
 hl.bind("SUPER + SPACE", hl.dsp.exec_cmd(keyboardToggle))

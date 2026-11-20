@@ -1,0 +1,121 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! command -v apt-get >/dev/null 2>&1; then
+    echo "This installer supports Ubuntu/Debian (APT packages and upstream Cliamp installer)." >&2
+    exit 1
+fi
+
+if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v yt-dlp >/dev/null 2>&1; then
+    sudo apt-get update
+    sudo apt-get install -y ffmpeg yt-dlp
+fi
+
+if ! command -v curl >/dev/null 2>&1; then
+    sudo apt-get update
+    sudo apt-get install -y curl
+fi
+
+if ! command -v cliamp >/dev/null 2>&1; then
+    install_script="$(mktemp)"
+    trap 'rm -f "$install_script"' EXIT
+
+    curl -fsSL https://cliamp.stream/install.sh -o "$install_script"
+    sh "$install_script"
+    rm -f "$install_script"
+    trap - EXIT
+fi
+
+if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    echo "If the installer used $HOME/.local/bin, add that directory to PATH."
+fi
+
+music_dir="$HOME/Music/cliamp/Omarchy"
+managed_marker="$music_dir/.managed-by-dotfiles"
+playlist="$music_dir/omarchy-community.m3u"
+playlist_marker="# Managed by dotfiles linux/runs/cliamp"
+
+if [[ -d "$music_dir" && ! -f "$managed_marker" ]]; then
+    existing_entry="$(find "$music_dir" -mindepth 1 -maxdepth 1 -print -quit)"
+    if [[ -n "$existing_entry" ]]; then
+        echo "Refusing to use non-empty, unmanaged music directory: $music_dir" >&2
+        exit 1
+    fi
+fi
+
+mkdir -p "$music_dir"
+touch "$managed_marker"
+
+if [[ -e "$playlist" ]] && {
+    [[ "$(head -n 1 "$playlist")" != "#EXTM3U" ]] ||
+    [[ "$(sed -n '2p' "$playlist")" != "$playlist_marker" ]]
+}; then
+    echo "Refusing to overwrite an unmanaged playlist: $playlist" >&2
+    exit 1
+fi
+
+temporary_dir="$(mktemp -d "$music_dir/.download.XXXXXX")"
+trap 'rm -rf "$temporary_dir"' EXIT
+source_playlist="$temporary_dir/omarchy-source.m3u"
+new_playlist="$temporary_dir/omarchy-community.m3u"
+curl -fsSL --retry 3 --connect-timeout 15 \
+    https://radio.cliamp.stream/omarchy/tracks.m3u \
+    -o "$source_playlist"
+
+printf '#EXTM3U\n%s\n' "$playlist_marker" > "$new_playlist"
+track_count=0
+while IFS= read -r line || [[ -n "$line" ]]; do
+    line="${line%$'\r'}"
+    if [[ -z "$line" ]]; then
+        printf '\n' >> "$new_playlist"
+        continue
+    fi
+
+    if [[ "$line" == \#* ]]; then
+        [[ "$line" == "#EXTM3U" ]] && continue
+        printf '%s\n' "$line" >> "$new_playlist"
+        continue
+    fi
+
+    track_url="$line"
+    case "$track_url" in
+        https://radio.cliamp.stream/omarchy/tracks/*) ;;
+        /omarchy/tracks/*) track_url="https://radio.cliamp.stream$track_url" ;;
+        *)
+            echo "Unexpected track URL in Omarchy track index: $track_url" >&2
+            exit 1
+            ;;
+    esac
+
+    track_id="${track_url%%\?*}"
+    track_id="${track_id%/}"
+    track_id="${track_id##*/}"
+    if [[ ! "$track_id" =~ ^[[:alnum:]_-]+$ ]]; then
+        echo "Unexpected track URL in Omarchy track index: $track_url" >&2
+        exit 1
+    fi
+
+    track_file="${track_id}.mp3"
+    destination="$music_dir/$track_file"
+    if [[ -e "$destination" && ! -s "$destination" ]]; then
+        echo "Refusing to replace an existing empty file: $destination" >&2
+        exit 1
+    elif [[ ! -e "$destination" ]]; then
+        temporary_track="$temporary_dir/$track_file"
+        curl -fsSL --retry 3 --connect-timeout 15 "$track_url" -o "$temporary_track"
+        mv --no-clobber "$temporary_track" "$destination"
+        rm -f "$temporary_track"
+    fi
+
+    printf '%s\n' "$track_file" >> "$new_playlist"
+    track_count=$((track_count + 1))
+done < "$source_playlist"
+
+if (( track_count == 0 )); then
+    echo "The Omarchy track index contained no track URLs." >&2
+    exit 1
+fi
+
+mv "$new_playlist" "$playlist"
+echo "Downloaded or verified $track_count Omarchy tracks in $music_dir."
+echo "Cliamp playlist: $playlist"

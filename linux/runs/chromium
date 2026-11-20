@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if command -v chromium >/dev/null 2>&1 || command -v chromium-browser >/dev/null 2>&1; then
+    echo "Chromium is already installed."
+    exit 0
+fi
+
+if [[ ! -r /etc/os-release ]]; then
+    echo "Cannot identify this distribution (missing /etc/os-release)." >&2
+    exit 1
+fi
+
+# shellcheck disable=SC1091
+source /etc/os-release
+
+case "${ID:-}" in
+    ubuntu)
+        if ! command -v snap >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y snapd
+        fi
+
+        if ! snap list chromium >/dev/null 2>&1; then
+            sudo snap install chromium
+        else
+            echo "Chromium is already installed as a snap."
+        fi
+        ;;
+    debian)
+        sudo apt-get update
+        sudo apt-get install -y chromium
+        ;;
+    *)
+        echo "This installer supports Ubuntu (Canonical Chromium snap) and Debian (APT Chromium)." >&2
+        exit 1
+        ;;
+esac
