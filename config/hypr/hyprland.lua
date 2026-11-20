@@ -43,6 +43,10 @@ hl.monitor({
 local terminal    = "wezterm"
 local fileManager = "nautilus"
 local menu        = "hyprlauncher --toggle"
+local obsidian    = "obsidian"
+local chrome      = "google-chrome"
+
+local reloadWaybar = "pkill waybar; waybar"
 
 
 -------------------
@@ -270,7 +274,7 @@ local shiftMod = mainMod .. " + SHIFT"
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(terminal))
-local closeWindowBind = hl.bind(shiftMod .. " + Q", hl.dsp.window.close())
+local closeWindowBind = hl.bind(mainMod .. " + W", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
 hl.bind(shiftMod .. " + E", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
@@ -296,6 +300,11 @@ hl.bind(shiftMod .. " + h", hl.dsp.window.move({ direction = "left" }))
 hl.bind(shiftMod .. " + l", hl.dsp.window.move({ direction = "right" }))
 hl.bind(shiftMod .. " + k", hl.dsp.window.move({ direction = "up" }))
 hl.bind(shiftMod .. " + j", hl.dsp.window.move({ direction = "down" }))
+
+-- custom apps
+hl.bind(shiftMod .. " + O", hl.dsp.exec_cmd(obsidian))
+hl.bind(shiftMod .. " + RETURN", hl.dsp.exec_cmd(chrome))
+hl.bind(shiftMod .. " + W", hl.dsp.exec_cmd(reloadWaybar))
 
 -- Switch to a submap called `resize`.
 -- hl.bind("ALT + R", hl.dsp.submap("resize"))
